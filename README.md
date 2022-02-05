@@ -1,6 +1,6 @@
 # demoproj1
 
-My first SPA project.<br>
+My first SPA project.(Main file is 'empty.php'!)<br>
 This is a single page app.<br>
 It allows to the user to add and remove data from a MySQL database.<br>
 PHP;<br>
