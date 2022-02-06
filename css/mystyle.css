@@ -12,7 +12,22 @@
     -moz-box-sizing: border-box;    /* Firefox, other Gecko */
     box-sizing: border-box;         /* Opera/IE 8+ */
 }
+label{
+    color:var(--dblue);
+}
 
+select{
+    border:1px solid cornflowerblue;
+    border-radius: 5px;
+    outline:none;
+    color:var(--dblue)
+}
+select:focus{
+    border:1px solid cornflowerblue;
+    border-radius: 5px;
+    outline:none;
+    color:var(--dblue)
+}
 input{
     border:1px solid var(--dblue);
     border-radius: 5px;
@@ -193,25 +208,81 @@ p {
     background-color:red;
 }
 
-
+#swap{
+    width: 100px;
+    position: fixed;
+    top:0;
+    margin-left: 5px;
+    margin-top:40px;
+    z-index: 32;
+    border-radius:100%;
+    height:100px;
+}
+#swap1{
+    width: 100px;
+    position: fixed;
+    top:0;
+    margin-left: 5px;
+    margin-top:40px;
+    z-index: 32;
+    border-radius:100%;
+    height:100px;
+}
+#swap:hover{
+    background-color:var(--blue);
+}
+#swap1:hover{
+    background-color:var(--blue);
+}
+#swap:active:after{
+    cursor: pointer;
+    color:var(--bgrey);
+    background-color: var(--bgrey);
+    border:none;
+    opacity: 1;
+    transition: 0s;
+    height:100px;
+    width: 100px;
+    
+}
+#swap1:active:after{
+    cursor: pointer;
+    color:var(--bgrey);
+    background-color: var(--bgrey);
+    border:none;
+    opacity: 1;
+    transition: 0s;
+    height:100px;
+    width: 100px;
+    
+}
+#swap:after {
+    content: "";
+    background: var(--bgrey);
+    position: absolute;
+    padding-left: 200%;
+    left:0!important;
+    top:0!important;
+    opacity: 0;
+    transition: all 0.8s;
+    height:42px;
+}
+#swap1:after {
+    content: "";
+    background: var(--bgrey);
+    position: absolute;
+    padding-left: 200%;
+    left:0!important;
+    top:0!important;
+    opacity: 0;
+    transition: all 0.8s;
+    height:42px;
+}
 
 #editordiv{
     display:block;
-    margin-top:160px;
-    margin-bottom:100px;
-    position: absolute;
-    width: 100%;
-    
-}
-
-#editordiv table{
     background-color: var(--bblue);
-    color: var(--dblue);
-    border-collapse: collapse;
-    overflow-x:auto;
-    text-align: center;
-   
-    margin-top:115px;
+    margin-top:60px;
     position: absolute;
     width: 72%;
     
@@ -220,39 +291,79 @@ p {
     margin-right:auto;
     left:0;
     right:0;
-    
+}
+
+
+
+#fixeddiv input{
+    font-size:18px;
 }
 
 #editordiv label{
     font-size:14px;
+    position: absolute;
 }
 
 #fixeddiv{
     position: fixed;
     z-index: 30;
-    width:100%;
+    width: 72%;
     top:0;
+    margin-left:auto;
+    margin-right:auto;
+    left:0;
+    right:0;
+    height: 10px;
 }
-#fixeddiv table{
+
+#fixedinsert{
     position: absolute;
+    width: 100%;
+    top:0;
+    margin-left:auto;
+    margin-right:auto;
+    left:0;
+    right:0;
     margin-top:40px;
 }
 #fixedinsert button{
-    margin-top:20px;
-    width: auto;
+    width: 100px;
     border-radius: 6px;
 }
 #insertheader{
     position: fixed;
     z-index: 30;
-    width: 100%;
-    top:0;
-    margin-top:110px;
-    
+    width: 72%;
+    margin-top:128px;
+    margin-left:auto;
+    margin-right:auto;
+    border:2px solid var(--dblue);
+    background-color: var(--bgrey);
 }
-#insertheader th {
+
+#insertheader th{
     width: 20%;
-    border:none;
+}
+
+#insertable1{
+    
+   text-align: center;
+    position: absolute;
+    margin-top:170px;
+    width: 100%;
+    margin-left:auto;
+    margin-right:auto;
+    left:0;
+    right:0;
+}
+
+#insertable1 tr:nth-child(odd){
+    background-color:var(--dblue);
+    color: var(--bblue);
+}
+#insertable1 tr:nth-child(even){
+    background-color: var(--bgrey);
+    color: var(--dblue);
 }
 #insertable1 td{
     width: 20%;
@@ -273,131 +384,60 @@ p {
     border:none;
 }
 
-select{
-    border:1px solid cornflowerblue;
-    border-radius: 5px;
-    outline:none;
-    color:var(--dblue)
-}
-select:focus{
-    border:1px solid cornflowerblue;
-    border-radius: 5px;
-    outline:none;
-    color:var(--dblue)
-}
-
-#insertable1 tr:nth-child(odd){
-    background-color:var(--dblue);
-    color: var(--bblue);
-}
-
-#insertable1{
-    z-index: 29;
-    width: 100%;
-}
 
 
 #preenchatxt{
     position: absolute;
-    left:0;
     display:none;
-    font-size:16px;
     margin-top:10px;
+    right:0;
+    margin-right: 8%;
 }
 
 #insertTxt{
     position: absolute;
-    left:0;
     display:none;
-    font-size:20px;
     margin-top:10px;
+    right:0;
+    margin-right: 8%;
 }
 
 /*updatetable*/
 
 
-
-#updatediv{
-    display:none;
-    margin-top:80px;
-    margin-bottom:100px;
-    position: absolute;
-    width: 100%;
-}
-
-#updatediv table{
-    border-top: 2px solid var(--dblue);
-    border-bottom: 2px solid var(--dblue);
-    background-color: var(--bblue);
-    color: var(--dblue);
-    border-collapse: collapse;
-    overflow-x:auto;
-    text-align: center;
-   
-    margin-top:65px;
-    position: absolute;
-    width: 100%;
-    
-    margin-bottom:100px;
-    margin-left:auto;
-    margin-right:auto;
-    left:0;
-}
-
-#upheader table{
-    top:0;
-    margin-top:96px;
-    z-index: 32;
-    position:fixed;
-}
-
-#upheader th{
-    width: 20%;
-}
-
 #fixedupdate{
     position: fixed;
     z-index: 30;
-    width:100%;
+    width:72%;
     top:0;
+    margin-top:10px;
+    margin-left:auto;
+    margin-right:auto;
+    left:0;
+    right:0;
 }
-
-#updatetable label{
-    font-size:12px;
-    top:0;
-}
-#updatetable input {
-    height: 40px;
-    top:0;
-}
-
-
 #fixedupdate table{
     position: absolute;
+    width: 100%;
+    top:0;
+    margin-left:auto;
+    margin-right:auto;
+    left:0;
+    right:0;
     margin-top:30px;
 }
-
-#updatetable1 tr:nth-child(odd){
-    background-color:var(--dblue);
-    color: var(--bblue);
+#updatetable input {
+    font-size:18px;
 }
-
-#updatetable1{
-    z-index: 29;
-    width: 100%;
+#updatetable label {
+    font-size:14px;
+    position: absolute;
 }
-
-#updatetable1 td{
-    width: 20%;
-    border-top:2px solid var(--dblue);
-}
-
-#updatebutton
-{
-    height: 40px;
+#updatetable button{
     width: 100px;
     border-radius: 6px;
 }
+
 
 .deleteb a {
     padding-left: 50px;

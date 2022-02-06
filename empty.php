@@ -25,7 +25,7 @@ $password = $_SESSION['password'] ?? null;
                 $('#searctablediv').hide();
                 $('#logindiv').hide();
                 $('#emaildiv').hide();
-                $('#updatediv').hide();
+                $('#fixedupdate').hide();
                 $('#registodiv').hide();
 
             });
@@ -56,7 +56,7 @@ $password = $_SESSION['password'] ?? null;
                 $('#logindiv').show();
                 $('#editordiv').hide();
                 $('#emaildiv').hide();
-                $('#updatediv').hide();
+                $('#fixedupdate').hide();
                 $('#registodiv').hide();
             });
             return false;
@@ -71,7 +71,7 @@ $password = $_SESSION['password'] ?? null;
                 $('#logindiv').hide();
                 $('#editordiv').hide();
                 $('#emaildiv').show();
-                $('#updatediv').hide();
+                $('#fixedupdate').hide();
                 $('#registodiv').hide();
             });
             return false;
@@ -86,7 +86,7 @@ $password = $_SESSION['password'] ?? null;
                 $('#logindiv').hide();
                 $('#editordiv').hide();
                 $('#emaildiv').hide();
-                $('#updatediv').show();
+                $('#fixedupdate').show();
                 $('#registodiv').hide();
             });
             return false;
@@ -101,7 +101,7 @@ $password = $_SESSION['password'] ?? null;
                 $('#logindiv').hide();
                 $('#editordiv').hide();
                 $('#emaildiv').hide();
-                $('#updatediv').hide();
+                $('#fixedupdate').hide();
                 $('#registodiv').show();
             });
             return false;
@@ -284,7 +284,7 @@ echo mysqli_num_rows($sql1);
     <h2>Login</h2>
 
 
-    <h1>Utilizador:aaaaaaaaaaaaaaaaaaaaaaaaaaa</h1><br>
+    <h1>Utilizador:</h1><br>
     <input type='text' name='txt_uname' class='textbox' id='username' placeholder='Utilizador'>
     <label for='idvazio' id='idvazio'>Preencha o campo, por favor!</label><br>
 
@@ -340,13 +340,42 @@ echo mysqli_num_rows($sql1);
 
     </div>
     <!-- editordiv-->
+    <button type='button' id='swap'>Modificar</button>
+                <button type='button' id='swap1'>Adicionar</button>
     <div id="editordiv">
 
 
         <div id="fixeddiv">
+      
+
+<script>
+    
+    $(document).ready(function() {
+        $('#fixedupdate').hide();
+        $('#swap').click(function(){
+                $('#fixedinsert').show();
+                $('#fixedupdate').hide();
+                $('#swap').hide();
+                $('#swap1').show();
+            });
+
+        });
+  
+</script>
+<script>
+    $(document).ready(function() {
+        $('#swap1').click(function(){
+            $('#fixedinsert').hide();
+            $('#fixedupdate').show();
+            $('#swap').show();
+            $('#swap1').hide();
+        
+    });
+});
+</script>
 
             <table id="fixedinsert">
-
+                
                 <form action="javascript:void(0)" method="POST" id="insert">
                     <script>
                         $(document).ready(function($) {
@@ -378,49 +407,52 @@ echo mysqli_num_rows($sql1);
                             return false;
                         });
                     </script>
-                    <tr>
-                    <td><label>Produto:</label></td>
-                    <td><input autocomplete="off" type="text" name="produto" id="iproduto" class="textinput"></td>
-                    </tr>
-                    <td><label>Quantidade:</label></td>
-                    <td><input autocomplete="off" type="text" name="quantidade" id="iquantidade" class="textinput" onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
-                </td>
-                    <td><label>Preço:</label></td>
-                        <td><input autocomplete="off" type="text" name="price" id="iprice" class="textinput" onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
+<tr>
+
+                    <td>
+                    <label>Produto:</label>
+                    <input autocomplete="off" type="text" name="produto" id="iproduto" class="textinput">
                     </td>
 
-                    <td><label>Stock:</label></td>
-                        <td><select id='selectbox' name="stock">
+                    <td>
+                    <select id='selectbox' name="stock">
                             <option value="1">Em stock.</option>
                             <option value="2">Pouco stock.</option>
                             <option value="3">Fora de stock.</option>
                         </select>
                     </td>
+                    <td><button type="submit" id='but-add' value="Adicionar">Adicionar</button></td>
+                    
+</tr>
+            
+<tr>
+<td>
+<label>Quantidade:</label>
+<input autocomplete="off" type="text" name="quantidade" id="iquantidade" class="textinput" onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
+</td>
+<td>
+<label>Preço:</label>
+<input autocomplete="off" type="text" name="price" id="iprice" class="textinput" onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
+</td>
+                    
+                
+</form>
+<td>
+<form method="post" action="php/deleteall.php">
+<button  type="submit" value="deleteall">Apagar tudo</button>
+</form>
+</tr>
+</td>
 
-                <tr>
-                <td colspan='4'><button type="submit" id='but-add' value="Adicionar">Adicionar</button></td>
-                </form>
-                <td>
-                    <form method="post" action="php/deleteall.php">
-                        <button  type="submit" value="deleteall">Apagar tudo</button>
-                </form>
-                </tr>
-
-                <tr>
-                    <td>
-                        <div id="insertTxt">
-                            Adicionado com sucesso!
-                        </div>
-                    </td>
-
-                    <td>
-                        <div id="preenchatxt">
-                            Preencha os campos!
-                        </div>
-                    </td>
-                </tr>
-
-                </td>
+                    
+<td>
+<div id="insertTxt">
+Adicionado com sucesso!
+</div>
+<div id="preenchatxt">
+Preencha os campos!
+</div>
+</td>
                 <form action="javascript:void(0)" method="POST" id="deleteref">
                     <script>
                         $(document).ready(function($) {
@@ -521,129 +553,71 @@ echo mysqli_num_rows($sql1);
         </div>
     </div>
 
+    <div id='fixedupdate'>
 
-    <div id="updatediv">
-        <div id='fixedupdate'>
-
-            <table id="updatetable">
-
-                <form action="javascript:void(0)" method="POST" id="update1">
-                    <script>
-                        $(document).ready(function($) {
-                            $('#update1').submit(function(e) {
-                                if ($('#uref').val().length === 0 || $('#uproduto').val().length === 0 || $('#uquantidade').val().length === 0 || $('#uprice').val().length === 0) {
-                                    $("#preenchatxt").show();
-                                    $('#preenchatxt').delay(700, 'linear').fadeOut(555);
-                                } else {
-                                    $.ajax({
-                                        type: "POST",
-                                        url: "php/update.php",
-                                        data: $("#update1").serialize(), // get all form field value in serialize form
-                                        success: function() {
-                                            $(".forload").load("php/show.php");
-
-                                        }
-                                    });
-                                }
-                            });
-                            return false;
-                        });
-                    </script><!-- UPDATE -->
-                    <tr>
-                        <td>
-                            <label>Referência:</label>
-                        <input autocomplete="off" type="text" name="id" id="uref" >
-                        </td>
-                            
-                        <td>
-                            <label>Produto:</label>
-                        <input autocomplete="off" type="text" name="produto" id="uproduto" >
-                        </td>
-
-                        <td>
-                            <label>Quantidade:</label>
-                       <input autocomplete="off" type="text" name="quantidade" id="uquantidade"  onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
-                        </td>
-
-                        <td>
-                            <label>Preço:</label>
-                        <input autocomplete="off" type="text" name="price" id="uprice"  onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
-                        </td>
-
-                        <td>
-                            <label>Stock:</label>
-                        <select name="stock">
-                        <option value="1">Em stock.</option>
-                        <option value="2">Pouco stock.</option>
-                        <option value="3">Fora de stock.</option>
-                        </select>
-                        </td>
-
-                        <td><button type="submit" id="updatebutton" value="Modificar">Modificar</button></td>
-                    </tr>
-                    
-                </form>
-
-            </table>
-
-        </div>
-        <div id='upheader'>
-            <table>
-                <tr>
-                    <th>Referência</th>
-                    <th>Produto</th>
-                    <th>Quantidade</th>
-                    <th>Preço por unidade</th>
-                    <th>Stock</th>
-                </tr>
-            </table>
-        </div>
-        <div class="forload">
-            <table id="updatetable1">
-
-
-                <?php $sql = "SELECT * FROM teste";
-                $result = $con->query($sql);
-                while ($row = $result->fetch_assoc()) {
-
-
-                ?>
-                    <tr>
-
-                        <td class="tdref">
-                            <?php echo $row["id"]; ?>
-                        </td>
-
-                        <td class="tdprod">
-                            <?php echo $row["produto"]; ?>
-                        </td>
-
-                        <td class="tdsql">
-                            <?php echo $row["quantidade"]; ?>
-                        </td>
-
-                        <td class="tdsql">
-                            <?php echo $row["price"] . " €";   ?>
-                        </td>
-
-                        <?php
-                    if ($row["stock"] == '1') {
-                        echo "<td class='verde'></td>";
-                    } elseif ($row["stock"] == '2') {
-                        echo "<td class='amarelo'></td>";
+<table id="updatetable">
+    <form action="javascript:void(0)" method="POST" id="update1">
+        <script>
+            $(document).ready(function($) {
+                $('#update1').submit(function(e) {
+                    if ($('#uref').val().length === 0 || $('#uproduto').val().length === 0 || $('#uquantidade').val().length === 0 || $('#uprice').val().length === 0) {
+                        $("#preenchatxt").show();
+                        $('#preenchatxt').delay(700, 'linear').fadeOut(555);
                     } else {
-                        echo "<td class='vermelho'></td>";
+                        $.ajax({
+                            type: "POST",
+                            url: "php/update.php",
+                            data: $("#update1").serialize(), // get all form field value in serialize form
+                            success: function() {
+                                $(".forload").load("php/show.php");
+
+                            }
+                        });
                     }
-                }
-                    ?>
-                    </tr>
+                });
+                return false;
+            });
+        </script><!-- UPDATE -->
+<tr>
 
-<tr><th id='bordernone'><div id='lastdiv'></div></th></tr>
+<td>
+    <label>Produto:</label>
+<input autocomplete="off" type="text" name="produto" id="uproduto" >
+</td>
+            <td>
+                <label>Referência:</label>
+            <input autocomplete="off" type="text" name="id" id="uref" >
+        </td>
+        
+        <td>
+            <select name="stock">
+            <option value="1">Em stock.</option>
+            <option value="2">Pouco stock.</option>
+            <option value="3">Fora de stock.</option>
+            </select>
+            </td>
 
-            </table>
-        </div>
+</tr>  
+<tr>
+            <td>
+                <label>Quantidade:</label>
+           <input autocomplete="off" type="text" name="quantidade" id="uquantidade"  onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
+            </td>
 
-    </div>
+            <td>
+                <label>Preço:</label>
+            <input autocomplete="off" type="text" name="price" id="uprice"  onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
+            </td>
+
+            <td>
+                <button type="submit" id="updatebutton" value="Modificar">Modificar</button></td>
+</tr>
+        
+    </form>
+
+</table>
+</div>
+
 
     <div id="searctablediv">
         <form action="javascript:void(0)" method="POST" id="search1">
