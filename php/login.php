@@ -5,8 +5,8 @@ $username = $_SESSION['username'] ?? null;
 $admin = $_SESSION['admin'] ?? null;
 
 
-    $username = $_POST['txt_uname'];
-    $passwords = $_POST['txt_pwd'];
+    $username = $_POST['username'];
+    $passwords = $_POST['password'];
         $sql = ("SELECT * FROM users WHERE username ='$username'");
         $stmt = $con->prepare($sql);
         $stmt->execute();

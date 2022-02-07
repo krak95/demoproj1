@@ -1,10 +1,10 @@
 <?php
 require_once 'config.php';
-if (!isset($_POST['txt_uname'])) {
+if (!isset($_POST['username'])) {
     exit;
 }
-$username = $_POST['txt_uname'];
-$passwords = $_POST['txt_pwd'];
+$username = $_POST['username'];
+$passwords = $_POST['password'];
 
         $sql = ("SELECT * FROM users WHERE username ='$username'");
         $stmt = $con->prepare($sql);

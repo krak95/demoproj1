@@ -1311,8 +1311,8 @@ button:hover{
     position: relative;
     border: none;
     text-align: center;
-    -webkit-transition-duration: 0.4s; /* Safari */
-    transition-duration: 0.4s;
+    -webkit-transition-duration: 0.1s; /* Safari */
+    transition-duration: 0.1s;
     text-decoration: none;
     overflow: hidden;
     cursor: pointer;
@@ -1325,7 +1325,7 @@ button:active:after{
     background-color: var(--bgrey);
     border:none;
     opacity: 1;
-    transition: 0s;
+    transition: 0.1s;
     height:42px;
 }
 button:after {
@@ -1337,15 +1337,9 @@ button:after {
     top:0!important;
     opacity: 0;
     padding-right: 100%;
-    transition: all 0.8s;
+    transition: all 0.1s;
     height:42px;
   }
-
-#maindiv button:focus {
-    transition: all 1.8s;
-    color:var(--dblue);
-    background-color:var(--bblue);
-}
 
 #showmain p{
     font-size:22px;
@@ -1388,6 +1382,8 @@ button:after {
 #emaildiv{
     display:none;
 }
-#invalidmail{
-    
+
+.selected{
+background-color: var(--bblue);
+color:var(--dblue);
 }

@@ -17,21 +17,117 @@ $password = $_SESSION['password'] ?? null;
 <link rel="stylesheet" href="css/mystyle.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
 </script>
+
+
 <script>
-// editor //
+    
 $(document).ready(function() {
-$('#maineditor').click(function() {
+    $('#mainlogin').text("<?php if ($username != ''){echo $name;}else{echo 'Login';}?>");
+});
+</script>
+
+<script>
+    
+$(document).ready(function() {
+    $('#swap1').hide();
+    $('#swap').hide();
+$('#maineditor').click(function(){
+    $('#swap').show();
+    $('#swap1').show();
+});
+});
+</script>
+
+<script>
+$(document).ready(function() {
+$('#mainregisto').click(function(){
+    $('#swap1').hide();
+    $('#swap').hide();
+    $('#mainlogin').removeClass('selected');
+    $('#mainregisto').addClass('selected');
+    $('#maineditor').removeClass('selected');
+    $('#mainsearch').removeClass('selected');
+    $('#mainupdate').removeClass('selected');
+    $('#mainemail').removeClass('selected');
+});
+});
+</script>
+<script>
+$(document).ready(function() {
+$('#maineditor').click(function(){
+$('#fixeddiv').show();
 $('#editordiv').show();
 $('#searctablediv').hide();
 $('#logindiv').hide();
 $('#emaildiv').hide();
 $('#fixedupdate').hide();
 $('#registodiv').hide();
-
+$('#mainlogin').removeClass('selected');
+$('#mainregisto').removeClass('selected');
+$('#maineditor').addClass('selected');
+$('#mainsearch').removeClass('selected');
+$('#mainupdate').removeClass('selected');
+$('#mainemail').removeClass('selected');
 });
-return false;
 });
 </script>
+<script>
+$(document).ready(function() {
+$('#mainsearch').click(function(){
+    $('#swap1').hide();
+    $('#swap').hide();
+    $('#mainlogin').removeClass('selected');
+    $('#mainregisto').removeClass('selected');
+    $('#maineditor').removeClass('selected');
+    $('#mainsearch').addClass('selected');
+    $('#mainupdate').removeClass('selected');
+    $('#mainemail').removeClass('selected');
+});
+});
+</script>
+<script>
+$(document).ready(function() {
+$('#mainupdate').click(function(){
+    $('#swap1').hide();
+    $('#swap').hide();
+    $('#mainlogin').removeClass('selected');
+    $('#mainregisto').removeClass('selected');
+    $('#maineditor').removeClass('selected');
+    $('#mainsearch').removeClass('selected');
+    $('#mainupdate').addClass('selected');
+    $('#mainemail').removeClass('selected');
+});
+});
+</script>
+<script>
+$(document).ready(function() {
+$('#mainemail').click(function(){
+    $('#swap1').hide();
+    $('#swap').hide();
+    $('#mainlogin').removeClass('selected');
+    $('#mainregisto').removeClass('selected');
+    $('#maineditor').removeClass('selected');
+    $('#mainsearch').removeClass('selected');
+    $('#mainupdate').removeClass('selected');
+    $('#mainemail').addClass('selected');
+});
+});
+</script>
+<script>
+$(document).ready(function() {
+$('#mainlogin').click(function(){
+    $('#swap1').hide();
+    $('#swap').hide();
+    $('#mainlogin').addClass('selected');
+    $('#mainregisto').removeClass('selected');
+    $('#maineditor').removeClass('selected');
+    $('#mainsearch').removeClass('selected');
+    $('#mainupdate').removeClass('selected');
+    $('#mainemail').removeClass('selected');
+});
+});
+</script>
+
 
 <script>
 // search //
@@ -185,13 +281,6 @@ if ($('#regmail').val() === '') {
 $('#regmailempty').show();
 $('#regmailempty').fadeOut(2000);
 }
-$.post('php/checkmail.php',{
-email: $('#regmail').val()
-}, function(response){
-if (response == "false") {
-$('#invalidmail').show();
-$('#invalidmail').fadeOut(2000);
-}else{
 
 $.post('php/checkuser.php', {
 username: $('#reguser').val()
@@ -199,7 +288,17 @@ username: $('#reguser').val()
 if (response == "false") {
 $('#userexist').show();
 $('#userexist').fadeOut(2000);
-} else if ($('#renam').val() != 0 && $('#reguser').val() != 0 && $('#regpass').val() != 0 && $('#regmail').val() != 0) {
+}
+
+$.post('php/checkmail.php',{
+email: $('#regmail').val()
+}, function(response){
+if (response == "false") {
+$('#invalidmail').show();
+$('#invalidmail').fadeOut(2000);
+}
+
+else if ($('#renam').val() != 0 && $('#reguser').val() != 0 && $('#regpass').val() != 0 && $('#regmail').val() != 0) {
 $.ajax({
 type: "POST",
 url: "php/regist.php",
@@ -210,7 +309,7 @@ window.location.href = 'empty.php';
 });
 }
 });
-}
+
 });
 });
 return false;
@@ -256,22 +355,27 @@ echo "
 
 $(document).ready(function($){
 $('#formlog').submit(function(e){
+
 if ($('#username').val() === ''){
 $('#idvazio').fadeIn(555);
 $('#idvazio').fadeOut(2000);
+return false;
+}else{
+    $.post('php/checkuser.php', {
+        username: $('#username').val()
+        }, function(response) {
+        if (response == 'true') {
+        $('#wrongcred').show();
+        $('#wrongcred').fadeOut(2000);
+        return false;
 }
 if ($('#password').val() === '') {
 $('#passvazio').fadeIn(555);
 $('#passvazio').fadeOut(2000);
-}
-else if ($('#username').val() != 0 && $('#password').val() != 0) {
-$.post('php/checkpass.php', { txt_uname: $('#username').val(), txt_pwd: $('#password').val()}, function(response) {
-if (response == 'no') {
-$('#wrongcred').show();
-$('#wrongcred').fadeOut(2000);
-}
-else if ($('#username').val() != 0 && $('#password').val() != 0) {
-
+return false;
+}else{
+    $.post('php/checkpass.php', { username: $('#username').val(), password: $('#password').val()}, function(response) {
+    if (response == 'yes') {
 $.ajax({
 type:'POST',
 url: 'php/login.php',
@@ -281,6 +385,9 @@ window.location.href = 'empty.php';
 }
 
 });
+    }  $('#wrongcred').show();
+    $('#wrongcred').fadeOut(2000);
+});
 }
 });
 }
@@ -288,13 +395,15 @@ window.location.href = 'empty.php';
 return false;
 });
 </script>
+
+
 <div class='div_login'>
 <h2>Login</h2>
 <h1>Utilizador:</h1><br>
-<input type='text' name='txt_uname' class='textbox' id='username' placeholder='Utilizador'>
+<input type='text' name='username' class='textbox' id='username' placeholder='Utilizador'>
 <label for='idvazio' id='idvazio'>Preencha o campo, por favor!</label><br>
 <h1>Password:</h1><br>
-<input type='password' name='txt_pwd' class='textbox' id='password' placeholder='Password'>
+<input type='password' name='password' class='textbox' id='password' placeholder='Password'>
 <label for='wrongcred' id='wrongcred'>Credenciais erradas!</label>
 <label for='passvazio' id='passvazio'>Preencha o campo, por favor!</label><br>
 <button type='submit'>Login</button>
