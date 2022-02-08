@@ -1,29 +1,8 @@
-.test1{
-    position: fixed;
-    background-color: var(--dgrey);
-    z-index: 31;
-    width: 50px;
-    height: 50px;
-    display:none;
-    right: 0;
-    margin-right:10px;
-    border-radius: 100%;
-}
-.test1:hover{
-    position: fixed;
-    background-color: crimson;
-    z-index: 31;
-    width: 50px;
-    height: 50px;
-    display:none;
-    right: 0;
-    margin-right:10px;
-    border-radius: 100%;
-}
+
 :root {
-    --bblue: #A6C1F5;
+    --bblue: rgb(225, 235, 255);
     --bgrey: #8498C2;
-    --dblue: #2C4475;
+    --dblue: #384d77;
     --dgrey: #505C75;
     --blue: #5E91F7;
 }
@@ -119,11 +98,36 @@ p {
     bottom:0;
     left:0;
     right:0;
-    background-color: var(--bblue);
-    height: 50px;
+    background-color: var(--dblue);
+    height: 136px;
     z-index:30;
     border-top: 2px solid var(--dblue);
 }
+
+#footerinset{
+    left:0;
+    right:0;
+    background-color: var(--bblue);
+    z-index:30;
+    margin-left:2px;
+}
+#foottable{
+    display:contents;
+}
+
+#foottable td{
+    border:2px solid var(--dblue);
+    width: 20%;
+    text-align: center;
+}
+
+#foottable th{
+    border:2px solid var(--dblue);
+    background-color: var(--dgrey);
+    width: 20%;
+    text-align: center;
+}
+
 
 #logout {
     width: 80px;
@@ -136,30 +140,20 @@ p {
     right:0;
     bottom:0;
     height:40px;
-    margin-bottom:5px;
+    margin-bottom:9px;
     margin-right: 5px;
     border:none;
 }
-
 #logout:hover {
     width: 80px;
-    color: crimson;
+    background-color: crimson;
+    color:var(--bblue);
     position: fixed;
     text-align:center;
+    margin-bottom:9px;
 }
-
-
-
-
 
 /*MYSQL TABLE*/
-
-#test1{
-    position: absolute;
-    z-index: 20;
-    background-color: crimson;
-    margin-top:400px;
-}
 
 .move{
     margin-left:150px;
@@ -1311,36 +1305,22 @@ button:hover{
     position: relative;
     border: none;
     text-align: center;
-    -webkit-transition-duration: 0.1s; /* Safari */
-    transition-duration: 0.1s;
+    -webkit-transition-duration: 0.6s; /* Safari */
+    transition-duration: 0.6s;
     text-decoration: none;
     overflow: hidden;
     cursor: pointer;
     height:32px;
     
 }
-button:active:after{
+button:active{
     cursor: pointer;
-    color:var(--bgrey);
-    background-color: var(--bgrey);
+    color:var(--dblue);
+    background-color: var(--bblue);
     border:none;
     opacity: 1;
-    transition: 0.1s;
-    height:42px;
+    transition: 0.2s;
 }
-button:after {
-    content: "";
-    background: var(--bgrey);
-    position: absolute;
-    padding-top: 400%;
-    left:0!important;
-    top:0!important;
-    opacity: 0;
-    padding-right: 100%;
-    transition: all 0.1s;
-    height:42px;
-  }
-
 #showmain p{
     font-size:22px;
     margin-top:5px;
@@ -1386,4 +1366,45 @@ button:after {
 .selected{
 background-color: var(--bblue);
 color:var(--dblue);
+}
+
+:focus{
+    outline:none;
+}
+.fecharlogin{
+    position: fixed;
+    background-color: var(--dgrey);
+    z-index: 31;
+    width: 50px;
+    height: 50px;
+    display:none;
+    right: 0;
+    margin-right:10px;
+    border-radius: 100%;
+    display:none;
+    margin-top:4px;
+}
+.fecharlogin:hover{
+    position: fixed;
+    background-color: crimson;
+    z-index: 31;
+    width: 50px;
+    height: 50px;
+    display:none;
+    right: 0;
+    margin-right:10px;
+    border-radius: 100%;
+    display:none;
+    margin-top:4px;
+}
+.avatar{
+    z-index:100;
+    position: absolute;
+}
+
+#removeavatar{
+    position: relative;
+    height:20px;
+    width: 100px;
+
 }

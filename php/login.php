@@ -27,6 +27,7 @@ $admin = $_SESSION['admin'] ?? null;
                     $_SESSION['email'] = $email;
                     $_SESSION['admin'] = $admin;
                     $_SESSION['username'] = $username;
+                    $_SESSION['avatar'] = $avatar;
                     echo "Successfully logged in!";
                 } else {
                 }

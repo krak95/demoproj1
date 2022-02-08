@@ -1,11 +1,14 @@
 <?php
-require_once "php/config.php";
+
 session_start();
+require_once 'php/config.php';
+include 'php/avatarcheck.php';
 $name = $_SESSION['name'] ?? null;
 $email = $_SESSION['email'] ?? null;
 $username = $_SESSION['username'] ?? null;
 $admin = $_SESSION['admin'] ?? null;
 $password = $_SESSION['password'] ?? null;
+$avatar = $_SESSION['avatar'] ?? null;
 
 ?>
 <!DOCTYPE html>
@@ -20,20 +23,43 @@ $password = $_SESSION['password'] ?? null;
 
 
 <script>
-    
+
 $(document).ready(function() {
-    $('#mainlogin').text("<?php if ($username != ''){echo $name;}else{echo 'Login';}?>");
+$('#mainlogin').text("<?php if ($username != ''){echo $name;}else{echo 'Login';}?>");
 });
 </script>
 
 <script>
-    
+
 $(document).ready(function() {
-    $('#swap1').hide();
-    $('#swap').hide();
-$('#maineditor').click(function(){
-    $('#swap').show();
-    $('#swap1').show();
+$('#swap1').hide();
+$('#swap').hide();
+
+});
+</script>
+
+
+<script>
+$(document).ready(function() {
+$('#mainlogin').click(function(){
+$('#mainlogin').addClass('selected');
+$('#mainregisto').removeClass('selected');
+$('#maineditor').removeClass('selected');
+$('#mainsearch').removeClass('selected');
+$('#mainupdate').removeClass('selected');
+$('#mainemail').removeClass('selected');
+$('#footer').animate({height:'136px'},{duration:300,complete: function() {
+$('#swap1').hide();
+$('#swap').hide();
+$('#searctablediv').hide();
+$('#logindiv').show();
+$('#editordiv').hide();
+$('#emaildiv').hide();
+$('#fixedupdate').hide();
+$('#registodiv').hide();
+
+}
+});
 });
 });
 </script>
@@ -41,174 +67,141 @@ $('#maineditor').click(function(){
 <script>
 $(document).ready(function() {
 $('#mainregisto').click(function(){
-    $('#swap1').hide();
-    $('#swap').hide();
-    $('#mainlogin').removeClass('selected');
-    $('#mainregisto').addClass('selected');
-    $('#maineditor').removeClass('selected');
-    $('#mainsearch').removeClass('selected');
-    $('#mainupdate').removeClass('selected');
-    $('#mainemail').removeClass('selected');
-});
-});
-</script>
-<script>
-$(document).ready(function() {
-$('#maineditor').click(function(){
-$('#fixeddiv').show();
-$('#editordiv').show();
+$('#mainlogin').removeClass('selected');
+$('#mainregisto').addClass('selected');
+$('#maineditor').removeClass('selected');
+$('#mainsearch').removeClass('selected');
+$('#mainupdate').removeClass('selected');
+$('#mainemail').removeClass('selected');
+$('.fecharlogin').hide();
+$('#footer').animate({height:'136px'},{duration:300,complete: function() {
+$('#swap1').hide();
+$('#swap').hide();
+$('#fixeddiv').hide();
+$('#editordiv').hide();
 $('#searctablediv').hide();
 $('#logindiv').hide();
 $('#emaildiv').hide();
 $('#fixedupdate').hide();
-$('#registodiv').hide();
+$('#registodiv').show();
+}
+});
+});
+});
+</script>
+
+<script>
+$(document).ready(function() {
+$('#maineditor').click(function(){
 $('#mainlogin').removeClass('selected');
 $('#mainregisto').removeClass('selected');
 $('#maineditor').addClass('selected');
 $('#mainsearch').removeClass('selected');
 $('#mainupdate').removeClass('selected');
 $('#mainemail').removeClass('selected');
-});
-});
-</script>
-<script>
-$(document).ready(function() {
-$('#mainsearch').click(function(){
-    $('#swap1').hide();
-    $('#swap').hide();
-    $('#mainlogin').removeClass('selected');
-    $('#mainregisto').removeClass('selected');
-    $('#maineditor').removeClass('selected');
-    $('#mainsearch').addClass('selected');
-    $('#mainupdate').removeClass('selected');
-    $('#mainemail').removeClass('selected');
-});
-});
-</script>
-<script>
-$(document).ready(function() {
-$('#mainupdate').click(function(){
-    $('#swap1').hide();
-    $('#swap').hide();
-    $('#mainlogin').removeClass('selected');
-    $('#mainregisto').removeClass('selected');
-    $('#maineditor').removeClass('selected');
-    $('#mainsearch').removeClass('selected');
-    $('#mainupdate').addClass('selected');
-    $('#mainemail').removeClass('selected');
-});
-});
-</script>
-<script>
-$(document).ready(function() {
-$('#mainemail').click(function(){
-    $('#swap1').hide();
-    $('#swap').hide();
-    $('#mainlogin').removeClass('selected');
-    $('#mainregisto').removeClass('selected');
-    $('#maineditor').removeClass('selected');
-    $('#mainsearch').removeClass('selected');
-    $('#mainupdate').removeClass('selected');
-    $('#mainemail').addClass('selected');
-});
-});
-</script>
-<script>
-$(document).ready(function() {
-$('#mainlogin').click(function(){
-    $('#swap1').hide();
-    $('#swap').hide();
-    $('#mainlogin').addClass('selected');
-    $('#mainregisto').removeClass('selected');
-    $('#maineditor').removeClass('selected');
-    $('#mainsearch').removeClass('selected');
-    $('#mainupdate').removeClass('selected');
-    $('#mainemail').removeClass('selected');
-});
-});
-</script>
-
-
-<script>
-// search //
-$(document).ready(function() {
-$('#mainsearch').click(function() {
-$('#searctablediv').show();
-$('#logindiv').hide();
-$('#editordiv').hide();
-$('#emaildiv').hide();
-$('#updatediv').hide();
-$('#registodiv').hide();
-});
-return false;
-});
-</script>
-
-<script>
-// login //
-$(document).ready(function() {
-$('#mainlogin').click(function() {
+$('#footer').animate({height:'136px'},{duration:300,complete: function() {
+$('#editordiv').show();
 $('#searctablediv').hide();
-$('#logindiv').show();
-$('#editordiv').hide();
+$('#logindiv').hide();
 $('#emaildiv').hide();
 $('#fixedupdate').hide();
 $('#registodiv').hide();
+$('.fecharlogin').hide();
+$('#fixeddiv').show();
+$('#swap').show();
+$('#swap1').show();
+}
 });
-return false;
+});
 });
 </script>
 
 <script>
-// email //
 $(document).ready(function() {
-$('#mainemail').click(function() {
+$('#mainsearch').click(function(){  
+$('#mainlogin').removeClass('selected');
+$('#mainregisto').removeClass('selected');
+$('#maineditor').removeClass('selected');
+$('#mainsearch').addClass('selected');
+$('#mainupdate').removeClass('selected');
+$('#mainemail').removeClass('selected');
+$('.fecharlogin').hide();
+$('#footer').animate({height:'136px'},{duration:300,complete: function() {
+$('#fixeddiv').hide();
+$('#editordiv').hide();
+$('#searctablediv').show();
+$('#logindiv').hide();
+$('#emaildiv').hide();
+$('#fixedupdate').hide();
+$('#registodiv').hide();
+$('#swap1').hide();
+$('#swap').hide();
+}
+});
+});
+});
+</script>
+
+<script>
+$(document).ready(function() {
+$('#mainupdate').click(function(){
+$('#mainlogin').removeClass('selected');
+$('#mainregisto').removeClass('selected');
+$('#maineditor').removeClass('selected');
+$('#mainsearch').removeClass('selected');
+$('#mainupdate').addClass('selected');
+$('#mainemail').removeClass('selected');
+$('.fecharlogin').hide();
+$('#footer').animate({height:'136px'},{duration:300,complete: function() {
+$('#swap1').hide();
+$('#swap').hide();
+$('#fixeddiv').hide();
+$('#editordiv').hide();
+$('#searctablediv').hide();
+$('#logindiv').hide();
+$('#emaildiv').hide();
+$('#fixedupdate').hide();
+$('#registodiv').hide();
+$('#swap1').hide();
+$('#swap').hide();
+}
+});
+});
+});
+</script>
+
+<script>
+$(document).ready(function() {
+$('#mainemail').click(function(){
+$('#mainlogin').removeClass('selected');
+$('#mainregisto').removeClass('selected');
+$('#maineditor').removeClass('selected');
+$('#mainsearch').removeClass('selected');
+$('#mainupdate').removeClass('selected');
+$('#mainemail').addClass('selected');
+$('.fecharlogin').hide();
+$('#footer').animate({height:'136px'},{duration:300,complete: function() {
+$('#swap1').hide();
+$('#swap').hide();
 $('#searctablediv').hide();
 $('#logindiv').hide();
 $('#editordiv').hide();
 $('#emaildiv').show();
 $('#fixedupdate').hide();
 $('#registodiv').hide();
+
+}
 });
-return false;
+});
 });
 </script>
 
-<script>
-// update //
-$(document).ready(function() {
-$('#mainupdate').click(function() {
-$('#searctablediv').hide();
-$('#logindiv').hide();
-$('#editordiv').hide();
-$('#emaildiv').hide();
-$('#fixedupdate').show();
-$('#registodiv').hide();
-});
-return false;
-});
-</script>
 
-<script>
-// registo //
-$(document).ready(function() {
-$('#mainregisto').click(function() {
-$('#searctablediv').hide();
-$('#logindiv').hide();
-$('#editordiv').hide();
-$('#emaildiv').hide();
-$('#fixedupdate').hide();
-$('#registodiv').show();
-});
-return false;
-});
-</script>
 
 </head>
 
 
 <body>
-
 <div id='infinitepage'>
 
 
@@ -361,21 +354,21 @@ $('#idvazio').fadeIn(555);
 $('#idvazio').fadeOut(2000);
 return false;
 }else{
-    $.post('php/checkuser.php', {
-        username: $('#username').val()
-        }, function(response) {
-        if (response == 'true') {
-        $('#wrongcred').show();
-        $('#wrongcred').fadeOut(2000);
-        return false;
+$.post('php/checkuser.php', {
+username: $('#username').val()
+}, function(response) {
+if (response == 'true') {
+$('#wrongcred').show();
+$('#wrongcred').fadeOut(2000);
+return false;
 }
 if ($('#password').val() === '') {
 $('#passvazio').fadeIn(555);
 $('#passvazio').fadeOut(2000);
 return false;
 }else{
-    $.post('php/checkpass.php', { username: $('#username').val(), password: $('#password').val()}, function(response) {
-    if (response == 'yes') {
+$.post('php/checkpass.php', { username: $('#username').val(), password: $('#password').val()}, function(response) {
+if (response == 'yes') {
 $.ajax({
 type:'POST',
 url: 'php/login.php',
@@ -385,8 +378,8 @@ window.location.href = 'empty.php';
 }
 
 });
-    }  $('#wrongcred').show();
-    $('#wrongcred').fadeOut(2000);
+}else{  $('#wrongcred').show();
+$('#wrongcred').fadeOut(2000);}
 });
 }
 });
@@ -418,9 +411,11 @@ return false;
 <script>
 $(document).ready(function() {
 $('#mainlogin').click(function() {
-$('#footer').animate({height: '80%'}, 600);
-$('.test1').css('display','block');
+$('#footer').animate({height:'80%'},{duration:400,complete: function() {
+$('.fecharlogin').show();
 $('#mainlogin').text('<?php echo $name ?>');
+}
+});
 });
 return false;
 });
@@ -428,9 +423,10 @@ return false;
 
 <script>
 $(document).ready(function() {
-$('.test1').click(function() {
-$('#footer').animate({height: '50px'}, 600);
-$('.test1').css('display','none');
+$('.fecharlogin').click(function() {
+$('.fecharlogin').hide(0, function(){
+$('#footer').animate({height: '136px'}, 600);
+});
 });
 return false;
 });
@@ -746,28 +742,69 @@ $("#showsearchtable").html(data);
 
 </div>
 <div id="footer">
-<table>
-
+<div id='footerinset'>
+<table id='foottable'>
 <tr>
-<td><?php echo  $name = $_SESSION['name'] ?? null; ?></td>
-<td><?php echo  $email = $_SESSION['email'] ?? null; ?></td>
-<td><?php echo  $username = $_SESSION['username'] ?? null; ?></td>
-<td><?php echo  $admin = $_SESSION['admin'] ?? null; ?></td>
-<td><?php
+<th>Name</th>
+<th>Email</th>
+<th>Utilizador</th>
+<th>Admin</th>
+<th>??</th>
+</tr>
+<tr>
+<td>
+<?php echo  $name; ?>
+</td>
+
+<td>
+<p><?php echo  $avatar; ?></p>
+
+</td>
+
+<td>
+<?php echo  $username; ?>
+</td>
+
+<td>
+<?php echo  $admin; ?>
+</td>
+
+<td>
+<?php if ($avatar != null){?>
+<form method='post' action='php/avatarRemove.php'>
+<button id='removeavatar' type='submit'>Remover</button>
+</form>
+<?php ;} ?>
+<?php
+if ($avatar == null){?>
+<form id='uploadimg' action="php/avatarup.php" method="post" enctype="multipart/form-data">
+Select Image File to Upload:
+<input type="file" name="file">
+<button type="submit" name="upload" >Upload</button>
+</form>
+</td>
+<?php ;}else{
+?> 
+<div style="background-color:black;"><img style="max-height:200px;" src="img/avatar<?php echo $avatar; ?>"></div>
+<?php
+}?>
+
+
+
+<?php
 if ($username == null) {
+
 } else { ?>
 <form action="php/logout.php" method="post">
-<input type="submit" id="logout" name="logout" value="Logout">
-</input>
+<button type="submit" id="logout" name="logout" value="Logout">Sair
+</button>
 </form>
-<?php echo '';
+<?php 
 } ?>
 </td>
-<td>
-<button class="test1">Fechar</button>
-</td>
+<button class="fecharlogin">&darr;</button>
 </table>
-
+</div>
 </div>
 
 
