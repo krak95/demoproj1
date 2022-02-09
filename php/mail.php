@@ -30,6 +30,6 @@ if(isset($_POST['name']) && isset($_POST['email'])){
     $mail->addReplyTo($_POST['email'], $_POST['name']);
 	
 	if($mail->Send()){
-		header("Location: empty.php");
+		header("Location:../empty.php");
 	}
 }

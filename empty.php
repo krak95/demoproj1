@@ -41,6 +41,7 @@ $('#swap').hide();
 
 <script>
 $(document).ready(function() {
+    if (a = 0){
 $('#mainlogin').click(function(){
 $('#mainlogin').addClass('selected');
 $('#mainregisto').removeClass('selected');
@@ -48,7 +49,6 @@ $('#maineditor').removeClass('selected');
 $('#mainsearch').removeClass('selected');
 $('#mainupdate').removeClass('selected');
 $('#mainemail').removeClass('selected');
-$('#footer').animate({height:'136px'},{duration:300,complete: function() {
 $('#swap1').hide();
 $('#swap').hide();
 $('#searctablediv').hide();
@@ -58,14 +58,14 @@ $('#emaildiv').hide();
 $('#fixedupdate').hide();
 $('#registodiv').hide();
 
+});
 }
-});
-});
 });
 </script>
 
 <script>
 $(document).ready(function() {
+    if (a = 0){
 $('#mainregisto').click(function(){
 $('#mainlogin').removeClass('selected');
 $('#mainregisto').addClass('selected');
@@ -74,7 +74,6 @@ $('#mainsearch').removeClass('selected');
 $('#mainupdate').removeClass('selected');
 $('#mainemail').removeClass('selected');
 $('.fecharlogin').hide();
-$('#footer').animate({height:'136px'},{duration:300,complete: function() {
 $('#swap1').hide();
 $('#swap').hide();
 $('#fixeddiv').hide();
@@ -84,14 +83,41 @@ $('#logindiv').hide();
 $('#emaildiv').hide();
 $('#fixedupdate').hide();
 $('#registodiv').show();
+});
+    }else{
+$('#mainregisto').click(function(){
+$('#mainlogin').removeClass('selected');
+$('#mainregisto').addClass('selected');
+$('#maineditor').removeClass('selected');
+$('#mainsearch').removeClass('selected');
+$('#mainupdate').removeClass('selected');
+$('#mainemail').removeClass('selected');
+$('#footer').animate({width: '100px'},{duration:100,complete: function(){
+$('#footer').animate({height: '56px'},{duration:100, complete: function(){
+$('.fecharlogin').hide();
+$('#swap1').hide();
+$('#swap').hide();
+$('#fixeddiv').hide();
+$('#editordiv').hide();
+$('#searctablediv').hide();
+$('#logindiv').hide();
+$('#emaildiv').hide();
+$('#fixedupdate').hide();
+$('#registodiv').show();
+$('#foottable').hide();
+var a = 0;
+}    
+});
 }
 });
 });
+}
 });
 </script>
 
 <script>
 $(document).ready(function() {
+    if (a = 0){
 $('#maineditor').click(function(){
 $('#mainlogin').removeClass('selected');
 $('#mainregisto').removeClass('selected');
@@ -99,7 +125,6 @@ $('#maineditor').addClass('selected');
 $('#mainsearch').removeClass('selected');
 $('#mainupdate').removeClass('selected');
 $('#mainemail').removeClass('selected');
-$('#footer').animate({height:'136px'},{duration:300,complete: function() {
 $('#editordiv').show();
 $('#searctablediv').hide();
 $('#logindiv').hide();
@@ -110,9 +135,36 @@ $('.fecharlogin').hide();
 $('#fixeddiv').show();
 $('#swap').show();
 $('#swap1').show();
+});
+} else {
+$('#maineditor').click(function(){
+$('#mainlogin').removeClass('selected');
+$('#mainregisto').removeClass('selected');
+$('#maineditor').addClass('selected');
+$('#mainsearch').removeClass('selected');
+$('#mainupdate').removeClass('selected');
+$('#mainemail').removeClass('selected');
+$('#footer').animate({width: '100px'},{duration:100,complete: function(){
+$('#footer').animate({height: '56px'},{duration:100, complete: function(){
+$('#editordiv').show();
+$('#searctablediv').hide();
+$('#logindiv').hide();
+$('#emaildiv').hide();
+$('#fixedupdate').hide();
+$('#registodiv').hide();
+$('.fecharlogin').hide();
+$('#fixeddiv').show();
+$('#swap').show();
+$('#swap1').show();
+$('#foottable').hide();
+$('.fecharlogin').hide();
+var a = 0;
+}    
+});
 }
 });
 });
+}
 });
 </script>
 
@@ -126,7 +178,6 @@ $('#mainsearch').addClass('selected');
 $('#mainupdate').removeClass('selected');
 $('#mainemail').removeClass('selected');
 $('.fecharlogin').hide();
-$('#footer').animate({height:'136px'},{duration:300,complete: function() {
 $('#fixeddiv').hide();
 $('#editordiv').hide();
 $('#searctablediv').show();
@@ -136,8 +187,6 @@ $('#fixedupdate').hide();
 $('#registodiv').hide();
 $('#swap1').hide();
 $('#swap').hide();
-}
-});
 });
 });
 </script>
@@ -152,7 +201,6 @@ $('#mainsearch').removeClass('selected');
 $('#mainupdate').addClass('selected');
 $('#mainemail').removeClass('selected');
 $('.fecharlogin').hide();
-$('#footer').animate({height:'136px'},{duration:300,complete: function() {
 $('#swap1').hide();
 $('#swap').hide();
 $('#fixeddiv').hide();
@@ -164,8 +212,6 @@ $('#fixedupdate').hide();
 $('#registodiv').hide();
 $('#swap1').hide();
 $('#swap').hide();
-}
-});
 });
 });
 </script>
@@ -180,7 +226,6 @@ $('#mainsearch').removeClass('selected');
 $('#mainupdate').removeClass('selected');
 $('#mainemail').addClass('selected');
 $('.fecharlogin').hide();
-$('#footer').animate({height:'136px'},{duration:300,complete: function() {
 $('#swap1').hide();
 $('#swap').hide();
 $('#searctablediv').hide();
@@ -190,8 +235,6 @@ $('#emaildiv').show();
 $('#fixedupdate').hide();
 $('#registodiv').hide();
 
-}
-});
 });
 });
 </script>
@@ -230,25 +273,30 @@ echo mysqli_num_rows($sql1);
 
 <div id="emaildiv">
 <!--- emaildiv--->
-<div class="container3">
 
-<form action="php/mail.php" method="post">
 <div class="div_contato">
 
-<h1 style="color:ghostwhite; text-align:center">Contato</h1>
-<input type="text" id="contuser" name="name" value="<?php echo " $name"; ?>">
-<input type="text" id="contemail" name="email" value="<?php echo " $email"; ?>">
-<p id="subject">Subject</p>
-<input type="text" id="contsub" name="subject">
-<p id="mensagem">Mensagem</p>
-<textarea placeholder="Mensagem" name="body" id="contmens" rows="3"></textarea>
-<input id="sentmess" type="submit" />
+<form action="php/mail.php" method="post">
+
+<h2>Contato</h2>
+
+<h1>Nome:</h1><br>
+<input type="text" name="name" value="<?php echo "$name"; ?>"><br>
+
+<h1>Email:</h1><br>
+<input type="text" name="email" value="<?php echo "$email"; ?>"><br>
+
+<h1>Subject:</h1><br>
+<input type="text" id="contsub" name="subject"><br>
+
+<h1>Mensagem:</h1><br><br>
+<textarea placeholder="Mensagem" name="body"></textarea><br>
+<button type="submit"></button>
+
 </form>
-</div>
-
-
 
 </div>
+
 </div>
 
 <div id=registodiv>
@@ -314,20 +362,20 @@ return false;
 
 
 <h1>Nome:</h1><br>
-<input type="text" name="name" class="textbox" id="renam" placeholder="Name">
+<input type="text" name="name" id="renam" placeholder="Name">
 <label for='renamempty' id='renamempty'>Preencha o campo, por favor!</label><br>
 
 <h1>Utilizador:</h1><br>
-<input type="text" name="username" class="textbox" id="reguser" placeholder="Username">
+<input type="text" name="username" id="reguser" placeholder="Username">
 <label for='userexist' id='userexist'>Utilizador já existe!</label>
 <label for='reguserempty' id='reguserempty'>Preencha o campo, por favor!</label><br>
 
 <h1>Password:</h1><br>
-<input type="password" name="password" class="textbox" id="regpass" placeholder="Password">
+<input type="password" name="password" id="regpass" placeholder="Password">
 <label for='regpassempty' id='regpassempty'>Preencha o campo, por favor!</label><br>
 
 <h1>Email:</h1><br>
-<input type="text" name="email" class="textbox" id="regmail" placeholder="Email">
+<input type="text" name="email" id="regmail" placeholder="Email">
 <label for='invalidmail' id='invalidmail'>Email inválido!</label>
 <label for='regmailempty' id='regmailempty'>Preencha o campo, por favor!</label><br>
 
@@ -404,17 +452,36 @@ return false;
 </form>
 </div>
 
+<script>
+$(document).ready(function() {
+    $('#footer').hide();
+});
+</script>
+
 ";
 } else {
 ?>
 
 <script>
 $(document).ready(function() {
+    var a = 0;
+$('#foottable').hide();
 $('#mainlogin').click(function() {
+$('#mainlogin').addClass('selected');
+$('#mainregisto').removeClass('selected');
+$('#maineditor').removeClass('selected');
+$('#mainsearch').removeClass('selected');
+$('#mainupdate').removeClass('selected');
+$('#mainemail').removeClass('selected');
 $('#footer').animate({height:'80%'},{duration:400,complete: function() {
+$('#footer').animate({width:'100%'},{duration:400,complete: function() {
 $('.fecharlogin').show();
+$('#foottable').show();
 $('#mainlogin').text('<?php echo $name ?>');
+var a = 1;
 }
+});
+    }
 });
 });
 return false;
@@ -423,9 +490,19 @@ return false;
 
 <script>
 $(document).ready(function() {
+$('#foottable').hide();
 $('.fecharlogin').click(function() {
 $('.fecharlogin').hide(0, function(){
-$('#footer').animate({height: '136px'}, 600);
+$('#footer').animate({width: '100px'},{duration:400,complete: function(){
+$('#footer').animate({height: '56px'},{duration:600, complete: function(){
+$('#foottable').hide();
+var a = 0;
+}
+
+});
+}
+});
+
 });
 });
 return false;
@@ -744,37 +821,36 @@ $("#showsearchtable").html(data);
 <div id="footer">
 <div id='footerinset'>
 <table id='foottable'>
+
 <tr>
 <th>Name</th>
-<th>Email</th>
-<th>Utilizador</th>
-<th>Admin</th>
-<th>??</th>
-</tr>
-<tr>
 <td>
 <?php echo  $name; ?>
 </td>
+</tr>
 
+<tr>
+<th>Email</th>
 <td>
-<p><?php echo  $avatar; ?></p>
-
+<p><?php echo  $email; ?></p>
 </td>
+</tr>
 
+<tr>
+<th>Utilizador</th>
 <td>
 <?php echo  $username; ?>
 </td>
+</tr>
 
-<td>
-<?php echo  $admin; ?>
-</td>
+<tr>
+<th>TEMP(nome avatar)</th>
+<td><?php echo  $avatar; ?></td>
+</tr>
 
+<tr>
+<th>AVATAR</th>
 <td>
-<?php if ($avatar != null){?>
-<form method='post' action='php/avatarRemove.php'>
-<button id='removeavatar' type='submit'>Remover</button>
-</form>
-<?php ;} ?>
 <?php
 if ($avatar == null){?>
 <form id='uploadimg' action="php/avatarup.php" method="post" enctype="multipart/form-data">
@@ -788,6 +864,16 @@ Select Image File to Upload:
 <div style="background-color:black;"><img style="max-height:200px;" src="img/avatar<?php echo $avatar; ?>"></div>
 <?php
 }?>
+
+<?php if ($avatar != null){?>
+<form method='post' action='php/avatarRemove.php'>
+<button id='removeavatar' type='submit'>Remover</button>
+</form>
+<?php ;} ?>
+</td>
+</tr>
+
+
 
 
 
@@ -808,7 +894,7 @@ if ($username == null) {
 </div>
 
 
-
+<div id="bottomfiller"></div>
 
 </body>
 

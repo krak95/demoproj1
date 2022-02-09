@@ -8,5 +8,4 @@ $res = $stmt->get_result();
 while($row = mysqli_fetch_array($res)){
     $_SESSION['avatar'] = $row['avatar'];
     
-    echo $row['avatar'];
 }
