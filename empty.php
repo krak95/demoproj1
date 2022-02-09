@@ -41,7 +41,6 @@ $('#swap').hide();
 
 <script>
 $(document).ready(function() {
-    if (a = 0){
 $('#mainlogin').click(function(){
 $('#mainlogin').addClass('selected');
 $('#mainregisto').removeClass('selected');
@@ -57,9 +56,7 @@ $('#editordiv').hide();
 $('#emaildiv').hide();
 $('#fixedupdate').hide();
 $('#registodiv').hide();
-
 });
-}
 });
 </script>
 
