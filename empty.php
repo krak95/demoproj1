@@ -81,7 +81,7 @@ $('#emaildiv').hide();
 $('#fixedupdate').hide();
 $('#registodiv').show();
 });
-    }else{
+}else{
 $('#mainregisto').click(function(){
 $('#mainlogin').removeClass('selected');
 $('#mainregisto').addClass('selected');
@@ -167,6 +167,7 @@ var a = 0;
 
 <script>
 $(document).ready(function() {
+    if (a = 0){
 $('#mainsearch').click(function(){  
 $('#mainlogin').removeClass('selected');
 $('#mainregisto').removeClass('selected');
@@ -174,22 +175,42 @@ $('#maineditor').removeClass('selected');
 $('#mainsearch').addClass('selected');
 $('#mainupdate').removeClass('selected');
 $('#mainemail').removeClass('selected');
-$('.fecharlogin').hide();
-$('#fixeddiv').hide();
+});
+} else {
+$('#mainsearch').click(function(){
+$('#mainlogin').removeClass('selected');
+$('#mainregisto').removeClass('selected');
+$('#maineditor').removeClass('selected');
+$('#mainsearch').addClass('selected');
+$('#mainupdate').removeClass('selected');
+$('#mainemail').removeClass('selected');
+$('#footer').animate({width: '100px'},{duration:100,complete: function(){
+$('#footer').animate({height: '56px'},{duration:100, complete: function(){
 $('#editordiv').hide();
 $('#searchdiv').show();
 $('#logindiv').hide();
 $('#emaildiv').hide();
 $('#fixedupdate').hide();
 $('#registodiv').hide();
-$('#swap1').hide();
+$('.fecharlogin').hide();
+$('#fixeddiv').hide();
 $('#swap').hide();
+$('#swap1').hide();
+$('#foottable').hide();
+$('.fecharlogin').hide();
+var a = 0;
+}    
 });
+}
+});
+});
+}
 });
 </script>
 
 <script>
 $(document).ready(function() {
+    if (a = 0){
 $('#mainupdate').click(function(){
 $('#mainlogin').removeClass('selected');
 $('#mainregisto').removeClass('selected');
@@ -197,24 +218,42 @@ $('#maineditor').removeClass('selected');
 $('#mainsearch').removeClass('selected');
 $('#mainupdate').addClass('selected');
 $('#mainemail').removeClass('selected');
-$('.fecharlogin').hide();
-$('#swap1').hide();
-$('#swap').hide();
-$('#fixeddiv').hide();
+});
+} else {
+$('#mainupdate').click(function(){
+$('#mainlogin').removeClass('selected');
+$('#mainregisto').removeClass('selected');
+$('#maineditor').removeClass('selected');
+$('#mainsearch').removeClass('selected');
+$('#mainupdate').addClass('selected');
+$('#mainemail').removeClass('selected');
+$('#footer').animate({width: '100px'},{duration:100,complete: function(){
+$('#footer').animate({height: '56px'},{duration:100, complete: function(){
 $('#editordiv').hide();
 $('#searchdiv').hide();
 $('#logindiv').hide();
 $('#emaildiv').hide();
 $('#fixedupdate').hide();
 $('#registodiv').hide();
-$('#swap1').hide();
+$('.fecharlogin').hide();
+$('#fixeddiv').hide();
 $('#swap').hide();
+$('#swap1').hide();
+$('#foottable').hide();
+$('.fecharlogin').hide();
+var a = 0;
+}    
 });
+}
+});
+});
+}
 });
 </script>
 
 <script>
 $(document).ready(function() {
+    if (a = 0){
 $('#mainemail').click(function(){
 $('#mainlogin').removeClass('selected');
 $('#mainregisto').removeClass('selected');
@@ -222,17 +261,36 @@ $('#maineditor').removeClass('selected');
 $('#mainsearch').removeClass('selected');
 $('#mainupdate').removeClass('selected');
 $('#mainemail').addClass('selected');
-$('.fecharlogin').hide();
-$('#swap1').hide();
-$('#swap').hide();
+});
+} else {
+$('#mainemail').click(function(){
+$('#mainlogin').removeClass('selected');
+$('#mainregisto').removeClass('selected');
+$('#maineditor').removeClass('selected');
+$('#mainsearch').removeClass('selected');
+$('#mainupdate').removeClass('selected');
+$('#mainemail').addClass('selected');
+$('#footer').animate({width: '100px'},{duration:100,complete: function(){
+$('#footer').animate({height: '56px'},{duration:100, complete: function(){
+$('#editordiv').hide();
 $('#searchdiv').hide();
 $('#logindiv').hide();
-$('#editordiv').hide();
 $('#emaildiv').show();
 $('#fixedupdate').hide();
 $('#registodiv').hide();
-
+$('.fecharlogin').hide();
+$('#fixeddiv').hide();
+$('#swap').hide();
+$('#swap1').hide();
+$('#foottable').hide();
+$('.fecharlogin').hide();
+var a = 0;
+}    
 });
+}
+});
+});
+}
 });
 </script>
 
@@ -289,7 +347,7 @@ echo mysqli_num_rows($sql1);
 
 <h1>Mensagem:</h1><br><br>
 <textarea placeholder="Escreva aqui a sua mensagem." name="body"></textarea><br>
-<button type="submit"></button>
+<button  type="submit"> Enviar</button>
 
 </form>
 

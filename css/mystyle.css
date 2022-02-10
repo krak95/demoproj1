@@ -400,11 +400,14 @@ p {
 #but-add{
     position: absolute;
     margin-top:50px;
-    left:0;
+    right:0;
     margin-left:150px;
     border-radius: 6px;
     width: 33%;
     height: 100px;
+}
+#but-add:active{
+    background-color: var(--bgrey);
 }
 #preenchatxt{
     position: absolute;
@@ -429,11 +432,11 @@ p {
     margin-top:10px;
     border-radius: 6px;
     width: 16%;
-    height: 140px;
+    height: 35px;
     background-color: var(--bgrey);
     color:crimson;
     font-weight: bold;
-    font-size:20px;
+    font-size:auto;
     border:2px solid crimson;
 }
 #but-del:after{
@@ -602,6 +605,9 @@ p {
     border-radius: 6px;
     width: 26%;
     Height:100px;
+}
+#but-mod:active{
+    background-color: var(--bgrey);
 }
 
 .deleteb a {
