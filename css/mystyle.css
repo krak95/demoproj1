@@ -31,7 +31,7 @@ select:focus{
 }
 input{
     border:1px solid var(--dblue);
-    border-radius: 5px;
+    border-radius:none;
     text-align: center;
     position: relative;
     display: block;
@@ -43,6 +43,27 @@ input{
     height: 24px;
     
 }
+input:focus{
+    outline: 1px solid var(--bgrey);
+}
+
+textarea{
+    border:1px solid var(--dblue);
+    border-radius: 5px;
+    text-align: center;
+    position: relative;
+    display: block;
+    margin-right: auto;
+    margin-left:auto;
+    margin-top:20px;
+    width:80%;
+    color:var(--dblue);
+    height: 24px;
+    border-radius: 0;
+}
+textarea:focus{outline: 1px solid var(--bgrey);
+}
+
 
 html {
     overflow: -moz-scrollbars-vertical; 
@@ -85,10 +106,12 @@ p {
     
 }
 
-.testing{
-    position: relative;
-    margin-left:450px;
-    color: white;
+.test{
+    z-index: 40;
+    position: absolute;
+    color:black;
+    top:0;
+    left:0;
 }
 /* FOOTER */
 
@@ -123,11 +146,13 @@ p {
     border:4px solid var(--dblue);
     height: 20%;
     text-align: center;
+    color:var(--bblue);
 }
 
 #foottable th{
     border:4px solid var(--dblue);
-    background-color: var(--dgrey);
+    background-color: var(--bgrey);
+    color: var(--dblue);
     height: 20%;
     text-align: center;
 }
@@ -327,6 +352,9 @@ p {
     
 }
 /*labelINSERT*/
+#fixeddiv label{
+    font-weight: bold;
+}
 #labelproduto{
     position: absolute;
     top:0;
@@ -404,6 +432,8 @@ p {
     height: 140px;
     background-color: var(--bgrey);
     color:crimson;
+    font-weight: bold;
+    font-size:20px;
     border:2px solid crimson;
 }
 #but-del:after{
@@ -432,8 +462,8 @@ p {
     margin-top:142px;
     margin-left:auto;
     margin-right:auto;
-    border:2px solid var(--dblue);
-    background-color: var(--bgrey);
+    background-color: var(--dblue);
+    color:var(--bblue);
 }
 #insertheader table{
     width: 100%;
@@ -459,12 +489,11 @@ p {
     color: var(--bblue);
 }
 #insertable1 tr:nth-child(even){
-    background-color: var(--bgrey);
+    background-color: var(--bblue);
     color: var(--dblue);
 }
 #insertable1 td{
     width: 20%;
-    border:2px solid var(--dblue);
 }
 
 #lastdiv{
@@ -506,6 +535,9 @@ p {
     left:0;
     right:0;
     margin-top:30px;
+}
+#fixedupdate label{
+    font-weight: bold;
 }
 #labeluref{
     position: absolute;
@@ -583,11 +615,6 @@ p {
     background-color: crimson;
     position: relative;
 }
-
-input:focus{
-   outline:none;
-}
-
 #reset{
     width:83px;
     height:30px;
@@ -610,82 +637,88 @@ input:focus{
 }
 
 /*SEARCHTABLE*/
-#searctablediv{
-    display:none;
-    margin-top:50px;
-    margin-bottom:100px;
-    position: absolute;
-    width: 100%;
-}
-#searctablediv table {
-    border-top: 2px solid var(--dblue);
+#searchdiv{
     background-color: var(--bblue);
-    color: var(--dblue);
-    border-collapse: collapse;
-    overflow-x:auto;
-    text-align: center;
-   
-   
+    margin-top:80px;
     position: absolute;
-    width: 100%;
+    width: 72%;
     
+    margin-bottom:100px;
     margin-left:auto;
     margin-right:auto;
     left:0;
+    right:0;
+    display:block;
 }
-
-#searctablediv td{
-    border-top: 2px solid var(--dblue);
-border-bottom: 2px solid var(--dblue);
-}
-
-#searchtableheader{
+#searchtablediv{
     border:none;
     position: fixed;
     z-index:31;
     margin-left:auto;
     margin-right:auto;
-    width: 100%;
+    
+    width:72%;
     top:0;
     left:0;
     right:0;
     max-height: 136px;
-    margin-top:34px;
-    border-top: 2px solid var(--dblue);
+    margin-top:26px;
+}
+#searchtablediv input{
+text-align: left;
+position: relative;
+display: block;
+margin-right: auto;
+margin-left:auto;
+width: 60%;
+}
+
+#searchtablediv label{
+    font-weight: bold;
+    font-size:14px;
+    left:0;
+    position: absolute;
+    margin-left:80px;
+    margin-top:42px;
+}
+
+#searchtableheader{
+    width: 72%;
+    position: fixed;
+    z-index: 30;
+    margin-left:auto;
+    margin-right:auto;
+    color:var(--bblue);
+    background-color: var(--dblue);
+    margin-top:12px;
 }
 #searchtableheader th{
     width: 20%;
 }
 
 #showsearchtable{
+    margin-top:250px;
     position: absolute;
-    border-bottom: 2px solid var(--dblue);
     margin-left: auto;
     margin-right: auto;
+    left:0;
+    right:0;
     top:0;
     overflow-y: auto;
+    width: 100%;
+    text-align: center;
 }
-
 
 #showsearchtable tr:nth-child(odd){
     background-color:var(--dblue);
     color: var(--bblue);
 }
-.searchresults {
-    width: 20%;
-}
-.searchresults tr:nth-child(odd){
-    text-align: center;
+#showsearchtable tr:nth-child(even){
+    background-color:var(--bblue);
     color: var(--dblue);
-    border-top: 2px solid var(--dblue);
-    border-bottom: 2px solid var(--dblue);
-    position:absolute;
-    margin-left: auto;
-    margin-right: auto;
-    top:0;
-    left:0;
-    right:0;
-    background-color: var(--bblue);
+}
+.searchresults td {
+    width: 20%;
 }
 /*EDITTABLE*/
 .editTable{
@@ -975,7 +1008,7 @@ border-bottom: 2px solid var(--dblue);
 /*CONTATO*/
 
 #emaildiv {
-    display: block;
+    display: none;
 }
 
 .div_contato {
@@ -1405,8 +1438,57 @@ color:var(--dblue);
 }
 
 #removeavatar{
+    background-color:var(--blue);
     position: relative;
-    height:20px;
+    height: 34px;
     width: 100px;
+}
+#removeavatar:hover{
+    background-color:crimson;
+}
 
+#upload{
+    background-color:var(--bgrey);
+    color:var(--dblue);
+    font-weight: bold;
+    position: relative;
+    height: 34px;
+    width: 100px;
+}
+#upload:hover{
+    background-color:var(--blue);
+    color:var(--dblue);
+    font-weight: bold;
+    position: relative;
+    height: 34px;
+    width: 100px;
+    transition: 0.2s;
+}
+
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.inputfile + label {
+    font-size: 14px;
+    color: var(--dblue);
+    font-weight: bold;
+    background-color: var(--bgrey);
+    display: inline-block;
+    height: auto;
+    width: 100px;
+    text-align: center;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    transition: 0.2s;
+    background-color: var(--blue);
+}
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
 }

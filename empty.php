@@ -50,7 +50,7 @@ $('#mainupdate').removeClass('selected');
 $('#mainemail').removeClass('selected');
 $('#swap1').hide();
 $('#swap').hide();
-$('#searctablediv').hide();
+$('#searchdiv').hide();
 $('#logindiv').show();
 $('#editordiv').hide();
 $('#emaildiv').hide();
@@ -75,7 +75,7 @@ $('#swap1').hide();
 $('#swap').hide();
 $('#fixeddiv').hide();
 $('#editordiv').hide();
-$('#searctablediv').hide();
+$('#searchdiv').hide();
 $('#logindiv').hide();
 $('#emaildiv').hide();
 $('#fixedupdate').hide();
@@ -96,7 +96,7 @@ $('#swap1').hide();
 $('#swap').hide();
 $('#fixeddiv').hide();
 $('#editordiv').hide();
-$('#searctablediv').hide();
+$('#searchdiv').hide();
 $('#logindiv').hide();
 $('#emaildiv').hide();
 $('#fixedupdate').hide();
@@ -123,7 +123,7 @@ $('#mainsearch').removeClass('selected');
 $('#mainupdate').removeClass('selected');
 $('#mainemail').removeClass('selected');
 $('#editordiv').show();
-$('#searctablediv').hide();
+$('#searchdiv').hide();
 $('#logindiv').hide();
 $('#emaildiv').hide();
 $('#fixedupdate').hide();
@@ -144,7 +144,7 @@ $('#mainemail').removeClass('selected');
 $('#footer').animate({width: '100px'},{duration:100,complete: function(){
 $('#footer').animate({height: '56px'},{duration:100, complete: function(){
 $('#editordiv').show();
-$('#searctablediv').hide();
+$('#searchdiv').hide();
 $('#logindiv').hide();
 $('#emaildiv').hide();
 $('#fixedupdate').hide();
@@ -177,7 +177,7 @@ $('#mainemail').removeClass('selected');
 $('.fecharlogin').hide();
 $('#fixeddiv').hide();
 $('#editordiv').hide();
-$('#searctablediv').show();
+$('#searchdiv').show();
 $('#logindiv').hide();
 $('#emaildiv').hide();
 $('#fixedupdate').hide();
@@ -202,7 +202,7 @@ $('#swap1').hide();
 $('#swap').hide();
 $('#fixeddiv').hide();
 $('#editordiv').hide();
-$('#searctablediv').hide();
+$('#searchdiv').hide();
 $('#logindiv').hide();
 $('#emaildiv').hide();
 $('#fixedupdate').hide();
@@ -225,7 +225,7 @@ $('#mainemail').addClass('selected');
 $('.fecharlogin').hide();
 $('#swap1').hide();
 $('#swap').hide();
-$('#searctablediv').hide();
+$('#searchdiv').hide();
 $('#logindiv').hide();
 $('#editordiv').hide();
 $('#emaildiv').show();
@@ -242,9 +242,10 @@ $('#registodiv').hide();
 
 
 <body>
+    
 <div id='infinitepage'>
 
-
+<div class='test'><p><?php echo $admin; ?></p></div>
 
 <!--
 <div class="nutil"> Número de utilizadors:    
@@ -287,7 +288,7 @@ echo mysqli_num_rows($sql1);
 <input type="text" id="contsub" name="subject"><br>
 
 <h1>Mensagem:</h1><br><br>
-<textarea placeholder="Mensagem" name="body"></textarea><br>
+<textarea placeholder="Escreva aqui a sua mensagem." name="body"></textarea><br>
 <button type="submit"></button>
 
 </form>
@@ -605,9 +606,14 @@ return false;
 </select>
 </form>
 
+<?php /*DELETE BUTTON*/ 
+if ($admin == 1){
+    echo "
 <form method='post' action='php/deleteall.php'>
-<button  type="submit" id='but-del' value="deleteall">Apagar tudo</button>
-</form>
+<button  type='submit' id='but-del' value='deleteall'>Apagar tudo</button>
+</form>";
+}
+?>
 
 <div id="insertTxt">Adicionado com sucesso!</div>
 <div id="preenchatxt">Preencha os campos!</div>
@@ -765,8 +771,12 @@ return false;
 </div>
 
 
-<div id="searctablediv">
-<form action="javascript:void(0)" method="POST" id="search1">
+
+<div id="searchdiv">
+    
+
+<div id='searchtablediv'>
+
 <script>
 $(document).ready(function() {
 $('#search1').on('keyup', function(event) {
@@ -782,39 +792,48 @@ $("#showsearchtable").html(data);
 });
 });
 </script>
-<div id='searchtableheader'>
-<table>
-
-<tr>
-<td colspan='2'>
-<h5>Produto</h5>
-</td>
-<td colspan='3' id="searchinput"><input type="text" name="search" placeholder="Escreva aqui para procurar."></td>
-</tr>
-<tr>
-<th>
-<h5>Referência</h5>
-</th>
-<th>
-<h5>Nome</h5>
-</th>
-<th>
-<h5>Quantidade</h5>
-</th>
-<th>
-<h5>Preço</h5>
-</th>
-<th>
-<h5>Stock</h5>
-</th>
-</tr>
-</table>
-<table id="showsearchtable">
-</table>
-</div>
+<form action="javascript:void(0)" method="POST" id="search1">
+<label>Produto:</label><br>
+<input type="text" name="search" placeholder="Escreva aqui para procurar."><br>
 </form>
 
+<script>
+$(document).ready(function() {
+$('#searchref').on('keyup', function(event) {
+
+$.ajax({
+type: "POST",
+url: "php/searchref.php",
+data: $("#searchref").serialize(), // get all form field value in serialize form
+success: function(data) {
+$("#showsearchtable").html(data);
+}
+});
+});
+});
+</script>
+<form action="javascript:void(0)" method="POST" id="searchref">
+<label>Referência:</label><br>
+<input type="text" name="searchref" placeholder="Escreva aqui para procurar.">
+</form><br>
+
+<table id='searchtableheader'>
+
+<tr>
+<th>Ref.</th>
+<th>Nome</th>
+<th>Quantidade</th>
+<th>Preço</th>
+<th>Stock</th>
+</tr>
+
+</table>
+
+<table id="showsearchtable"></table>
+
 </div>
+</div>
+
 <div id="footer">
 <div id='footerinset'>
 <table id='foottable'>
@@ -829,7 +848,7 @@ $("#showsearchtable").html(data);
 <tr>
 <th>Email</th>
 <td>
-<p><?php echo  $email; ?></p>
+<?php echo  $email; ?>
 </td>
 </tr>
 
@@ -851,9 +870,11 @@ $("#showsearchtable").html(data);
 <?php
 if ($avatar == null){?>
 <form id='uploadimg' action="php/avatarup.php" method="post" enctype="multipart/form-data">
-Select Image File to Upload:
-<input type="file" name="file">
-<button type="submit" name="upload" >Upload</button>
+
+<input class='inputfile' id='file' type="file" name="file">
+<label for="file">(imagem para clique) Avatar.</label><br><br>
+
+<button id='upload' type="submit" name="upload" >Upload</button>
 </form>
 </td>
 <?php ;}else{

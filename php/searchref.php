@@ -1,10 +1,9 @@
 <?php
 require_once "config.php";
-    $filter = $_POST['search'] ?? null;
-    $query = "SELECT id,produto,quantidade,price,stock FROM teste WHERE produto LIKE '%$filter%' ";
+    $filter = $_POST['searchref'] ?? null;
+    $query = "SELECT id,produto,quantidade,price,stock FROM teste WHERE id LIKE '%$filter%' ";
     $result = $con->query($query);
     while ($row = $result->fetch_assoc()){ 
-        if($filter != ''){
 ?>
             <tr class="searchresults">
                 <td class="searchresults" ><?php echo $row["id"]; ?></td>
@@ -26,9 +25,7 @@ require_once "config.php";
                             }
                             ?>
             </tr> 
-
     <?php
-    }else{echo '';}
     }
 
 
