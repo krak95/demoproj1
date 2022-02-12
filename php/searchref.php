@@ -1,7 +1,7 @@
 <?php
 require_once "config.php";
     $filter = $_POST['searchref'] ?? null;
-    $query = "SELECT id,produto,quantidade,price,stock FROM teste WHERE id LIKE '%$filter%' ";
+    $query = "SELECT id,produto,quantidade,price,stock FROM produtos WHERE id LIKE '%$filter%' ";
     $result = $con->query($query);
     while ($row = $result->fetch_assoc()){ 
 ?>

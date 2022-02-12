@@ -490,7 +490,7 @@ p {
     width: 100%;
 }
 #insertheader th{
-    width: 20%;
+    width: 16.6%;
     position: relative;
 }
 
@@ -516,7 +516,7 @@ p {
     color: var(--dblue);
 }
 #insertable1 td{
-    width: 20%;
+    width: 16.6%;
 }
 
 #lastdiv{
@@ -540,7 +540,7 @@ p {
 
 #fixedupdate{
     position: fixed;
-    z-index: 30;
+    z-index: 32;
     width:72%;
     top:0;
     margin-top:40px;
@@ -550,6 +550,7 @@ p {
     right:0;
 }
 #fixedupdate table{
+    z-index: 32;
     position: absolute;
     width: 100%;
     top:0;
@@ -558,9 +559,6 @@ p {
     left:0;
     right:0;
     margin-top:30px;
-}
-#fixedupdate label{
-    font-weight: bold;
 }
 #labeluref{
     position: absolute;
@@ -626,9 +624,6 @@ p {
     width: 26%;
     Height:100px;
 }
-#but-mod:active{
-    background-color: var(--bgrey);
-}
 
 .deleteb a {
     padding-left: 50px;
@@ -641,6 +636,11 @@ p {
     background-color: crimson;
     position: relative;
 }
+
+input:focus{
+   outline:none;
+}
+
 #reset{
     width:83px;
     height:30px;
@@ -661,7 +661,6 @@ p {
     color: white;
     cursor:pointer;
 }
-
 /*SEARCHTABLE*/
 #searchdiv{
     background-color: var(--bblue);
@@ -1473,7 +1472,7 @@ color:var(--dblue);
     background-color:crimson;
 }
 
-#upload{
+.upload{
     background-color:var(--bgrey);
     color:var(--dblue);
     font-weight: bold;
@@ -1481,7 +1480,7 @@ color:var(--dblue);
     height: 34px;
     width: 100px;
 }
-#upload:hover{
+.upload:hover{
     background-color:var(--blue);
     color:var(--dblue);
     font-weight: bold;
@@ -1540,4 +1539,11 @@ color:var(--dblue);
     position: absolute;
     color:black;
     margin-top:300px;
+}
+
+#carrinho{
+    position:absolute;
+    margin-top:200px;
+    margin-left:200px;
+    display:none;
 }

@@ -1,12 +1,12 @@
 <?php
-session_start();
 require_once 'config.php';
+session_start();
 
 
-$username = $_SESSION['username'];
+$id = $_POST['id'];
 
 
-$targetDir = "../img\avatar";
+$targetDir = "../img\img";
 $fileName = basename($_FILES["file"]["name"]);
 $targetFilePath = $targetDir . $fileName;
 $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
@@ -18,7 +18,7 @@ if(isset($_POST["upload"]) && !empty($_FILES["file"]["name"])){
         // Upload file to server
         if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
             // Insert image file name into database
-            $insert = $con->query("UPDATE users SET avatar ='$fileName' WHERE username = '$username'");
+            $insert = $con->query("UPDATE produtos SET img ='$fileName' WHERE id = '$id'");
             if($insert){
                 
             }
@@ -28,6 +28,7 @@ if(isset($_POST["upload"]) && !empty($_FILES["file"]["name"])){
             
         
     }   
-    
+
 header('location:../index.php');
+
 ?>

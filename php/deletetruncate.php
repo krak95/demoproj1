@@ -1,6 +1,6 @@
 <?php
 require_once 'config.php';
-$sql = "TRUNCATE teste";
+$sql = "TRUNCATE produtos";
 $stmt = $con->prepare($sql);
 $stmt->execute();
 if($stmt){

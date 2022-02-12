@@ -4,7 +4,7 @@ require_once "config.php";
 
 <table id="insertable1">
 <?php
-        $sql =  "SELECT COUNT(*) FROM teste";
+        $sql =  "SELECT COUNT(*) FROM produtos";
         $result = $con->query($sql);
         while($row = mysqli_fetch_array($result)) {
             ?>

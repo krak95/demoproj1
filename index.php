@@ -243,6 +243,7 @@ $('#swap').hide();
 $('#swap1').hide();
 $('#foottable').hide();
 $('.fecharlogin').hide();
+$('#carrinho').show();
 var a = 0;
 }
 });
@@ -322,7 +323,7 @@ echo mysqli_num_rows($sql1);
 <button id='maineditor'>Editor</button>
 <button id='mainsearch'>Procura</button>
 <button id='mainupdate'>Update</button>
-<button id='mainemail'>Email</button>
+<button id='mainemail'><?php echo $username ?></button>
 </tr>
 </table>
 </div>
@@ -723,7 +724,9 @@ return false;
 <div id='insertheader'>
 <table>
 <tr>
-<th>Ref.</th>
+    
+<th>img</th>
+<th>add</th>
 <th>Produto</th>
 <th>Quantidade</th>
 <th>Preço</th>
@@ -732,10 +735,11 @@ return false;
 </table>
 </div>
 <div class="forload">
+    
 <table id="insertable1">
 
 
-<?php $sql = "SELECT * FROM teste";
+<?php $sql = "SELECT * FROM produtos";
 $result = $con->query($sql);
 while ($row = $result->fetch_assoc()) {
 
@@ -745,8 +749,35 @@ while ($row = $result->fetch_assoc()) {
 
 <td>
 
-<?php echo $row["id"]; ?>
+<?php
+if ($row['img'] == null){?>
+<form action="php/imgUPLOAD.php" method="post" enctype="multipart/form-data">
+<input type='hidden' name='id' value='<?php echo $row['id'];?>' />
+<input class='inputfile' class='file' type="file" name="file">
+<label for="file">(imagem para clique) Avatar.</label><br><br>
 
+<button class='upload' type="submit" name="upload" >Upload</button>
+</form>
+</td>
+<?php ;
+}else{
+?>
+<div style="background-color:black;"><img style="max-width:50px;" src="img/img<?php echo $row['img']; ?>"></div>
+<?php
+}
+if ($row['img'] != null){?>
+<form method='post' action='php/imgREMOVE.php'>
+<input type='hidden' name='id' value='<?php echo $row['id'];?>' />
+<button id='removeavatar' type='submit'>Remover</button>
+</form>
+<?php ;} ?>
+</td>
+
+<td>
+<form method='post' action='php/addtocart.php'>
+<button class='upload' type="submit" name="addcart" >add cart</button>
+<input type='hidden' name='addcart' value='<?php echo $row['id'];?>' />
+</form>
 </td>
 
 <td>
@@ -782,7 +813,51 @@ echo "<td class='vermelho'></td>";
 <div id='fixedupdate'>
 
 <table id="updatetable">
-    
+<form action="javascript:void(0)" method="POST" id="update1">
+<script>
+$(document).ready(function($) {
+$('#update1').submit(function(e) {
+if ($('#uref').val().length === 0 || $('#uproduto').val().length === 0 || $('#uquantidade').val().length === 0 || $('#uprice').val().length === 0) {
+$("#preenchatxt").show();
+$('#preenchatxt').delay(700, 'linear').fadeOut(555);
+} else {
+$.ajax({
+type: "POST",
+url: "php/update.php",
+data: $("#update1").serialize(), // get all form field value in serialize form
+success: function() {
+$(".forload").load("php/show.php");
+
+}
+});
+}
+});
+return false;
+});
+</script><!-- UPDATE -->
+
+<label id='labeluref'>Referência:</label>
+<input autocomplete="off" type="text" name="id" id="uref" >
+
+<label id='labeluprod'>Produto:</label>
+<input autocomplete="off" type="text" name="produto" id="uproduto" >
+
+<label id='labeluquant'>Quantidade:</label>
+<input autocomplete="off" type="text" name="quantidade" id="uquantidade"  onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
+
+<label id='labeluprice'>Preço:</label>
+<input autocomplete="off" type="text" name="price" id="uprice"  onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
+
+<select id='ustock' name="stock">
+<option value="1">Em stock.</option>
+<option value="2">Pouco stock.</option>
+<option value="3">Fora de stock.</option>
+</select>
+
+<button type="submit" id="but-mod" value="Modificar">Modificar</button></td>
+
+</form>
+
 </table>
 </div>
 
@@ -885,12 +960,11 @@ $("#showsearchtable").html(data);
 <td>
 <?php
 if ($avatar == null){?>
-<form id='uploadimg' action="php/avatarup.php" method="post" enctype="multipart/form-data">
+<form action="php/avatarup.php" method="post" enctype="multipart/form-data">
 
 <input class='inputfile' id='file' type="file" name="file">
 <label for="file">(imagem para clique) Avatar.</label><br><br>
-
-<button id='upload' type="submit" name="upload" >Upload</button>
+<button class='upload' type="submit" name="upload">Upload</button>
 </form>
 </td>
 <?php ;}else{

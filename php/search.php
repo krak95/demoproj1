@@ -1,7 +1,7 @@
 <?php
 require_once "config.php";
     $filter = $_POST['search'] ?? null;
-    $query = "SELECT id,produto,quantidade,price,stock FROM teste WHERE produto LIKE '%$filter%' ";
+    $query = "SELECT id,produto,quantidade,price,stock FROM produtos WHERE produto LIKE '%$filter%' ";
     $result = $con->query($query);
     while ($row = $result->fetch_assoc()){ 
         if($filter != ''){
