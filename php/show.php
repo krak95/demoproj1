@@ -11,19 +11,19 @@ require_once "config.php";
                 ?>
                         <tr>
 
-                            <td class="tdref">
+                            <td>
                                 <?php echo $row["id"]; ?>
                             </td>
 
-                            <td class="tdprod">
+                            <td>
                                 <?php echo $row["produto"]; ?>
                             </td>
 
-                            <td class="tdsql">
+                            <td>
                                 <?php echo $row["quantidade"]; ?>
                             </td>
 
-                            <td class="tdsql">
+                            <td>
                                 <?php echo $row["price"] . " €";   ?>
                             </td>
 

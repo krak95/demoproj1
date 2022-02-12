@@ -9,6 +9,6 @@ unset($password);
 unset($avatar);
 session_destroy();
 session_write_close();
-header('location:../empty.php');
+header('location:../index.php');
 echo ""; 
 exit();

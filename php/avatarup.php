@@ -33,5 +33,5 @@ if(isset($_POST["upload"]) && !empty($_FILES["file"]["name"])){
     $statusMsg = 'Please select a file to upload.';
 }
 
-header('location:../empty.php');
+header('location:../index.php');
 ?>

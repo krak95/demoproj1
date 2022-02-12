@@ -325,12 +325,13 @@ p {
 }
 
 #editordiv{
-    display:none;
+    display:block;
     background-color: var(--bblue);
     margin-top:80px;
     position: absolute;
     width: 72%;
-    
+    height: 200px;
+    z-index: 31;
     margin-bottom:100px;
     margin-left:auto;
     margin-right:auto;
@@ -340,11 +341,13 @@ p {
 
 
 #fixeddiv{
+    background-color: var(--bblue);
     position: fixed;
     z-index: 30;
     width:72%;
+    height: 200px;
     top:0;
-    margin-top:40px;
+    margin-top:32px;
     margin-left:auto;
     margin-right:auto;
     left:0;
@@ -360,36 +363,42 @@ p {
     top:0;
     font-size:14px;
 }
+
 #labelquantidade{
     position: absolute;
     margin-top:50px;
     top:0;
     font-size:14px;
 }
+
 #labelprice{
     position: absolute;
     top:0;
     margin-top: 100px;
     font-size:14px;
 }
+
 /*inputINSERT*/
 #iproduto{
     position: absolute;
     width:170px;
     text-align: left;
 }
+
 #iquantidade{
     position: absolute;
     width:130px;
     margin-top:70px;
     text-align: left;
 }
+
 #iprice{
     position: absolute;
     width:130px;
     margin-top: 120px;
     text-align: left;
 }
+
 #istock{
     position: absolute;
     left:0;
@@ -397,6 +406,7 @@ p {
     margin-top:22px;
     margin-left: 50%;
 }
+
 #but-add{
     position: absolute;
     margin-top:50px;
@@ -406,9 +416,11 @@ p {
     width: 33%;
     height: 100px;
 }
+
 #but-add:active{
     background-color: var(--bgrey);
 }
+
 #preenchatxt{
     position: absolute;
     display:none;
@@ -417,6 +429,7 @@ p {
     color:crimson;
     font-size:20px;
 }
+
 #insertTxt{
     position: absolute;
     display:none;
@@ -439,6 +452,7 @@ p {
     font-size:auto;
     border:2px solid crimson;
 }
+
 #but-del:after{
     background-color:crimson;
     color:var(--dgrey);
@@ -447,7 +461,9 @@ p {
     background-color:crimson;
     color:var(--dgrey);
 }
+
 #fixedinsert{
+    background-color: var(--bblue);
     position: absolute;
     width: 100%;
     top:0;
@@ -456,18 +472,20 @@ p {
     left:0;
     right:0;
     margin-top:40px;
+    z-index: 31;
 }
 
 #insertheader{
     position: fixed;
-    z-index: 30;
     width: 72%;
     margin-top:142px;
     margin-left:auto;
     margin-right:auto;
     background-color: var(--dblue);
     color:var(--bblue);
+    z-index: 40;
 }
+
 #insertheader table{
     width: 100%;
 }
@@ -475,6 +493,7 @@ p {
     width: 20%;
     position: relative;
 }
+
 
 #insertable1{
     text-align: center;
@@ -485,6 +504,7 @@ p {
     margin-right:auto;
     left:0;
     right:0;
+    z-index: 1;
 }
 
 #insertable1 tr:nth-child(odd){
@@ -654,7 +674,7 @@ p {
     margin-right:auto;
     left:0;
     right:0;
-    display:block;
+    display:none;
 }
 #searchtablediv{
     border:none;
@@ -1497,4 +1517,27 @@ color:var(--dblue);
 }
 .inputfile + label {
 	cursor: pointer; /* "hand" cursor */
+}
+
+.black{
+    background-color:black;
+    margin-top:200px;
+    margin-left:200px;
+    width:320px;
+    position: absolute;
+    height: 350px;
+    top:0;
+    }
+#arrayel{
+    position: absolute;
+    background-color: var(--dblue);
+    padding:20px;
+    color:var(--bblue);
+    margin-top: 200px;
+    margin-left:200px;
+}
+#debugDiv{
+    position: absolute;
+    color:black;
+    margin-top:300px;
 }

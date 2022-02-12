@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 require_once 'php/config.php';
 include 'php/avatarcheck.php';
@@ -9,23 +8,26 @@ $username = $_SESSION['username'] ?? null;
 $admin = $_SESSION['admin'] ?? null;
 $password = $_SESSION['password'] ?? null;
 $avatar = $_SESSION['avatar'] ?? null;
-
 ?>
+
 <!DOCTYPE html>
 <html>
+    
 <meta charset="UTF-8">
 
 <head>
+
 <title>LosCalmos</title>
+
 <link rel="stylesheet" href="css/mystyle.css">
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
 </script>
-
 
 <script>
 
 $(document).ready(function() {
-$('#mainlogin').text("<?php if ($username != ''){echo $name;}else{echo 'Login';}?>");
+$('#mainlogin').text("<?php if ($username != ''){echo 'Sr./Sra.'. $name;}else{echo 'Login';}?>");
 });
 </script>
 
@@ -62,7 +64,7 @@ $('#registodiv').hide();
 
 <script>
 $(document).ready(function() {
-    if (a = 0){
+if (a = 0){
 $('#mainregisto').click(function(){
 $('#mainlogin').removeClass('selected');
 $('#mainregisto').addClass('selected');
@@ -103,7 +105,7 @@ $('#fixedupdate').hide();
 $('#registodiv').show();
 $('#foottable').hide();
 var a = 0;
-}    
+}
 });
 }
 });
@@ -114,7 +116,7 @@ var a = 0;
 
 <script>
 $(document).ready(function() {
-    if (a = 0){
+if (a = 0){
 $('#maineditor').click(function(){
 $('#mainlogin').removeClass('selected');
 $('#mainregisto').removeClass('selected');
@@ -156,7 +158,7 @@ $('#swap1').show();
 $('#foottable').hide();
 $('.fecharlogin').hide();
 var a = 0;
-}    
+}
 });
 }
 });
@@ -167,8 +169,8 @@ var a = 0;
 
 <script>
 $(document).ready(function() {
-    if (a = 0){
-$('#mainsearch').click(function(){  
+if (a = 0){
+$('#mainsearch').click(function(){
 $('#mainlogin').removeClass('selected');
 $('#mainregisto').removeClass('selected');
 $('#maineditor').removeClass('selected');
@@ -199,7 +201,7 @@ $('#swap1').hide();
 $('#foottable').hide();
 $('.fecharlogin').hide();
 var a = 0;
-}    
+}
 });
 }
 });
@@ -210,7 +212,7 @@ var a = 0;
 
 <script>
 $(document).ready(function() {
-    if (a = 0){
+if (a = 0){
 $('#mainupdate').click(function(){
 $('#mainlogin').removeClass('selected');
 $('#mainregisto').removeClass('selected');
@@ -242,7 +244,7 @@ $('#swap1').hide();
 $('#foottable').hide();
 $('.fecharlogin').hide();
 var a = 0;
-}    
+}
 });
 }
 });
@@ -253,7 +255,7 @@ var a = 0;
 
 <script>
 $(document).ready(function() {
-    if (a = 0){
+if (a = 0){
 $('#mainemail').click(function(){
 $('#mainlogin').removeClass('selected');
 $('#mainregisto').removeClass('selected');
@@ -285,7 +287,7 @@ $('#swap1').hide();
 $('#foottable').hide();
 $('.fecharlogin').hide();
 var a = 0;
-}    
+}
 });
 }
 });
@@ -300,13 +302,11 @@ var a = 0;
 
 
 <body>
-    
+
 <div id='infinitepage'>
 
-<div class='test'><p><?php echo $admin; ?></p></div>
-
 <!--
-<div class="nutil"> Número de utilizadors:    
+<div class="nutil"> Número de utilizadors:
 
 $sql1 = mysqli_query($con, "SELECT * FROM users");
 echo mysqli_num_rows($sql1);
@@ -318,7 +318,7 @@ echo mysqli_num_rows($sql1);
 <table>
 <tr>
 <button id='mainlogin'>Login</button>
-<button id='mainregisto'>Registo</button>
+<button id='mainregisto'>Criar conta</button>
 <button id='maineditor'>Editor</button>
 <button id='mainsearch'>Procura</button>
 <button id='mainupdate'>Update</button>
@@ -401,7 +401,7 @@ type: "POST",
 url: "php/regist.php",
 data: $('#regist').serialize(), // get all form field value in serialize form
 success: function(data) {
-window.location.href = 'empty.php';
+window.location.href = 'index.php';
 }
 });
 }
@@ -478,7 +478,7 @@ type:'POST',
 url: 'php/login.php',
 data: $('#formlog').serialize(), // get all form field value in serialize form
 success: function(data){
-window.location.href = 'empty.php';
+window.location.href = 'index.php';
 }
 
 });
@@ -510,7 +510,7 @@ return false;
 
 <script>
 $(document).ready(function() {
-    $('#footer').hide();
+$('#footer').hide();
 });
 </script>
 
@@ -520,7 +520,7 @@ $(document).ready(function() {
 
 <script>
 $(document).ready(function() {
-    var a = 0;
+var a = 0;
 $('#foottable').hide();
 $('#mainlogin').click(function() {
 $('#mainlogin').addClass('selected');
@@ -537,7 +537,7 @@ $('#mainlogin').text('<?php echo $name ?>');
 var a = 1;
 }
 });
-    }
+}
 });
 });
 return false;
@@ -664,9 +664,9 @@ return false;
 </select>
 </form>
 
-<?php /*DELETE BUTTON*/ 
+<?php /*DELETE BUTTON*/
 if ($admin == 1){
-    echo "
+echo "
 <form method='post' action='php/deleteall.php'>
 <button  type='submit' id='but-del' value='deleteall'>Apagar tudo</button>
 </form>";
@@ -699,7 +699,7 @@ return false;
 });
 </script>
 
-<!-- 
+<!--
 <tr>
 <td>
 <input id='refdel' name="id" onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
@@ -743,19 +743,21 @@ while ($row = $result->fetch_assoc()) {
 ?>
 <tr>
 
-<td class="tdref">
+<td>
+
 <?php echo $row["id"]; ?>
+
 </td>
 
-<td class="tdprod">
+<td>
 <?php echo $row["produto"]; ?>
 </td>
 
-<td class="tdsql">
+<td>
 <?php echo $row["quantidade"]; ?>
 </td>
 
-<td class="tdsql">
+<td>
 <?php echo $row["price"] . " €";   ?>
 </td>
 
@@ -780,58 +782,14 @@ echo "<td class='vermelho'></td>";
 <div id='fixedupdate'>
 
 <table id="updatetable">
-<form action="javascript:void(0)" method="POST" id="update1">
-<script>
-$(document).ready(function($) {
-$('#update1').submit(function(e) {
-if ($('#uref').val().length === 0 || $('#uproduto').val().length === 0 || $('#uquantidade').val().length === 0 || $('#uprice').val().length === 0) {
-$("#preenchatxt").show();
-$('#preenchatxt').delay(700, 'linear').fadeOut(555);
-} else {
-$.ajax({
-type: "POST",
-url: "php/update.php",
-data: $("#update1").serialize(), // get all form field value in serialize form
-success: function() {
-$(".forload").load("php/show.php");
-
-}
-});
-}
-});
-return false;
-});
-</script><!-- UPDATE -->
-
-<label id='labeluref'>Referência:</label>
-<input autocomplete="off" type="text" name="id" id="uref" >
-
-<label id='labeluprod'>Produto:</label>
-<input autocomplete="off" type="text" name="produto" id="uproduto" >
-
-<label id='labeluquant'>Quantidade:</label>
-<input autocomplete="off" type="text" name="quantidade" id="uquantidade"  onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
-
-<label id='labeluprice'>Preço:</label>
-<input autocomplete="off" type="text" name="price" id="uprice"  onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
-
-<select id='ustock' name="stock">
-<option value="1">Em stock.</option>
-<option value="2">Pouco stock.</option>
-<option value="3">Fora de stock.</option>
-</select>
-
-<button type="submit" id="but-mod" value="Modificar">Modificar</button></td>
-
-</form>
-
+    
 </table>
 </div>
 
 
 
 <div id="searchdiv">
-    
+
 
 <div id='searchtablediv'>
 
@@ -936,7 +894,7 @@ if ($avatar == null){?>
 </form>
 </td>
 <?php ;}else{
-?> 
+?>
 <div style="background-color:black;"><img style="max-height:200px;" src="img/avatar<?php echo $avatar; ?>"></div>
 <?php
 }?>
@@ -961,7 +919,7 @@ if ($username == null) {
 <button type="submit" id="logout" name="logout" value="Logout">Sair
 </button>
 </form>
-<?php 
+<?php
 } ?>
 </td>
 <button class="fecharlogin">&darr;</button>

@@ -4,5 +4,5 @@ $sql = "TRUNCATE teste";
 $stmt = $con->prepare($sql);
 $stmt->execute();
 if($stmt){
-    header('location:../empty.php');
+    header('location:../index.php');
 }

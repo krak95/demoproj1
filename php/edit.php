@@ -8,7 +8,7 @@ $price  = $_GET['price'];
    $stmtinsert->bind_param('ssss', $produto, $quantidade, $price, $id);
    if ($produto != null && $quantidade != null && $price != null) {
        $result = $stmtinsert->execute();
-       header("location:../table.php");
+       header("location:../index.php");
        echo ""; 
     }else {
        echo "Error deleting record";
