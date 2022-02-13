@@ -1,11 +1,8 @@
 <?php
-require_once 'config.php';
 session_start();
-
+require_once 'config.php';
 
 $id = $_POST['id'];
-
-
 $targetDir = "../img\img";
 $fileName = basename($_FILES["file"]["name"]);
 $targetFilePath = $targetDir . $fileName;
@@ -18,17 +15,13 @@ if(isset($_POST["upload"]) && !empty($_FILES["file"]["name"])){
         // Upload file to server
         if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
             // Insert image file name into database
-            $insert = $con->query("UPDATE produtos SET img ='$fileName' WHERE id = '$id'");
+            $insert = $con->query("UPDATE produtos SET img = '$fileName' WHERE id = '$id'");
             if($insert){
                 
             }
-                
+    
         } 
         }
-            
-        
-    }   
-
+    }
+    
 header('location:../index.php');
-
-?>

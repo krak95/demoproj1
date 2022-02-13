@@ -1462,14 +1462,17 @@ color:var(--dblue);
     position: absolute;
 }
 
-#removeavatar{
+.removeavatar{
     background-color:var(--blue);
     position: relative;
     height: 34px;
     width: 100px;
 }
-#removeavatar:hover{
+.removeavatar:hover{
     background-color:crimson;
+    position: relative;
+    height: 34px;
+    width: 100px;
 }
 
 .upload{
@@ -1518,6 +1521,35 @@ color:var(--dblue);
 	cursor: pointer; /* "hand" cursor */
 }
 
+
+
+.inputfile1 {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.inputfile1 + label {
+    font-size: 14px;
+    color: var(--dblue);
+    font-weight: bold;
+    background-color: var(--bgrey);
+    display: inline-block;
+    height: auto;
+    width: 100px;
+    text-align: center;
+}
+
+.inputfile1:focus + label,
+.inputfile1 + label:hover {
+    transition: 0.2s;
+    background-color: var(--blue);
+}
+.inputfile1 + label {
+	cursor: pointer; /* "hand" cursor */
+}
 .black{
     background-color:black;
     margin-top:200px;

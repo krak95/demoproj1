@@ -30,4 +30,3 @@ if(isset($_POST["upload"]) && !empty($_FILES["file"]["name"])){
     }   
     
 header('location:../index.php');
-?>

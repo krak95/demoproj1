@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once 'php/config.php';
-include 'php/avatarcheck.php';
+require 'php/config.php';
+require 'php/avatarcheck.php';
 $name = $_SESSION['name'] ?? null;
 $email = $_SESSION['email'] ?? null;
 $username = $_SESSION['username'] ?? null;
@@ -58,6 +58,7 @@ $('#editordiv').hide();
 $('#emaildiv').hide();
 $('#fixedupdate').hide();
 $('#registodiv').hide();
+$('#carrinho').hide();
 });
 });
 </script>
@@ -82,6 +83,7 @@ $('#logindiv').hide();
 $('#emaildiv').hide();
 $('#fixedupdate').hide();
 $('#registodiv').show();
+$('#carrinho').hide();
 });
 }else{
 $('#mainregisto').click(function(){
@@ -104,6 +106,8 @@ $('#emaildiv').hide();
 $('#fixedupdate').hide();
 $('#registodiv').show();
 $('#foottable').hide();
+$('#carrinho').hide();
+
 var a = 0;
 }
 });
@@ -134,6 +138,7 @@ $('.fecharlogin').hide();
 $('#fixeddiv').show();
 $('#swap').show();
 $('#swap1').show();
+$('#carrinho').hide();
 });
 } else {
 $('#maineditor').click(function(){
@@ -157,6 +162,7 @@ $('#swap').show();
 $('#swap1').show();
 $('#foottable').hide();
 $('.fecharlogin').hide();
+$('#carrinho').hide();
 var a = 0;
 }
 });
@@ -177,6 +183,19 @@ $('#maineditor').removeClass('selected');
 $('#mainsearch').addClass('selected');
 $('#mainupdate').removeClass('selected');
 $('#mainemail').removeClass('selected');
+$('#editordiv').hide();
+$('#searchdiv').show();
+$('#logindiv').hide();
+$('#emaildiv').hide();
+$('#fixedupdate').hide();
+$('#registodiv').hide();
+$('.fecharlogin').hide();
+$('#fixeddiv').hide();
+$('#swap').hide();
+$('#swap1').hide();
+$('#foottable').hide();
+$('.fecharlogin').hide();
+$('#carrinho').hide();
 });
 } else {
 $('#mainsearch').click(function(){
@@ -200,6 +219,7 @@ $('#swap').hide();
 $('#swap1').hide();
 $('#foottable').hide();
 $('.fecharlogin').hide();
+$('#carrinho').hide();
 var a = 0;
 }
 });
@@ -264,6 +284,19 @@ $('#maineditor').removeClass('selected');
 $('#mainsearch').removeClass('selected');
 $('#mainupdate').removeClass('selected');
 $('#mainemail').addClass('selected');
+$('#editordiv').hide();
+$('#searchdiv').hide();
+$('#logindiv').hide();
+$('#emaildiv').show();
+$('#fixedupdate').hide();
+$('#registodiv').hide();
+$('.fecharlogin').hide();
+$('#fixeddiv').hide();
+$('#swap').hide();
+$('#swap1').hide();
+$('#foottable').hide();
+$('.fecharlogin').hide();
+$('#carrinho').hide();
 });
 } else {
 $('#mainemail').click(function(){
@@ -287,6 +320,7 @@ $('#swap').hide();
 $('#swap1').hide();
 $('#foottable').hide();
 $('.fecharlogin').hide();
+$('#carrinho').hide();
 var a = 0;
 }
 });
@@ -322,8 +356,13 @@ echo mysqli_num_rows($sql1);
 <button id='mainregisto'>Criar conta</button>
 <button id='maineditor'>Editor</button>
 <button id='mainsearch'>Procura</button>
-<button id='mainupdate'>Update</button>
-<button id='mainemail'><?php echo $username ?></button>
+
+<button id='mainupdate'>
+Carrinho <?php $sql1 = mysqli_query($con, "SELECT * FROM carrinho WHERE username = '$username'");
+echo mysqli_num_rows($sql1);?>
+</button>
+
+<button id='mainemail'>Email></button>
 </tr>
 </table>
 </div>
@@ -534,7 +573,7 @@ $('#footer').animate({height:'80%'},{duration:400,complete: function() {
 $('#footer').animate({width:'100%'},{duration:400,complete: function() {
 $('.fecharlogin').show();
 $('#foottable').show();
-$('#mainlogin').text('<?php echo $name ?>');
+$('#mainlogin').text('<?php echo $name; ?>');
 var a = 1;
 }
 });
@@ -568,7 +607,7 @@ return false;
 
 
 <?php
-};
+}
 ?>
 </div>
 
@@ -739,12 +778,13 @@ return false;
 <table id="insertable1">
 
 
-<?php $sql = "SELECT * FROM produtos";
+<?php 
+$sql = "SELECT * FROM produtos";
 $result = $con->query($sql);
 while ($row = $result->fetch_assoc()) {
 
 
-?>
+  ?>
 <tr>
 
 <td>
@@ -752,31 +792,27 @@ while ($row = $result->fetch_assoc()) {
 <?php
 if ($row['img'] == null){?>
 <form action="php/imgUPLOAD.php" method="post" enctype="multipart/form-data">
-<input type='hidden' name='id' value='<?php echo $row['id'];?>' />
-<input class='inputfile' class='file' type="file" name="file">
-<label for="file">(imagem para clique) Avatar.</label><br><br>
+<input type='hidden' name='id' value='<?php echo $row['id']; ?>'>
+<input class='inputfile1' id='file1' type="file" name="file">
+<label for="file1">(imagem para clique) Avatar.</label><br><br>
 
-<button class='upload' type="submit" name="upload" >Upload</button>
+<button class='upload' type="submit" name="upload">Upload</button>
 </form>
 </td>
-<?php ;
-}else{
+<?php }else{
 ?>
 <div style="background-color:black;"><img style="max-width:50px;" src="img/img<?php echo $row['img']; ?>"></div>
-<?php
-}
-if ($row['img'] != null){?>
 <form method='post' action='php/imgREMOVE.php'>
-<input type='hidden' name='id' value='<?php echo $row['id'];?>' />
-<button id='removeavatar' type='submit'>Remover</button>
+<input type='hidden' name='id' value='<?php echo $row['id']; ?>' />
+<button class='removeavatar' type='submit'>Remover</button>
 </form>
-<?php ;} ?>
+<?php } ?>
 </td>
 
 <td>
 <form method='post' action='php/addtocart.php'>
 <button class='upload' type="submit" name="addcart" >add cart</button>
-<input type='hidden' name='addcart' value='<?php echo $row['id'];?>' />
+<input type='hidden' name='addcart' value='<?php echo $row['id']; ?>' />
 </form>
 </td>
 
@@ -975,7 +1011,7 @@ if ($avatar == null){?>
 
 <?php if ($avatar != null){?>
 <form method='post' action='php/avatarRemove.php'>
-<button id='removeavatar' type='submit'>Remover</button>
+<button class='removeavatar' type='submit'>Remover</button>
 </form>
 <?php ;} ?>
 </td>
@@ -1003,6 +1039,29 @@ if ($username == null) {
 
 
 <div id="bottomfiller"></div>
+<div id='carrinho'>
+
+    <?php 
+        $sql = "SELECT * from carrinho WHERE username = '$username'";
+        $result = $con->query($sql);
+        while ($row = $result->fetch_assoc())
+        {
+            if ($username = $row['username']){
+           ?>
+           <tr class="searchresults">
+                <td class="searchresults" ><?php echo $row["carrinho_id"]; ?></td>
+                <td class="searchresults" ><?php echo $row["produto"]; ?></td>
+                <td class="searchresults" ><?php echo $row["quantidade"]; ?></td>
+                <td class="searchresults" ><?php echo $row["price"] . " €" ; ?></td>
+                <td class="searchresults" ><?php echo $row["price_final"] . " €" ; ?></td>
+                <div style="background-color:black;"><img style="max-width:50px;" src="img/img<?php echo $row['img']; ?>"></div>
+            </tr> 
+           <?php
+        }
+        }
+     ?>
+
+</div>
 
 </body>
 
