@@ -325,7 +325,7 @@ p {
 }
 
 #editordiv{
-    display:block;
+    display:none;
     background-color: var(--bblue);
     margin-top:80px;
     position: absolute;
@@ -1577,5 +1577,5 @@ color:var(--dblue);
     position:absolute;
     margin-top:200px;
     margin-left:200px;
-    display:none;
+    display:block;
 }
