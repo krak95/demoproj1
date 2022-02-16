@@ -1,7 +1,14 @@
 <?php
 require_once 'config.php';
-$del = $_POST['iddelete'];
+$del = $_POST['id'];
 $sql = "DELETE FROM produtos WHERE id = ?";
 $stmt = $con->prepare($sql);
-$stmt->bind_param("i", $del);
+$stmt->bind_param('s',$del);
 $stmt->execute();
+if($stmt){
+    echo '1';
+    exit;
+}else{
+    echo '0';
+    exit;
+}

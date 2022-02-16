@@ -22,7 +22,99 @@ $avatar = $_SESSION['avatar'] ?? null;
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
 </script>
+<script>
+$(document).ready(function(){
 
+// Delete 
+$('.deleteup').click(function(){
+var bn = this;
+
+// Delete id
+var deleteup = $(this).data('id');
+
+var confirmdel = confirm("Are you sure?");
+if (confirmdel == true) {
+// AJAX Request
+$.ajax({
+url: 'php/deleteup.php',
+type: 'POST',
+data: { id:deleteup },
+success: function(response){
+if(response == 1){
+// Remove row from HTML Table
+$(bn).closest('tr').css('background','tomato');
+$(bn).closest('tr').fadeOut(800,function(){
+$(this).remove();
+});
+}else{
+alert('Invalid ID.');
+}
+
+}
+});
+return true;
+}
+
+});
+
+});
+</script>
+
+<script>
+$(document).ready(function(){
+
+// Delete 
+$('.delete').click(function(){
+var el = this;
+
+// Delete id
+var deleteid = $(this).data('id');
+
+var confirmalert = confirm("Are you sure?");
+if (confirmalert == true) {
+// AJAX Request
+$.ajax({
+url: 'php/deletecar.php',
+type: 'POST',
+data: { id:deleteid },
+success: function(response){
+if(response == 1){
+// Remove row from HTML Table
+$(el).closest('tr').css('background','tomato');
+$(el).closest('tr').fadeOut(800,function(){
+$(this).remove();
+});
+}else{
+alert('Invalid ID.');
+}
+
+}
+});
+return true;
+}
+
+});
+
+});
+</script>
+<script>
+
+$(document).ready(function($) {
+$('.addcart').click(function(e) {
+  var addcart = $(this).data('id');
+$.ajax({
+type: "POST",
+url: "php/addtocart.php",
+data: {id:addcart}, // get all form field value in serialize form
+success: function(data) {
+$("#carrinho").load("php/carrinho.php");
+}
+});
+
+});
+return false;
+});
+</script>
 <script>
 
 $(document).ready(function() {
@@ -615,9 +707,8 @@ return false;
 
 
 <!-- editordiv-->
-<button type='button' id='swap'>&larr;<br>&rarr;</button>
-<button type='button' id='swap1'>&larr;<br>&rarr;</button>
 <div id="editordiv">
+
 
 
 <div id="fixeddiv">
@@ -649,8 +740,12 @@ $('#swap1').hide();
 });
 </script>
 
-<table id="fixedinsert">
+<?php 
+if ( $admin == 1){ ?>
 
+
+<table id="fixedinsert">
+<button type='button' id='swap1'>&larr;&rarr;</button>
 <form action="javascript:void(0)" method="POST" id="insert">
 <script>
 $(document).ready(function($) {
@@ -662,7 +757,7 @@ return false;
 
 } else {
 $("#insertTxt").fadeIn(function(){
-$('#insertTxt').delay(150).fadeOut(600);
+$('#insertTxt').fadeOut(700);
 
 $.ajax({
 type: "POST",
@@ -758,6 +853,8 @@ return false;
 
 </form>
 </table>
+
+<?php } ?>
 </div>
 <div id='insertheader'>
 <table>
@@ -809,10 +906,7 @@ if ($row['img'] == null){?>
 </td>
 
 <td>
-<form method='post' action='php/addtocart.php'>
-<button class='upload' type="submit" name="addcart" >add cart</button>
-<input type='hidden' name='addcart' value='<?php echo $row['id']; ?>' />
-</form>
+<button class='addcart' data-id='<?php echo $row["id"]; ?>'> addcart </button>
 </td>
 
 <td>
@@ -835,18 +929,31 @@ echo "<td class='amarelo'></td>";
 } else {
 echo "<td class='vermelho'></td>";
 }
-}
 ?>
+
+<?php if ( $admin == 1) { ?>
+<td>
+<button class='deleteup' data-id='<?php echo $row["id"]; ?>'><?php echo $row["id"]; ?></button>
+
+
+</td>
+<?php } ?>
+
 </tr>
+<?php 
+} 
+?>
+
 
 <tr><th id='bordernone'><div id='lastdiv'></div></th></tr>
 
 </table>
 </div>
 </div>
-
+<?php 
+if ( $admin == 1){ ?>
 <div id='fixedupdate'>
-
+<button type='button' id='swap'>&larr;&rarr;</button>
 <table id="updatetable">
 <form action="javascript:void(0)" method="POST" id="update1">
 <script>
@@ -894,8 +1001,9 @@ return false;
 </form>
 
 </table>
-</div>
 
+<?php } ?>
+</div>
 
 
 <div id="searchdiv">
@@ -1042,13 +1150,13 @@ if ($username == null) {
 <div id='carrinho'>
 <table id='carrinhotable'>
 <tr>
-    <td>produto:</td>
-    <td>quantidade:</td>
-    <td>price:</td>
-    <td>imagem:</td>
-    <td>total:</td>
-    <td>deletebutton</td>
-  </tr>
+<td>produto:</td>
+<td>quantidade:</td>
+<td>price:</td>
+<td>imagem:</td>
+<td>total:</td>
+<td>deletebutton</td>
+</tr>
 <?php 
 $sql = "SELECT * from carrinho WHERE username = ?";
 $stmt = $con->prepare($sql);
@@ -1060,7 +1168,7 @@ while ($row = $result->fetch_assoc())
 if ($username = $row['username']){
 ?>
 
- 
+
 <tr>
 <td><?php echo $row["produto"]; ?></td>
 <td><?php echo $row["quantidade"]; ?></td>
@@ -1077,42 +1185,6 @@ if ($username = $row['username']){
 }
 ?>
 </table>
-<script>
-$(document).ready(function(){
-
-// Delete 
-$('.delete').click(function(){
-var el = this;
-
-// Delete id
-var deleteid = $(this).data('id');
-
-var confirmalert = confirm("Are you sure?");
-if (confirmalert == true) {
-// AJAX Request
-$.ajax({
-url: 'php/deletecar.php',
-type: 'POST',
-data: { id:deleteid },
-success: function(response){
-if(response == 1){
-// Remove row from HTML Table
-$(el).closest('tr').css('background','tomato');
-$(el).closest('tr').fadeOut(800,function(){
-$(this).remove();
-});
-}else{
-alert('Invalid ID.');
-}
-
-}
-});
-}
-
-});
-
-});
-</script>
 </div>
 
 </body>
