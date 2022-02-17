@@ -2,7 +2,7 @@
  
 /* Desktops and laptops ----------- */
 @media only screen 
-and (min-width : 580px) {
+and (min-width : 481px) {
 /* Styles */
 :root {
     --bblue: rgb(225, 235, 255);
@@ -338,7 +338,7 @@ p {
     background-color: var(--bblue);
     margin-top:80px;
     position: absolute;
-    width: 72%;
+    width: 60%;
     height: 200px;
     z-index: 31;
     margin-bottom:100px;
@@ -353,7 +353,7 @@ p {
     background-color: var(--bblue);
     position: fixed;
     z-index: 30;
-    width:72%;
+    width:60%;
     height: 200px;
     top:0;
     margin-top:32px;
@@ -486,7 +486,7 @@ p {
 
 #insertheader{
     position: fixed;
-    width: 72%;
+    width: 60%;
     margin-top:142px;
     margin-left:auto;
     margin-right:auto;
@@ -550,7 +550,7 @@ p {
 #fixedupdate{
     position: fixed;
     z-index: 32;
-    width:72%;
+    width:60%;
     top:0;
     margin-top:40px;
     margin-left:auto;
@@ -675,7 +675,7 @@ input:focus{
     background-color: var(--bblue);
     margin-top:80px;
     position: absolute;
-    width: 72%;
+    width: 60%;
     
     margin-bottom:100px;
     margin-left:auto;
@@ -691,7 +691,7 @@ input:focus{
     margin-left:auto;
     margin-right:auto;
     
-    width:72%;
+    width:60%;
     top:0;
     left:0;
     right:0;
@@ -717,7 +717,7 @@ width: 60%;
 }
 
 #searchtableheader{
-    width: 72%;
+    width: 60%;
     position: fixed;
     z-index: 30;
     margin-left:auto;
@@ -1621,6 +1621,11 @@ color:var(--dblue);
     right: 0;
 }
 .prodtotal{
+    margin-top:200px;
+    position: absolute;
+    z-index: 1;
+    color:var(--dblue);
+    font-weight: bold;
 }
 
 .car{
@@ -1628,10 +1633,20 @@ color:var(--dblue);
     right:0;
     top:0;
     margin-top:100px;
-    margin-right:5%;
 }
 #mainupdate{
-    width: auto;
+    height:72px;
+    width: 72px;
+    border-radius: 20px;
+}
+#mainupdate:hover{
+    height:72px;
+    width: 72px;
+    cursor:pointer;
+    border-radius: 20px;
+}
+#mainupdate img{
+    vertical-align: middle;
 }
 
 }
@@ -1974,7 +1989,7 @@ and (max-device-width : 480px) {
         background-color: var(--bblue);
         margin-top:280px;
         position: absolute;
-        width: 72%;
+        width: 60%;
         height: 200px;
         z-index: 31;
         margin-bottom:100px;
@@ -1989,7 +2004,7 @@ and (max-device-width : 480px) {
         background-color: var(--bblue);
         position: fixed;
         z-index: 30;
-        width:72%;
+        width:60%;
         height: 200px;
         top:0;
         margin-top:232px;
@@ -2122,7 +2137,7 @@ and (max-device-width : 480px) {
     
     #insertheader{
         position: fixed;
-        width: 72%;
+        width: 60%;
         margin-top:142px;
         margin-left:auto;
         margin-right:auto;
@@ -2186,7 +2201,7 @@ and (max-device-width : 480px) {
     #fixedupdate{
         position: fixed;
         z-index: 32;
-        width:72%;
+        width:60%;
         top:0;
         margin-top:240px;
         margin-left:auto;
@@ -2311,7 +2326,7 @@ and (max-device-width : 480px) {
         background-color: var(--bblue);
         margin-top:80px;
         position: absolute;
-        width: 72%;
+        width: 60%;
         
         margin-bottom:100px;
         margin-left:auto;
@@ -2327,7 +2342,7 @@ and (max-device-width : 480px) {
         margin-left:auto;
         margin-right:auto;
         
-        width:72%;
+        width:60%;
         top:0;
         left:0;
         right:0;
@@ -2353,7 +2368,7 @@ and (max-device-width : 480px) {
     }
     
     #searchtableheader{
-        width: 72%;
+        width: 60%;
         position: fixed;
         z-index: 30;
         margin-left:auto;

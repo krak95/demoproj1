@@ -10,7 +10,7 @@ $admin = $_SESSION['admin'] ?? null;
         $sql = ("SELECT * FROM users WHERE username ='$username'");
         $stmt = $con->prepare($sql);
         $stmt->execute();
-        $result = $stmt->get_result();
+    $result = $stmt->get_result();
         if ($result) {
 
             while ($row = $result->fetch_assoc()) {

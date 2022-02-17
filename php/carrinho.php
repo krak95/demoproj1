@@ -1,3 +1,50 @@
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
+</script>
+<script>
+$(document).ready(function() {
+if (a = 0){
+$('#mainupdate').click(function(){
+$('#mainlogin').removeClass('selected');
+$('#mainregisto').removeClass('selected');
+$('#maineditor').removeClass('selected');
+$('#mainsearch').removeClass('selected');
+$('#mainupdate').addClass('selected');
+$('#mainemail').removeClass('selected');
+});
+} else {
+$('#mainupdate').click(function(){
+$('#mainlogin').removeClass('selected');
+$('#mainregisto').removeClass('selected');
+$('#maineditor').removeClass('selected');
+$('#mainsearch').removeClass('selected');
+$('#mainupdate').addClass('selected');
+$('#mainemail').removeClass('selected');
+$('#footer').animate({width: '100px'},{duration:100,complete: function(){
+$('#footer').animate({height: '56px'},{duration:100, complete: function(){
+$('#editordiv').hide();
+$('#searchdiv').hide();
+$('#logindiv').hide();
+$('#emaildiv').hide();
+$('#fixedupdate').hide();
+$('#registodiv').hide();
+$('.fecharlogin').hide();
+$('#fixeddiv').hide();
+$('#swap').hide();
+$('#swap1').hide();
+$('#foottable').hide();
+$('.fecharlogin').hide();
+$('#carrinho').show();
+var a = 0;
+}
+});
+}
+});
+});
+}
+});
+</script>
 <?php
 session_start();
 require_once "config.php";
@@ -37,41 +84,16 @@ if ($username = $row['username']){
 }
 }
 ?>
+
+<tr>
+  <?php
+$stmt = $con->query("SELECT SUM(quantidade) as prodtotal, SUM(price) as pricetotal FROM carrinho WHERE username = '$username'");
+while ($row = $stmt->fetch_assoc()) {
+$sum = $row['prodtotal'];
+$sum1 = $row['pricetotal'];
+?>  
+<p class='prodtotal'>
+<?php echo '<br>'. $sum .'->'. $sum1 . '€';} ?> 
+<p>
+</tr>
 </table>
-<script>
-$(document).ready(function(){
-
-// Delete 
-$('.delete').click(function(){
-var el = this;
-
-// Delete id
-var deleteid = $(this).data('id');
-
-var confirmalert = confirm("Are you sure?");
-if (confirmalert == true) {
-// AJAX Request
-$.ajax({
-url: 'php/deletecar.php',
-type: 'POST',
-data: { id:deleteid },
-success: function(response){
-if(response == 1){
-// Remove row from HTML Table
-$(el).closest('tr').css('background','tomato');
-$(el).closest('tr').fadeOut(800,function(){
-$(this).remove();
-});
-}else{
-alert('Invalid ID.');
-}
-
-}
-});
-return true;
-}
-
-});
-
-});
-</script>

@@ -23,10 +23,9 @@ $avatar = $_SESSION['avatar'] ?? null;
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
 </script>
 <script>
-$(document).ready(function(){
+$(document).on('click','.deleteup',function (e) {
 
 // Delete 
-$('.deleteup').click(function(){
 var bn = this;
 
 // Delete id
@@ -61,10 +60,9 @@ return true;
 </script>
 
 <script>
-$(document).ready(function(){
+ $(document).on('click','.delete',function (e) {
 
 // Delete 
-$('.delete').click(function(){
 var el = this;
 
 // Delete id
@@ -79,22 +77,25 @@ type: 'POST',
 data: { id:deleteid },
 success: function(response){
 if(response == 1){
+$('#carrinho').load('php/carrinho.php');
+$('.car').load('php/prodtotal.php');
 // Remove row from HTML Table
+
 $(el).closest('tr').css('background','tomato');
 $(el).closest('tr').fadeOut(800,function(){
 $(this).remove();
-$('.prodtotal').load('php/prodtotal.php');
 });
+
 }else{
 alert('Invalid ID.');
 }
 
 }
 });
+
 return true;
 }
 
-});
 
 });
 </script>
@@ -109,7 +110,7 @@ url: "php/addtocart.php",
 data: {id:addcart}, // get all form field value in serialize form
 success: function(data) {
 $("#carrinho").load("php/carrinho.php");
-$(".prodtotal").load("php/prodtotal.php");
+$(".car").load("php/prodtotal.php");
 }
 });
 
@@ -454,18 +455,6 @@ echo mysqli_num_rows($sql1);
 </table>
 </div>
 
-<div class="car">
-<?php
-$sql1 = mysqli_query($con,"SELECT SUM(quantidade) as prodtotal, SUM(price) as pricetotal FROM carrinho WHERE username = '$username'");
-$row = mysqli_fetch_assoc($sql1); 
-$sum = $row['prodtotal'];
-$sum1 = $row['pricetotal'];
-?>  
-<p class='prodtotal'>
-<?php echo '<br>'. $sum .'->'. $sum1 . '€'; ?> 
-<p>
-<button id='mainupdate'>Carrinho</button>
-</div>
 
 <div id="emaildiv">
 <!--- emaildiv--->
@@ -1189,13 +1178,35 @@ if ($username = $row['username']){
 <td><button class='delete' data-id='<?php echo $row["carrinho_id"]; ?>'><?php echo $row["carrinho_id"]; ?></button></td>
 
 </tr>
-
-
 <?php
 }
 }
 ?>
+
+<tr>
+  <?php
+$sql1 = mysqli_query($con,"SELECT SUM(quantidade) as prodtotal, SUM(price) as pricetotal FROM carrinho WHERE username = '$username'");
+$row = mysqli_fetch_assoc($sql1); 
+$sum = $row['prodtotal'];
+$sum1 = $row['pricetotal'];
+?>  
+<p class='prodtotal'>
+<?php echo '<br>'. $sum .'->'. $sum1 . '€'; ?> 
+<p>
+</tr>
 </table>
+</div>
+
+<div class="car">
+<?php
+$sql1 = "SELECT * FROM carrinho WHERE username = '$username'";
+$stmt1 = $con->query($sql1);
+$rowcount = $stmt1->num_rows;
+if($username != null){
+  if($rowcount != null){
+?>
+<button id='mainupdate'><img src="img/cart.png" width="50px" height="50px" ></button>
+<?php } } ?>
 </div>
 
 </body>
