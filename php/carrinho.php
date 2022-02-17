@@ -1,5 +1,7 @@
 <?php
+session_start();
 require_once "config.php";
+$username = $_SESSION['username'];
 ?>
 
 <table id='carrinhotable'>
@@ -10,13 +12,11 @@ require_once "config.php";
     <td>imagem:</td>
     <td>total:</td>
     <td>deletebutton</td>
-  </tr>
+</tr>
 <?php 
-$sql = "SELECT * from carrinho WHERE username = ?";
-$stmt = $con->prepare($sql);
-$stmt->bind_param('s', $username);
-$stmt->execute();
-$result = $stmt->get_result();
+$sql = "SELECT * from carrinho WHERE username = '$username'";
+$result = $con->query($sql);
+if($result){}
 while ($row = $result->fetch_assoc())
 {
 if ($username = $row['username']){
@@ -24,15 +24,14 @@ if ($username = $row['username']){
 
  
 <tr>
-<td><?php echo $row["produto"]; ?></td>
-<td><?php echo $row["quantidade"]; ?></td>
-<td><?php echo $row["price"] . " €" ; ?></td>
-<td><img style="max-width:50px;" src="img/img<?php echo $row['img']; ?>"></td>
-<td><?php echo $row["price_final"] . " €" ; ?></td>
-<td><button class='delete' data-id='<?php echo $row["carrinho_id"]; ?>'><?php echo $row["carrinho_id"]; ?></button></td>
+<td class='loadcarrinho'><?php echo $row["produto"]; ?></td>
+<td class='loadcarrinho'><?php echo $row["quantidade"]; ?></td>
+<td class='loadcarrinho'><?php echo $row["price"] . " €" ; ?></td>
+<td class='loadcarrinho'><img style="max-width:50px;" src="img/img<?php echo $row['img']; ?>"></td>
+<td class='loadcarrinho'><?php echo $row["price_final"] . " €" ; ?></td>
+<td class='loadcarrinho'><button class='delete' data-id='<?php echo $row["carrinho_id"]; ?>'><?php echo $row["carrinho_id"]; ?></button></td>
 
 </tr>
-
 
 <?php
 }
