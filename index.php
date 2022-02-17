@@ -634,7 +634,7 @@ return false;
 <input type='password' name='password' class='textbox' id='password' placeholder='Password'>
 <label for='wrongcred' id='wrongcred'>Credenciais erradas!</label>
 <label for='passvazio' id='passvazio'>Preencha o campo, por favor!</label><br>
-<button type='submit'>Login</button>
+<button type='submit'>Entrar</button>
 </div>
 </form>
 </div>
@@ -910,7 +910,9 @@ if ($row['img'] == null){?>
 </td>
 
 <td>
-<?php echo $row["produto"]; ?>
+<?php echo $row["produto"];?>
+<br> REF: <?php
+      echo $row['id']; ?>
 </td>
 
 <td>
