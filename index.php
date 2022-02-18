@@ -19,6 +19,7 @@ $avatar = $_SESSION['avatar'] ?? null;
 <title>LosCalmos</title>
 
 <link rel="stylesheet" href="css/mystyle.css">
+<link rel="stylesheet" href="css/mobilecss.css">
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
 </script>
@@ -53,8 +54,6 @@ alert('Invalid ID.');
 });
 return true;
 }
-
-});
 
 });
 </script>
@@ -104,10 +103,11 @@ return true;
 $(document).ready(function($) {
 $('.addcart').click(function(e) {
   var addcart = $(this).data('id');
+  var quantidade = $('.quantidade').val();
 $.ajax({
 type: "POST",
 url: "php/addtocart.php",
-data: {id:addcart}, // get all form field value in serialize form
+data: {id:addcart, quantidade:quantidade}, // get all form field value in serialize form
 success: function(data) {
 $("#carrinho").load("php/carrinho.php");
 $(".car").load("php/prodtotal.php");
@@ -861,7 +861,6 @@ return false;
 <th>img</th>
 <th>add</th>
 <th>Produto</th>
-<th>Quantidade</th>
 <th>Preço</th>
 <th>Stock</th>
 </tr>
@@ -882,39 +881,42 @@ while ($row = $result->fetch_assoc()) {
 <tr>
 
 <td>
-
-<?php
-if ($row['img'] == null){?>
+<?php if ($row['img'] == null){ ?>
+<?php if ($admin == 1){ ?>
 <form action="php/imgUPLOAD.php" method="post" enctype="multipart/form-data">
 <input type='hidden' name='id' value='<?php echo $row['id']; ?>'>
 <input class='inputfile1' id='file1' type="file" name="file">
 <label for="file1">(imagem para clique) Avatar.</label><br><br>
-
 <button class='upload' type="submit" name="upload">Upload</button>
 </form>
 </td>
-<?php }else{
-?>
-<div style="background-color:black;"><img style="max-width:50px;" src="img/img<?php echo $row['img']; ?>"></div>
+<?php } }else{ ?>
+<?php if ($admin == 1){ ?>
+
+
 <form method='post' action='php/imgREMOVE.php'>
 <input type='hidden' name='id' value='<?php echo $row['id']; ?>' />
 <button class='removeavatar' type='submit'>Remover</button>
 </form>
-<?php } ?>
+<?php }  ?>
+<div style="background-color:black;"><img style="max-width:50px;" src="img/img<?php echo $row['img']; ?>"></div>
+
+<?php }  ?>
 </td>
 
 <td>
 <button class='addcart' data-id='<?php echo $row["id"]; ?>'> addcart </button>
+<input class='quantidade' type="text">
 </td>
 
 <td>
 <?php echo $row["produto"];?>
 <br> REF: <?php
       echo $row['id']; ?>
-</td>
-
-<td>
-<?php echo $row["quantidade"]; ?>
+      
+<?php if ( $admin == 1) { ?>
+<br><button class='deleteup' data-id='<?php echo $row["id"]; ?>'>APAGAR</button>
+<?php } ?>
 </td>
 
 <td>
@@ -923,21 +925,17 @@ if ($row['img'] == null){?>
 
 <?php
 if ($row["stock"] == '1') {
-echo "<td class='verde'></td>";
+echo 
+"<td class='verde'>Em stock.</td>";
 } elseif ($row["stock"] == '2') {
-echo "<td class='amarelo'></td>";
+echo 
+"<td class='amarelo'>Pouco stock.</td>";
 } else {
-echo "<td class='vermelho'></td>";
+echo 
+"<td class='vermelho'>Fora de stock.</td>";
 }
 ?>
 
-<?php if ( $admin == 1) { ?>
-<td>
-<button class='deleteup' data-id='<?php echo $row["id"]; ?>'><?php echo $row["id"]; ?></button>
-
-
-</td>
-<?php } ?>
 
 </tr>
 <?php 
@@ -959,7 +957,7 @@ if ( $admin == 1){ ?>
 <script>
 $(document).ready(function($) {
 $('#update1').submit(function(e) {
-if ($('#uref').val().length === 0 || $('#uproduto').val().length === 0 || $('#uquantidade').val().length === 0 || $('#uprice').val().length === 0) {
+if ($('#uref').val().length === 0 && $('#uproduto').val().length === 0 && $('#uquantidade').val().length === 0 && $('#uprice').val().length === 0) {
 $("#preenchatxt").show();
 $('#preenchatxt').delay(700, 'linear').fadeOut(555);
 } else {
@@ -983,9 +981,6 @@ return false;
 
 <label id='labeluprod'>Produto:</label>
 <input autocomplete="off" type="text" name="produto" id="uproduto" >
-
-<label id='labeluquant'>Quantidade:</label>
-<input autocomplete="off" type="text" name="quantidade" id="uquantidade"  onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
 
 <label id='labeluprice'>Preço:</label>
 <input autocomplete="off" type="text" name="price" id="uprice"  onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
@@ -1150,12 +1145,12 @@ if ($username == null) {
 <div id='carrinho'>
 <table id='carrinhotable'>
 <tr>
-<td>produto:</td>
-<td>quantidade:</td>
-<td>price:</td>
-<td>imagem:</td>
-<td>total:</td>
-<td>deletebutton</td>
+<th>produto:</th>
+<th>quantidade:</th>
+<th>price:</th>
+<th>imagem:</th>
+<th>total:</th>
+<th>deletebutton</th>
 </tr>
 <?php 
 $sql = "SELECT * from carrinho WHERE username = ?";
@@ -1185,13 +1180,16 @@ if ($username = $row['username']){
 
 <tr>
   <?php
-$sql1 = mysqli_query($con,"SELECT SUM(quantidade) as prodtotal, SUM(price) as pricetotal FROM carrinho WHERE username = '$username'");
-$row = mysqli_fetch_assoc($sql1); 
+$stmt = $con->prepare("SELECT SUM(quantidade) as prodtotal, SUM(price) as pricetotal FROM carrinho WHERE username = ?");
+$stmt->bind_param('s', $username);
+$stmt->execute();
+$result = $stmt->get_result();
+while ($row = $result->fetch_assoc()){ 
 $sum = $row['prodtotal'];
 $sum1 = $row['pricetotal'];
 ?>  
 <p class='prodtotal'>
-<?php echo '<br>'. $sum .'->'. $sum1 . '€'; ?> 
+<?php echo '<br>'. $sum .'->'. $sum1 . '€';} ?> 
 <p>
 </tr>
 </table>
