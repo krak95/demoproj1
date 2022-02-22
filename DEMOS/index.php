@@ -159,6 +159,27 @@ $('#carrinho').hide();
 
 <script>
 $(document).ready(function() {
+if (a = '0'){
+$('#mainregisto').click(function(){
+$('#mainlogin').removeClass('selected');
+$('#mainregisto').addClass('selected');
+$('#maineditor').removeClass('selected');
+$('#mainsearch').removeClass('selected');
+$('#mainupdate').removeClass('selected');
+$('#mainemail').removeClass('selected');
+$('.fecharlogin').hide();
+$('#swap1').hide();
+$('#swap').hide();
+$('#fixeddiv').hide();
+$('#editordiv').hide();
+$('#searchdiv').hide();
+$('#logindiv').hide();
+$('#emaildiv').hide();
+$('#fixedupdate').hide();
+$('#registodiv').show();
+$('#carrinho').hide();
+});
+}else{
 $('#mainregisto').click(function(){
 $('#mainlogin').removeClass('selected');
 $('#mainregisto').addClass('selected');
@@ -180,17 +201,40 @@ $('#fixedupdate').hide();
 $('#registodiv').show();
 $('#foottable').hide();
 $('#carrinho').hide();
-}
-});
-}
-});
-});
 
+var a = 0;
+}
+});
+}
+});
+});
+}
 });
 </script>
 
 <script>
 $(document).ready(function() {
+if (a = '0'){
+$('#maineditor').click(function(){
+$('#mainlogin').removeClass('selected');
+$('#mainregisto').removeClass('selected');
+$('#maineditor').addClass('selected');
+$('#mainsearch').removeClass('selected');
+$('#mainupdate').removeClass('selected');
+$('#mainemail').removeClass('selected');
+$('#editordiv').show();
+$('#searchdiv').hide();
+$('#logindiv').hide();
+$('#emaildiv').hide();
+$('#fixedupdate').hide();
+$('#registodiv').hide();
+$('.fecharlogin').hide();
+$('#fixeddiv').show();
+$('#swap').show();
+$('#swap1').show();
+$('#carrinho').hide();
+});
+} else {
 $('#maineditor').click(function(){
 $('#mainlogin').removeClass('selected');
 $('#mainregisto').removeClass('selected');
@@ -213,16 +257,41 @@ $('#swap1').show();
 $('#foottable').hide();
 $('.fecharlogin').hide();
 $('#carrinho').hide();
+var a = 0;
 }
 });
 }
 });
 });
+}
 });
 </script>
 
 <script>
 $(document).ready(function() {
+if (a = '0'){
+$('#mainsearch').click(function(){
+$('#mainlogin').removeClass('selected');
+$('#mainregisto').removeClass('selected');
+$('#maineditor').removeClass('selected');
+$('#mainsearch').addClass('selected');
+$('#mainupdate').removeClass('selected');
+$('#mainemail').removeClass('selected');
+$('#editordiv').hide();
+$('#searchdiv').show();
+$('#logindiv').hide();
+$('#emaildiv').hide();
+$('#fixedupdate').hide();
+$('#registodiv').hide();
+$('.fecharlogin').hide();
+$('#fixeddiv').hide();
+$('#swap').hide();
+$('#swap1').hide();
+$('#foottable').hide();
+$('.fecharlogin').hide();
+$('#carrinho').hide();
+});
+} else {
 $('#mainsearch').click(function(){
 $('#mainlogin').removeClass('selected');
 $('#mainregisto').removeClass('selected');
@@ -251,12 +320,22 @@ var a = 0;
 }
 });
 });
+}
 });
 </script>
 
-
 <script>
 $(document).ready(function() {
+if (a = '0'){
+$('#mainupdate').click(function(){
+$('#mainlogin').removeClass('selected');
+$('#mainregisto').removeClass('selected');
+$('#maineditor').removeClass('selected');
+$('#mainsearch').removeClass('selected');
+$('#mainupdate').addClass('selected');
+$('#mainemail').removeClass('selected');
+});
+} else {
 $('#mainupdate').click(function(){
 $('#mainlogin').removeClass('selected');
 $('#mainregisto').removeClass('selected');
@@ -279,28 +358,30 @@ $('#swap1').hide();
 $('#foottable').hide();
 $('.fecharlogin').hide();
 $('#carrinho').show();
+var a = 0;
 }
 });
 }
 });
 });
+}
 });
 </script>
 
 <script>
-$(document).on('click', '#mainupdate', function() {
+$(document).ready(function() {
+if (a = '0'){
+$('#mainemail').click(function(){
 $('#mainlogin').removeClass('selected');
 $('#mainregisto').removeClass('selected');
 $('#maineditor').removeClass('selected');
 $('#mainsearch').removeClass('selected');
-$('#mainupdate').addClass('selected');
-$('#mainemail').removeClass('selected');
-$('#footer').animate({width: '100px'},{duration:100,complete: function(){
-$('#footer').animate({height: '56px'},{duration:100, complete: function(){
+$('#mainupdate').removeClass('selected');
+$('#mainemail').addClass('selected');
 $('#editordiv').hide();
 $('#searchdiv').hide();
 $('#logindiv').hide();
-$('#emaildiv').hide();
+$('#emaildiv').show();
 $('#fixedupdate').hide();
 $('#registodiv').hide();
 $('.fecharlogin').hide();
@@ -309,16 +390,9 @@ $('#swap').hide();
 $('#swap1').hide();
 $('#foottable').hide();
 $('.fecharlogin').hide();
-$('#carrinho').show();
-}
+$('#carrinho').hide();
 });
-}
-});
-});
-</script>
-
-<script>
-$(document).ready(function() {
+} else {
 $('#mainemail').click(function(){
 $('#mainlogin').removeClass('selected');
 $('#mainregisto').removeClass('selected');
@@ -347,6 +421,7 @@ var a = 0;
 }
 });
 });
+}
 });
 </script>
 
@@ -829,7 +904,6 @@ while ($row = $result->fetch_assoc()) {
 <?php }  ?>
 </td>
 
-
 <td>
 <button class='addcart' data-id='<?php echo $row["id"]; ?>'> addcart </button>
 <input class='quantidade' type="text">
@@ -992,6 +1066,13 @@ $("#showsearchtable").html(data);
 <div id="footer">
 <div id='footerinset'>
 <table id='foottable'>
+<script>
+    $(document).ready(function(){
+        $('#alert').click(function(){
+        $('#alert').css('background-color','white');
+        });
+    });
+</script>
 <tr>
 <th>Name</th>
 <td>
@@ -1137,16 +1218,6 @@ if($username != null){
 
 </div>
 
-<script>
-    $(document).ready(function(){
-        $('#alert').click(function(){
-        alert(a);
-        });
-    });
-</script>
 </body>
 
 </html>
-
-
-<!-- SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT  -->

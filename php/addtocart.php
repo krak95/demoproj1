@@ -6,7 +6,6 @@ session_start();
 $username = $_SESSION['username'];
 $id = $_POST['id'];
 $quantidade = $_POST['quantidade'];
-
 $sql1 = "SELECT * FROM produtos WHERE id = '$id'";
 $result = $con->query($sql1);
 while ($row = $result->fetch_assoc()) {
