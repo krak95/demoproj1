@@ -241,8 +241,6 @@ p {
     display:inline;
 }
 
-
-/*insertable*/
 .verde{
     font-weight: bold;
     color:green;
@@ -345,7 +343,7 @@ p {
 }
 
 #editordiv{
-    display:none;
+    display:block;
     background-color: var(--bblue);
     margin-top:80px;
     position: absolute;
@@ -398,7 +396,15 @@ p {
     font-size:14px;
 }
 
+#labelref{
+    position: absolute;
+    top:0;
+    margin-top: 150px;
+    font-size:14px;
+}
+
 /*inputINSERT*/
+
 #iproduto{
     position: absolute;
     width:170px;
@@ -419,6 +425,13 @@ p {
     text-align: left;
 }
 
+#iref{
+    position: absolute;
+    width:170px;
+    text-align: left;
+    margin-top:170px;
+}
+
 #istock{
     position: absolute;
     left:0;
@@ -426,6 +439,7 @@ p {
     margin-top:22px;
     margin-left: 50%;
 }
+
 
 #but-add{
     position: absolute;
@@ -445,7 +459,7 @@ p {
     position: absolute;
     display:none;
     margin-top:150px;
-    left:0;
+    right:0;
     color:crimson;
     font-size:20px;
 }
@@ -454,8 +468,24 @@ p {
     position: absolute;
     display:none;
     margin-top:150px;
-    left:0;
+    right:0;
     color:mediumseagreen;
+    font-size:20px;
+}
+#referror{
+    position: absolute;
+    display:none;
+    margin-top:150px;
+    right:0;
+    color:crimson;
+    font-size:20px;
+}
+#existingprod{
+    position: absolute;
+    display:none;
+    margin-top:150px;
+    right:0;
+    color:crimson;
     font-size:20px;
 }
 
@@ -1395,6 +1425,12 @@ h5 {
     width: auto;
 }
 
+.loginshop{
+    width: auto;
+}
+.loginshop:hover{
+    width: auto;
+}
 button{
     width: 16.66666666666667%;
     text-align: center;
@@ -1625,13 +1661,23 @@ color:var(--dblue);
     margin-top:300px;
 }
 
+.delete{
+    width: 100px;
+    border: solid 1px crimson;
+}
+
+.delete:hover{
+    width: 100px;
+    background-color: crimson;
+}
+
 #carrinho{
     position:absolute;
     margin-left:auto;
     margin-right: auto;
     left:0;
     right: 0;
-    display:block;
+    display:none;
 }
 #carrinhotable{
     margin-top:200px;

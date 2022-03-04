@@ -59,7 +59,7 @@ return true;
 </script>
 
 <script>
- $(document).on('click','.delete',function (e) {
+$(document).on('click','.delete',function (e) {
 
 // Delete 
 var el = this;
@@ -98,26 +98,7 @@ return true;
 
 });
 </script>
-<script>
 
-$(document).ready(function($) {
-$('.addcart').click(function(e) {
-  var addcart = $(this).data('id');
-  var quantidade = $('.quantidade').val();
-$.ajax({
-type: "POST",
-url: "php/addtocart.php",
-data: {id:addcart, quantidade:quantidade}, // get all form field value in serialize form
-success: function(data) {
-$("#carrinho").load("php/carrinho.php");
-$(".car").load("php/prodtotal.php");
-}
-});
-
-});
-return false;
-});
-</script>
 <script>
 
 $(document).ready(function() {
@@ -373,7 +354,7 @@ echo mysqli_num_rows($sql1);
 <tr>
 <button id='mainlogin'>Login</button>
 <button id='mainregisto'>Criar conta</button>
-<button id='maineditor'>Editor</button>
+<button id='maineditor'>Loja</button>
 <button id='mainsearch'>Procura</button>
 <button id='mainemail'>Email></button>
 </tr>
@@ -574,7 +555,6 @@ $('#footer').hide();
 
 <script>
 $(document).ready(function() {
-var a = 0;
 $('#foottable').hide();
 $('#mainlogin').click(function() {
 $('#mainlogin').addClass('selected');
@@ -588,7 +568,6 @@ $('#footer').animate({width:'100%'},{duration:400,complete: function() {
 $('.fecharlogin').show();
 $('#foottable').show();
 $('#mainlogin').text('<?php echo $name; ?>');
-var a = 1;
 }
 });
 }
@@ -668,25 +647,39 @@ if ( $admin == 1){ ?>
 
 
 <table id="fixedinsert">
-<button type='button' id='swap1'>&larr;&rarr;</button>
-<form action="javascript:void(0)" method="POST" id="insert">
 <script>
 $(document).ready(function($) {
-$('#insert').submit(function(e) {
+$('#but-add').click(function(e) {
+var iprod = $('.iprod').val();
+var iquant = $('.iquant').val();
+var iprice = $('.iprice').val();
+var istock = $('.istock').val();
 if ($('#iproduto').val().length === 0 || $('#iquantidade').val().length === 0 || $('#iprice').val().length === 0) {
+
 $("#preenchatxt").show();
 $('#preenchatxt').fadeOut(900);
 return false;
 
-} else {
+}
+if ($('#iref').val().length !== 0) {
+
+$("#referror").show();
+$('#referror').fadeOut(900);
+}
+
+$.post('php/checkprod.php', { prod: $('#iproduto').val()}, function(response) {
+if (response != 'go') {
+$("#existingprod").show();
+$('#existingprod').fadeOut(900);
+}else{
 $("#insertTxt").fadeIn(function(){
 $('#insertTxt').fadeOut(700);
 
 $.ajax({
 type: "POST",
 url: "php/insert.php",
-data: $("#insert").serialize(), // get all form field value in serialize form
-success: function() {
+data: {keyprod:iprod, keyquant:iquant, keyprice:iprice, keystock:istock}, // get all form field value in serialize form
+success: function(data) {
 $(".forload").load("php/show.php");
 $("html, body").animate({
 scrollTop: $(document).height() - $(window).height()
@@ -695,31 +688,34 @@ scrollTop: $(document).height() - $(window).height()
 });
 });
 }
-
 });
 return false;
+});
 });
 </script>
 
 <div id='insertform'>
+
+<label id='labelref'>Referência:</label>
+<input autocomplete="off" type="text" name="ref" id="iref" class="textinput">
+
 <label id='labelproduto'>Produto:</label>
-<input autocomplete="off" type="text" name="produto" id="iproduto" class="textinput">
+<input autocomplete="off" type="text" name="produto" id="iproduto" class="iprod">
 
 <label id='labelquantidade'>Quantidade:</label>
-<input autocomplete="off" type="text" name="quantidade" id="iquantidade" class="textinput" onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
+<input autocomplete="off" type="text" name="quantidade" id="iquantidade" class="iquant" onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
 
 <label id='labelprice'>Preço:</label>
-<input autocomplete="off" type="text" name="price" id="iprice" class="textinput" onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
+<input autocomplete="off" type="text" name="price" id="iprice" class="iprice" onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
 
 <button type="submit" id='but-add' value="Adicionar">Adicionar</button>
 
 
-<select id='istock' name="stock">
+<select id='istock' class="istock" name="stock">
 <option value="1">Em stock.</option>
 <option value="2">Pouco stock.</option>
 <option value="3">Fora de stock.</option>
 </select>
-</form>
 
 <?php /*DELETE BUTTON*/
 if ($admin == 1){
@@ -732,6 +728,8 @@ echo "
 
 <div id="insertTxt">Adicionado com sucesso!</div>
 <div id="preenchatxt">Preencha os campos!</div>
+<div id="existingprod">Produto já existe na base de dados!</div>
+<div id='referror'>Por favor, apague o campo referência! Este campo será automaticamente preenchido.</div>
 </div>
 
 <form action="javascript:void(0)" method="POST" id="deleteref">
@@ -779,24 +777,32 @@ return false;
 
 <?php } ?>
 </div>
-<div id='insertheader'>
-<table>
-<tr>
-
-<th>img</th>
-<th>add</th>
-<th>Produto</th>
-<th>Preço</th>
-<th>Stock</th>
-</tr>
-</table>
-</div>
 <div class="forload">
 
 <table id="insertable1">
 
+<script>
+
+$(document).ready(function($) {
+$('.addcart').click(function(e) {
+var addcart = $(this).data('id');
+$.ajax({
+type: "POST",
+url: "php/addtocart.php",
+data: {id:addcart}, // get all form field value in serialize form
+success: function(data) {
+$("#carrinho").load("php/carrinho.php");
+$(".car").load("php/prodtotal.php");
+}
+});
+
+});
+return false;
+});
+</script>
 
 <?php 
+
 $sql = "SELECT * FROM produtos";
 $result = $con->query($sql);
 while ($row = $result->fetch_assoc()) {
@@ -826,20 +832,47 @@ while ($row = $result->fetch_assoc()) {
 <?php }  ?>
 <div style="background-color:black;"><img style="max-width:50px;" src="img/img<?php echo $row['img']; ?>"></div>
 
-<?php }  ?>
+<?php }   ?>
 </td>
 
 
 <td>
+<?php
+if($username != null){?>
 <button class='addcart' data-id='<?php echo $row["id"]; ?>'> addcart </button>
-<input class='quantidade' type="text">
+<?php
+}else{
+echo "<button class='loginshop'>login before shopping </button>";
+} ?>
 </td>
+<script>
+$(document).ready(function() {
+$('.loginshop').click(function(){
+$('#mainlogin').addClass('selected');
+$('#mainregisto').removeClass('selected');
+$('#maineditor').removeClass('selected');
+$('#mainsearch').removeClass('selected');
+$('#mainupdate').removeClass('selected');
+$('#mainemail').removeClass('selected');
+$('#swap1').hide();
+$('#swap').hide();
+$('#searchdiv').hide();
+$('#logindiv').show();
+$('#editordiv').hide();
+$('#emaildiv').hide();
+$('#fixedupdate').hide();
+$('#registodiv').hide();
+$('#carrinho').hide();
+});
+});
+</script>
+
 
 <td>
 <?php echo $row["produto"];?>
 <br> REF: <?php
-      echo $row['id']; ?>
-      
+    echo $row['id']; ?>
+    
 <?php if ( $admin == 1) { ?>
 <br><button class='deleteup' data-id='<?php echo $row["id"]; ?>'>APAGAR</button>
 <?php } ?>
@@ -873,57 +906,6 @@ echo
 
 </table>
 </div>
-</div>
-<?php 
-if ( $admin == 1){ ?>
-<div id='fixedupdate'>
-<button type='button' id='swap'>&larr;&rarr;</button>
-<table id="updatetable">
-<form action="javascript:void(0)" method="POST" id="update1">
-<script>
-$(document).ready(function($) {
-$('#update1').submit(function(e) {
-if ($('#uref').val().length === 0 && $('#uproduto').val().length === 0 && $('#uquantidade').val().length === 0 && $('#uprice').val().length === 0) {
-$("#preenchatxt").show();
-$('#preenchatxt').delay(700, 'linear').fadeOut(555);
-} else {
-$.ajax({
-type: "POST",
-url: "php/update.php",
-data: $("#update1").serialize(), // get all form field value in serialize form
-success: function() {
-$(".forload").load("php/show.php");
-
-}
-});
-}
-});
-return false;
-});
-</script><!-- UPDATE -->
-
-<label id='labeluref'>Referência:</label>
-<input autocomplete="off" type="text" name="id" id="uref" >
-
-<label id='labeluprod'>Produto:</label>
-<input autocomplete="off" type="text" name="produto" id="uproduto" >
-
-<label id='labeluprice'>Preço:</label>
-<input autocomplete="off" type="text" name="price" id="uprice"  onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
-
-<select id='ustock' name="stock">
-<option value="1">Em stock.</option>
-<option value="2">Pouco stock.</option>
-<option value="3">Fora de stock.</option>
-</select>
-
-<button type="submit" id="but-mod" value="Modificar">Modificar</button></td>
-
-</form>
-
-</table>
-
-<?php } ?>
 </div>
 
 
@@ -1103,20 +1085,6 @@ if ($username = $row['username']){
 }
 ?>
 
-<tr>
-  <?php
-$stmt = $con->prepare("SELECT SUM(quantidade) as prodtotal, SUM(price) as pricetotal FROM carrinho WHERE username = ?");
-$stmt->bind_param('s', $username);
-$stmt->execute();
-$result = $stmt->get_result();
-while ($row = $result->fetch_assoc()){ 
-$sum = $row['prodtotal'];
-$sum1 = $row['pricetotal'];
-?>  
-<p class='prodtotal'>
-<?php echo '<br>'. $sum .'->'. $sum1 . '€';} ?> 
-<p>
-</tr>
 </table>
 </div>
 
@@ -1126,24 +1094,12 @@ $sql1 = "SELECT * FROM carrinho WHERE username = '$username'";
 $stmt1 = $con->query($sql1);
 $rowcount = $stmt1->num_rows;
 if($username != null){
-  if($rowcount != null){
+if($rowcount != null){
 ?>
 <button id='mainupdate'><img src="img/cart.png" width="50px" height="50px" ></button>
 <?php } } ?>
 </div>
 
-<div id='alert'>
-  asds
-
-</div>
-
-<script>
-    $(document).ready(function(){
-        $('#alert').click(function(){
-        alert(a);
-        });
-    });
-</script>
 </body>
 
 </html>

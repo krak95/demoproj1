@@ -2,10 +2,10 @@
 session_start();
 require_once "config.php";
 
-$produto    = $_POST['produto'];
-$quantidade  = $_POST['quantidade'];
-$price  = $_POST['price'];
-$stock = $_POST['stock'];
+$produto    = $_POST['keyprod'];
+$quantidade  = $_POST['keyquant'];
+$price  = $_POST['keyprice'];
+$stock = $_POST['keystock'];
 $img = $_POST['img'] ?? null;
 
 $sql = "INSERT INTO produtos (produto, quantidade, price, stock, img) VALUES(?,?,?,?,?)";

@@ -1,3 +1,6 @@
+<?php 
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,70 +17,54 @@
 
 </head>
 <body>
-<div class='button' id='buttonSHOW'>
+<input type="text" class='1'>
+<input type="text" class='2'>
+<button type="submit" class='submit'>submit</button>
 
-</div>
+<button type="submit" class='submit1'>submit1</button>
+<div class='load'></div>
 
-<div class='button' id='buttonHIDE'>
-
-</div>
-<div id='demo'>
-<table >
-
-<tr>
-<th>
-1one
-</th>
-<th>
-1one
-</th>
-<th>
-1one
-</th>
-</tr>
-
-<tr>
-<td>
-1one
-</td>
-
-<td>
-1one
-</td>
-
-<td>
-1one
-</td>
-</tr>
-
-</table>
-</div>
-
-<div id='bigduk'></div>
 </body>
 </html>
 
 <script>
-$(document).ready(function(){
-    $('#bigduk').hide();
-    var bigduk = $('#bigduk');
-$('#buttonHIDE').click(function(){
-$('#demo').hide();
-$('#buttonHIDE').hide();
-$('#buttonSHOW').show();
-$('#buttonSHOW').text('SHOW');
+$('.submit').click(function() {
+  var id11 = $('.1').val();
+  var id22 = $('.2').val();
+$.ajax({
+type: "POST",
+url: "demo1.php",
+data: {id1:id11, id2:id22}, // get all form field value in serialize form
+success: function(data) {
+    $(".load").load('demoload.php');
+}
 });
+
 });
 </script>
 
+
 <script>
-$(document).ready(function(){
-    var bigduk = $('#bigduk');
-$('#buttonSHOW').click(function(){
-$('#demo').show();
-$('#buttonSHOW').hide();
-$('#buttonHIDE').show();
-$('#buttonHIDE').text('HIDE');
+$('.submit1').click(function() {
+  var id11 = $('.1').val();
+  var id22 = $('.2').val();
+$.ajax({
+type: "POST",
+url: "demo1.php",
+data: {id1:id11, id2:id22}, // get all form field value in serialize form
+success: function(data) {
+    $(".load").load('demoload1.php');
+}
 });
+
+});
+</script>
+
+
+<script>
+$('.submit').hover(function() {
+  $('.submit').append("<div class='box'> suckmyduk <div>");
+}, function(){
+  $('.box').remove();
 });
 </script>
