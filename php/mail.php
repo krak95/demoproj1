@@ -17,14 +17,14 @@ if(isset($_POST['name']) && isset($_POST['email'])){
 	$mail->IsSMTP();
 	$mail->Host = "smtp.gmail.com";
 	$mail->SMTPAuth = true;
-	$mail->Username = "jp.amorim.ua@gmail.com";
-	$mail->Password = 'Monalisa123!';
+	$mail->Username = "adminEMAIL";
+	$mail->Password = 'adminEMAILpass';
 	$mail->Port = 465;
 	$mail->SMTPSecure = "ssl";
 	
 	$mail->IsHTML(true);
-	$mail->SetFrom('jp.amorim.ua@gmail.com', 'jp');
-	$mail->addAddress('jp.amorim.ua@gmail.com');
+	$mail->SetFrom('adminEMAIL', 'jp');
+	$mail->addAddress('adminEMAIL');
 	$mail->Subject = $subject;
 	$mail->Body = $body;
     $mail->addReplyTo($_POST['email'], $_POST['name']);
