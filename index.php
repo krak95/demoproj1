@@ -338,6 +338,7 @@ var a = 0;
 
 <body>
 
+<div id='produtonocarro'>já existe no carrinho!</div>
 <div id='infinitepage'>
 
 <!--
@@ -783,9 +784,17 @@ return false;
 
 <script>
 
-$(document).ready(function($) {
-$('.addcart').click(function(e) {
+$(document).ready(function() {
+$('.addcart').click(function() {
 var addcart = $(this).data('id');
+$.post('php/checkcar.php', {
+produto: addcart
+}, function(response) {
+if (response == "stop") {
+$('#produtonocarro').show();
+$('#produtonocarro').fadeOut(2000);
+}else{
+
 $.ajax({
 type: "POST",
 url: "php/addtocart.php",
@@ -795,7 +804,8 @@ $("#carrinho").load("php/carrinho.php");
 $(".car").load("php/prodtotal.php");
 }
 });
-
+}
+});
 });
 return false;
 });
@@ -839,7 +849,7 @@ while ($row = $result->fetch_assoc()) {
 <td>
 <?php
 if($username != null){?>
-<button class='addcart' data-id='<?php echo $row["id"]; ?>'> addcart </button>
+<button class='addcart' data-id='<?php echo $row["produto"]; ?>'> addcart </button>
 <?php
 }else{
 echo "<button class='loginshop'>login before shopping </button>";
@@ -869,7 +879,7 @@ $('#carrinho').hide();
 
 
 <td>
-<?php echo $row["produto"];?>
+<p id='prodname' data-id='<?php echo $row["produto"];?>'><?php echo $row["produto"];?></p>
 <br> REF: <?php
     echo $row['id']; ?>
     
@@ -1073,13 +1083,19 @@ if ($username = $row['username']){
 
 <tr>
 <td><?php echo $row["produto"]; ?></td>
-<td><?php echo $row["quantidade"]; ?></td>
+<td>
+<input id="quantcar" type="text" value='1'>
+<button class='quantbut' data-id='<?php echo $row["produto"];?>' style='width:auto;'>Confirmar quantidade</button>
+</td>
+
 <td><?php echo $row["price"] . " €" ; ?></td>
 <td><img style="max-width:50px;" src="img/img<?php echo $row['img']; ?>"></td>
-<td><?php echo $row["price_final"] . " €" ; ?></td>
+<td id='grandtotal'></td>
 <td><button class='delete' data-id='<?php echo $row["carrinho_id"]; ?>'><?php echo $row["carrinho_id"]; ?></button></td>
 
 </tr>
+
+
 <?php
 }
 }
@@ -1106,3 +1122,23 @@ if($rowcount != null){
 
 
 <!-- SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT  -->
+
+<script>
+
+$(document).ready(function() {
+  $('.quantbut').click(function() {
+    var id = $(this).data('id');
+    var quantcar = $('#quantcar').val();
+$.ajax({
+type: "POST",
+url: "php/CARRINHOquant.php",
+data: {quant:quantcar, id:id}, // get all form field value in serialize form
+success: function(data) {
+$("#grandtotal").load();
+}
+});
+
+});
+return false;
+});
+</script>

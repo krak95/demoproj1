@@ -26,10 +26,14 @@ if ($username = $row['username']){
 
 <tr>
 <td><?php echo $row["produto"]; ?></td>
-<td><?php echo $row["quantidade"]; ?></td>
+<td>
+<input id="quantcar" type="text" value='1'>
+<button id='quantbut' data-id='<?php echo $row["produto"];?>' style='width:auto;'>Confirmar quantidade</button>
+</td>
+
 <td><?php echo $row["price"] . " €" ; ?></td>
 <td><img style="max-width:50px;" src="img/img<?php echo $row['img']; ?>"></td>
-<td><?php echo $row["price_final"] . " €" ; ?></td>
+<td id='grandtotal'></td>
 <td><button class='delete' data-id='<?php echo $row["carrinho_id"]; ?>'><?php echo $row["carrinho_id"]; ?></button></td>
 
 </tr>
@@ -53,3 +57,23 @@ $sum1 = $row['pricetotal'];
 <p>
 </tr>
 </table>
+
+<script>
+
+$(document).ready(function() {
+  $('#quantbut').click(function() {
+    var id = $(this).data('id');
+    var quantcar = $('#quantcar').val();
+$.ajax({
+type: "POST",
+url: "php/CARRINHOquant.php",
+data: {quant:quantcar, id:id}, // get all form field value in serialize form
+success: function(data) {
+$("#grandtotal").load();
+}
+});
+
+});
+return false;
+});
+</script>
