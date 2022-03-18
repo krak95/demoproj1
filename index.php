@@ -71,12 +71,11 @@ var confirmalert = confirm("Are you sure?");
 if (confirmalert == true) {
 // AJAX Request
 $.ajax({
-url: 'php/deletecar.php',
+url: 'php/CARRINHOapagar.php',
 type: 'POST',
 data: { id:deleteid },
 success: function(response){
 if(response == 1){
-$('#carrinho').load('php/carrinho.php');
 $('.car').load('php/prodtotal.php');
 // Remove row from HTML Table
 
@@ -787,7 +786,7 @@ return false;
 $(document).ready(function() {
 $('.addcart').click(function() {
 var addcart = $(this).data('id');
-$.post('php/checkcar.php', {
+$.post('php/CARRINHOcheckprod.php', {
 produto: addcart
 }, function(response) {
 if (response == "stop") {
@@ -800,7 +799,7 @@ type: "POST",
 url: "php/addtocart.php",
 data: {id:addcart}, // get all form field value in serialize form
 success: function(data) {
-$("#carrinho").load("php/carrinho.php");
+$("#carrinho").load("php/CARRINHO.php");
 $(".car").load("php/prodtotal.php");
 }
 });

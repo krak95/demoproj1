@@ -27,13 +27,5 @@ $result = $con->prepare("SELECT price_final FROM carrinho WHERE produto = ? AND 
 $result->bind_param("ss", $id, $username);
 $result->execute();
 $arr = $result->get_result()->fetch_row()[0] ?? null;
-echo $arr;
+echo $arr.' €';
 }
-
-?><br> <?php
-echo 'quantidade:'.$quantidade;
-?><br> <?php
-echo 'produto:'.$id;
-
-?><br> <?php
-echo 'user'.$username;
