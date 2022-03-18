@@ -1082,12 +1082,12 @@ if ($username = $row['username']){
 
 
 <tr>
+  
 <td><?php echo $row["produto"]; ?></td>
 <td>
 <input id="quantcar<?php echo $row["produto"];?>" type="text" value='1'>
 <button class='quantbut' data-id='<?php echo $row["produto"];?>' style='width:auto;'>Confirmar quantidade</button>
 </td>
-
 <td><?php echo $row["price"] . " €" ; ?></td>
 <td><img style="max-width:50px;" src="img/img<?php echo $row['img']; ?>"></td>
 <td id='grandtotal<?php echo $row["produto"];?>'></td>
