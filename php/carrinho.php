@@ -27,7 +27,7 @@ if ($username = $row['username']){
 <tr>
 <td><?php echo $row["produto"]; ?></td>
 <td>
-<input id="quantcar" type="text" value='1'>
+<input id="quantcar<?php echo $row["produto"];?>" type="text" value='1'>
 <button id='quantbut' data-id='<?php echo $row["produto"];?>' style='width:auto;'>Confirmar quantidade</button>
 </td>
 
@@ -63,7 +63,7 @@ $sum1 = $row['pricetotal'];
 $(document).ready(function() {
   $('#quantbut').click(function() {
     var id = $(this).data('id');
-    var quantcar = $('#quantcar').val();
+    var quantcar = $('#quantcar'+id).val();
 $.ajax({
 type: "POST",
 url: "php/CARRINHOquant.php",

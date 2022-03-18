@@ -29,4 +29,11 @@ $result->execute();
 $arr = $result->get_result()->fetch_row()[0] ?? null;
 echo $arr;
 }
-?>
+
+?><br> <?php
+echo 'quantidade:'.$quantidade;
+?><br> <?php
+echo 'produto:'.$id;
+
+?><br> <?php
+echo 'user'.$username;
