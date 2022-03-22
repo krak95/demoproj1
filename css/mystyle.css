@@ -529,9 +529,21 @@ p {
     background-color: crimson;
     color:white;
     position:absolute;
-    top:0;
+    bottom:0;
     left:0;
-    margin-top:200px;
+    margin-bottom:130px;
+    margin-left:20px;
+}
+
+#produtoaddcarro{
+    display:none;
+    background-color: green;
+    color:white;
+    position:absolute;
+    bottom:0;
+    left:0;
+    margin-bottom:130px;
+    margin-left:20px;
 }
 #insertheader{
     position: fixed;
@@ -1707,9 +1719,6 @@ color:var(--dblue);
     background-color: var(--bblue);
     color: var(--dblue);
 }
-#carrinhotable td{
-    
-}
 
 .loadcarrinho{
     margin-top:200px;
@@ -1720,8 +1729,7 @@ color:var(--dblue);
     right: 0;
 }
 .prodtotal{
-    margin-top:200px;
-    position: absolute;
+    margin-top:50px;
     z-index: 1;
     color:var(--dblue);
     font-weight: bold;
@@ -1729,9 +1737,10 @@ color:var(--dblue);
 
 .car{
     position: fixed;
-    right:0;
-    top:0;
-    margin-top:100px;
+    left:0;
+    bottom:0;
+    margin-left:20px;
+    margin-bottom:20px;
 }
 #mainupdate{
     height:72px;

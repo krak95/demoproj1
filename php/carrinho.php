@@ -25,7 +25,7 @@ if ($username = $row['username']){
 </td>
 
 <td>
-<input id="quantcar<?php echo $row["produto"];?>" type="text" value='1'>
+<input onkeypress='return (event.charCode >= 48 && event.charCode <= 57)' id="quantcar<?php echo $row["produto"];?>" type="text" value='1'>
 <button class='quantbut' data-id='<?php echo $row["produto"];?>' style='width:auto;'>Confirmar quantidade</button>
 </td>
 <td id='grandtotal<?php echo $row["produto"];?>'><?php echo $row["price"] . " €" ; ?></td>

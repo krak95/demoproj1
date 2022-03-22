@@ -23,40 +23,6 @@ $avatar = $_SESSION['avatar'] ?? null;
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
 </script>
-<script>
-$(document).on('click','.deleteup',function (e) {
-
-// Delete 
-var bn = this;
-
-// Delete id
-var deleteup = $(this).data('id');
-
-var confirmdel = confirm("Are you sure?");
-if (confirmdel == true) {
-// AJAX Request
-$.ajax({
-url: 'php/deleteup.php',
-type: 'POST',
-data: { id:deleteup },
-success: function(response){
-if(response == 1){
-// Remove row from HTML Table
-$(bn).closest('tr').css('background','tomato');
-$(bn).closest('tr').fadeOut(800,function(){
-$(this).remove();
-});
-}else{
-alert('Invalid ID.');
-}
-
-}
-});
-return true;
-}
-
-});
-</script>
 
 <script>
 $(document).on('click','.delete',function (e) {
@@ -79,8 +45,7 @@ if(response == 1){
 $('.car').load('php/prodtotal.php');
 // Remove row from HTML Table
 
-$(el).closest('tr').css('background','tomato');
-$(el).closest('tr').fadeOut(800,function(){
+$(el).closest('tr').fadeOut(200,function(){
 $(this).remove();
 });
 
@@ -338,6 +303,7 @@ var a = 0;
 <body>
 
 <div id='produtonocarro'>já existe no carrinho!</div>
+<div id='produtoaddcarro'>Produto adicionado ao carrinho!</div>
 <div id='infinitepage'>
 
 <!--
@@ -564,7 +530,7 @@ $('#mainsearch').removeClass('selected');
 $('#mainupdate').removeClass('selected');
 $('#mainemail').removeClass('selected');
 $('#footer').animate({height:'80%'},{duration:400,complete: function() {
-$('#footer').animate({width:'100%'},{duration:400,complete: function() {
+$('#footer').animate({width:'93%'},{duration:400,complete: function() {
 $('.fecharlogin').show();
 $('#foottable').show();
 $('#mainlogin').text('<?php echo $name; ?>');
@@ -791,7 +757,7 @@ produto: addcart
 }, function(response) {
 if (response == "stop") {
 $('#produtonocarro').show();
-$('#produtonocarro').fadeOut(2000);
+$('#produtonocarro').fadeOut(600);
 }else{
 
 $.ajax({
@@ -801,6 +767,8 @@ data: {id:addcart}, // get all form field value in serialize form
 success: function(data) {
 $("#carrinho").load("php/CARRINHO.php");
 $(".car").load("php/prodtotal.php");
+$('#produtoaddcarro').show();
+$('#produtoaddcarro').fadeOut(600);
 }
 });
 }
@@ -1081,7 +1049,7 @@ if ($username = $row['username']){
 </td>
 
 <td>
-<input id="quantcar<?php echo $row["produto"];?>" type="text" value='1'>
+<input onkeypress='return (event.charCode >= 48 && event.charCode <= 57)' id="quantcar<?php echo $row["produto"];?>" type="text" value='<?php echo $row["quantidade"];?>'>
 <button class='quantbut' data-id='<?php echo $row["produto"];?>' style='width:auto;'>Confirmar quantidade</button>
 </td>
 <td id='grandtotal<?php echo $row["produto"];?>'><?php echo $row["price"] . " €" ; ?></td>
@@ -1101,15 +1069,13 @@ if ($username = $row['username']){
 
 <div class="car">
 <?php
+
+
 $sql1 = "SELECT * FROM carrinho WHERE username = '$username'";
 $stmt1 = $con->query($sql1);
 $rowcount = $stmt1->num_rows;
 if($username != null){
 if($rowcount != null){
-?>
-<button id='mainupdate'><img src="img/cart.png" width="50px" height="50px" ></button>
-<?php } }
-
 $stmt = $con->prepare("SELECT SUM(quantidade) as prodtotal, SUM(price_final) as pricetotal FROM carrinho WHERE username = ?");
 $stmt->bind_param('s', $username);
 $stmt->execute();
@@ -1118,9 +1084,10 @@ while ($row = $result->fetch_assoc()){
 $sum = $row['prodtotal'];
 $sum1 = $row['pricetotal'];
 ?>  
-<p class='prodtotal'>
-<?php echo '<br>'. $sum .'->'. $sum1 . '€';} ?> 
-<p>
+<td class='prodtotal'>
+<?php echo '<br>'.'Items:'. $sum .'<br>'. 'Total:'.$sum1 . '€'.'<br>';} ?>
+<button id='mainupdate'><img src="img/cart.png" width="50px" height="50px" ></button>
+<?php } } ?>
 </div>
 
 </body>
