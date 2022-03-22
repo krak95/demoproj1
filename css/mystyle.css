@@ -1707,6 +1707,10 @@ color:var(--dblue);
     background-color: var(--bblue);
     color: var(--dblue);
 }
+#carrinhotable td{
+    
+}
+
 .loadcarrinho{
     margin-top:200px;
     position: relative;

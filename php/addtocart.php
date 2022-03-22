@@ -22,9 +22,9 @@ $stmt->execute();
 $arr = $stmt->get_result()->fetch_row()[0] ?? null;
 
 if ($arr == '') {
-$sql = "INSERT INTO carrinho (produto,price,username) VALUES (?,?,?)";
+$sql = "INSERT INTO carrinho (produto,price,username,price_final) VALUES (?,?,?,?)";
 $stmtinsert = $con->prepare($sql);
-$stmtinsert->bind_param('sss',$produto,$price,$username);
+$stmtinsert->bind_param('ssss',$produto,$price,$username,$price);
 $result1 = $stmtinsert->execute();
 }
     $insert = $con->query("UPDATE carrinho SET img = '$img' WHERE produto = '$produto'");
