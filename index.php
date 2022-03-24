@@ -568,7 +568,7 @@ $('#mainsearch').removeClass('selected');
 $('#mainupdate').removeClass('selected');
 $('#mainemail').removeClass('selected');
 $('#footer').animate({height:'80%'},{duration:400,complete: function() {
-$('#footer').animate({width:'93%'},{duration:400,complete: function() {
+$('#footer').animate({width:'75%'},{duration:400,complete: function() {
 $('.fecharlogin').show();
 $('#foottable').show();
 $('#mainlogin').text('<?php echo $name; ?>');

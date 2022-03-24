@@ -25,10 +25,10 @@ if ($username = $row['username']){
 </td>
 
 <td>
-<input onkeypress='return (event.charCode >= 48 && event.charCode <= 57)' id="quantcar<?php echo $row["produto"];?>" type="text" value='1'>
-<button class='quantbut' data-id='<?php echo $row["produto"];?>' style='width:auto;'>Confirmar quantidade</button>
+<input onkeypress='return (event.charCode >= 48 && event.charCode <= 57)' id="quantcar<?php echo $row["id_prod"];?>" type="text" value='<?php echo $row["quantidade"];?>'>
+<button class='quantbut' data-id='<?php echo $row["id_prod"];?>' style='width:auto;'>Confirmar quantidade</button>
 </td>
-<td id='grandtotal<?php echo $row["produto"];?>'><?php echo $row["price"] . " €" ; ?></td>
+<td id='grandtotal<?php echo $row["id_prod"];?>'><?php echo $row["price_final"] . " €" ; ?></td>
 
 <td><button class='delete' data-id='<?php echo $row["carrinho_id"]; ?>'>Tirar do carrinho.</button></td>
 
