@@ -5,7 +5,7 @@ session_start();
 $count = 0;
 $username = $_SESSION['username'];
 $id = $_POST['id']; echo $id;
-$sql1 = "SELECT * FROM produtos WHERE produto = '$id'";
+$sql1 = "SELECT * FROM produtos WHERE id = '$id'";
 $result = $con->query($sql1);
 while ($row = $result->fetch_assoc()) {
 if($result){
@@ -22,9 +22,9 @@ $stmt->execute();
 $arr = $stmt->get_result()->fetch_row()[0] ?? null;
 
 if ($arr == '') {
-$sql = "INSERT INTO carrinho (produto,price,username,price_final) VALUES (?,?,?,?)";
+$sql = "INSERT INTO carrinho (produto,price,username,price_final,id_prod) VALUES (?,?,?,?,?)";
 $stmtinsert = $con->prepare($sql);
-$stmtinsert->bind_param('ssss',$produto,$price,$username,$price);
+$stmtinsert->bind_param('sssss',$produto,$price,$username,$price,$id);
 $result1 = $stmtinsert->execute();
 }
     $insert = $con->query("UPDATE carrinho SET img = '$img' WHERE produto = '$produto'");
