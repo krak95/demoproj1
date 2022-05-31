@@ -6,7 +6,7 @@ require_once 'config.php';
 $username = $_SESSION['username'];
 
 
-$targetDir = "../img\avatar";
+$targetDir = "../img/avatar";
 $fileName = basename($_FILES["file"]["name"]);
 $targetFilePath = $targetDir . $fileName;
 $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);

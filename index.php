@@ -18,352 +18,59 @@ $avatar = $_SESSION['avatar'] ?? null;
 
 <title>LosCalmos</title>
 
-<link rel="stylesheet" href="css/mystyle.css">
-<link rel="stylesheet" href="css/mobilecss.css">
+<link rel="stylesheet" type="text/css" href="css/mystyle.css">
+<link rel="stylesheet" type="text/css" href="css/mobilecss.css">
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous">
 </script>
-
-<script>
-$(document).on('click','.deleteup',function (e) {
-
-// Delete 
-var el = this;
-
-// Delete id
-var deleteid = $(this).data('id');
-
-var confirmalert = confirm("Are you sure?");
-if (confirmalert == true) {
-// AJAX Request
-$.ajax({
-url: 'php/deleteup.php',
-type: 'POST',
-data: { id:deleteid },
-success: function(response){
-if(response == 1){
-// Remove row from HTML Table
-
-$(el).closest('tr').fadeOut(200,function(){
-$(this).remove();
-});
-
-}else{
-alert('Invalid ID.');
-}
-
-}
-});
-
-return true;
-}
-
-
-});
-</script>
-
-<script>
-$(document).on('click','.delete',function (e) {
-
-// Delete 
-var el = this;
-
-// Delete id
-var deleteid = $(this).data('id');
-
-var confirmalert = confirm("Are you sure?");
-if (confirmalert == true) {
-// AJAX Request
-$.ajax({
-url: 'php/CARRINHOapagar.php',
-type: 'POST',
-data: { id:deleteid },
-success: function(response){
-if(response == 1){
-$('.car').load('php/prodtotal.php');
-// Remove row from HTML Table
-
-$(el).closest('tr').fadeOut(200,function(){
-$(this).remove();
-});
-
-}else{
-alert('Invalid ID.');
-}
-
-}
-});
-
-return true;
-}
-
-
-});
-</script>
-
-<script>
-
-$(document).ready(function() {
-$('#mainlogin').text("<?php if ($username != ''){echo 'Sr./Sra.'. $name;}else{echo 'Login';}?>");
-});
-</script>
-
-<script>
-
-$(document).ready(function() {
-$('#swap1').hide();
-$('#swap').hide();
-
-});
-</script>
-
-
-<script>
-$(document).ready(function() {
-$('#mainlogin').click(function(){
-$('#mainlogin').addClass('selected');
-$('#mainregisto').removeClass('selected');
-$('#maineditor').removeClass('selected');
-$('#mainsearch').removeClass('selected');
-$('#mainupdate').removeClass('selected');
-$('#mainemail').removeClass('selected');
-$('#swap1').hide();
-$('#swap').hide();
-$('#searchdiv').hide();
-$('#logindiv').show();
-$('#editordiv').hide();
-$('#emaildiv').hide();
-$('#fixedupdate').hide();
-$('#registodiv').hide();
-$('#carrinho').hide();
-});
-});
-</script>
-
-<script>
-$(document).ready(function() {
-$('#mainregisto').click(function(){
-$('#mainlogin').removeClass('selected');
-$('#mainregisto').addClass('selected');
-$('#maineditor').removeClass('selected');
-$('#mainsearch').removeClass('selected');
-$('#mainupdate').removeClass('selected');
-$('#mainemail').removeClass('selected');
-$('#footer').animate({width: '100px'},{duration:100,complete: function(){
-$('#footer').animate({height: '56px'},{duration:100, complete: function(){
-$('.fecharlogin').hide();
-$('#swap1').hide();
-$('#swap').hide();
-$('#fixeddiv').hide();
-$('#editordiv').hide();
-$('#searchdiv').hide();
-$('#logindiv').hide();
-$('#emaildiv').hide();
-$('#fixedupdate').hide();
-$('#registodiv').show();
-$('#foottable').hide();
-$('#carrinho').hide();
-}
-});
-}
-});
-});
-
-});
-</script>
-
-<script>
-$(document).ready(function() {
-$('#maineditor').click(function(){
-$('#mainlogin').removeClass('selected');
-$('#mainregisto').removeClass('selected');
-$('#maineditor').addClass('selected');
-$('#mainsearch').removeClass('selected');
-$('#mainupdate').removeClass('selected');
-$('#mainemail').removeClass('selected');
-$('#footer').animate({width: '100px'},{duration:100,complete: function(){
-$('#footer').animate({height: '56px'},{duration:100, complete: function(){
-$('#editordiv').show();
-$('#searchdiv').hide();
-$('#logindiv').hide();
-$('#emaildiv').hide();
-$('#fixedupdate').hide();
-$('#registodiv').hide();
-$('.fecharlogin').hide();
-$('#fixeddiv').show();
-$('#swap').show();
-$('#swap1').show();
-$('#foottable').hide();
-$('.fecharlogin').hide();
-$('#carrinho').hide();
-}
-});
-}
-});
-});
-});
-</script>
-
-<script>
-$(document).ready(function() {
-$('#mainsearch').click(function(){
-$('#mainlogin').removeClass('selected');
-$('#mainregisto').removeClass('selected');
-$('#maineditor').removeClass('selected');
-$('#mainsearch').addClass('selected');
-$('#mainupdate').removeClass('selected');
-$('#mainemail').removeClass('selected');
-$('#footer').animate({width: '100px'},{duration:100,complete: function(){
-$('#footer').animate({height: '56px'},{duration:100, complete: function(){
-$('#editordiv').hide();
-$('#searchdiv').show();
-$('#logindiv').hide();
-$('#emaildiv').hide();
-$('#fixedupdate').hide();
-$('#registodiv').hide();
-$('.fecharlogin').hide();
-$('#fixeddiv').hide();
-$('#swap').hide();
-$('#swap1').hide();
-$('#foottable').hide();
-$('.fecharlogin').hide();
-$('#carrinho').hide();
-var a = 0;
-}
-});
-}
-});
-});
-});
-</script>
-
-
-<script>
-$(document).ready(function() {
-$('#mainupdate').click(function(){
-$('#mainlogin').removeClass('selected');
-$('#mainregisto').removeClass('selected');
-$('#maineditor').removeClass('selected');
-$('#mainsearch').removeClass('selected');
-$('#mainupdate').addClass('selected');
-$('#mainemail').removeClass('selected');
-$('#footer').animate({width: '100px'},{duration:100,complete: function(){
-$('#footer').animate({height: '56px'},{duration:100, complete: function(){
-$('#editordiv').hide();
-$('#searchdiv').hide();
-$('#logindiv').hide();
-$('#emaildiv').hide();
-$('#fixedupdate').hide();
-$('#registodiv').hide();
-$('.fecharlogin').hide();
-$('#fixeddiv').hide();
-$('#swap').hide();
-$('#swap1').hide();
-$('#foottable').hide();
-$('.fecharlogin').hide();
-$('#carrinho').show();
-}
-});
-}
-});
-});
-});
-</script>
-
-<script>
-$(document).on('click', '#mainupdate', function() {
-$('#mainlogin').removeClass('selected');
-$('#mainregisto').removeClass('selected');
-$('#maineditor').removeClass('selected');
-$('#mainsearch').removeClass('selected');
-$('#mainupdate').addClass('selected');
-$('#mainemail').removeClass('selected');
-$('#footer').animate({width: '100px'},{duration:100,complete: function(){
-$('#footer').animate({height: '56px'},{duration:100, complete: function(){
-$('#editordiv').hide();
-$('#searchdiv').hide();
-$('#logindiv').hide();
-$('#emaildiv').hide();
-$('#fixedupdate').hide();
-$('#registodiv').hide();
-$('.fecharlogin').hide();
-$('#fixeddiv').hide();
-$('#swap').hide();
-$('#swap1').hide();
-$('#foottable').hide();
-$('.fecharlogin').hide();
-$('#carrinho').show();
-}
-});
-}
-});
-});
-</script>
-
-<script>
-$(document).ready(function() {
-$('#mainemail').click(function(){
-$('#mainlogin').removeClass('selected');
-$('#mainregisto').removeClass('selected');
-$('#maineditor').removeClass('selected');
-$('#mainsearch').removeClass('selected');
-$('#mainupdate').removeClass('selected');
-$('#mainemail').addClass('selected');
-$('#footer').animate({width: '100px'},{duration:100,complete: function(){
-$('#footer').animate({height: '56px'},{duration:100, complete: function(){
-$('#editordiv').hide();
-$('#searchdiv').hide();
-$('#logindiv').hide();
-$('#emaildiv').show();
-$('#fixedupdate').hide();
-$('#registodiv').hide();
-$('.fecharlogin').hide();
-$('#fixeddiv').hide();
-$('#swap').hide();
-$('#swap1').hide();
-$('#foottable').hide();
-$('.fecharlogin').hide();
-$('#carrinho').hide();
-var a = 0;
-}
-});
-}
-});
-});
-});
-</script>
-
-
-
 </head>
 
 
 <body>
 
-<div id='produtonocarro'>já existe no carrinho!</div>
-<div id='produtoaddcarro'>Produto adicionado ao carrinho!</div>
-<div id='infinitepage'>
-
-<!--
-<div class="nutil"> Número de utilizadors:
-
-$sql1 = mysqli_query($con, "SELECT * FROM users");
-echo mysqli_num_rows($sql1);
-</div>
--->
-
-
 <div id="maindiv">
-<table>
-<tr>
+<ol>
+<li>
+<button id='maineditor'>LosCalmos</button>
 <button id='mainlogin'>Login</button>
-<button id='mainregisto'>Criar conta</button>
-<button id='maineditor'>Loja</button>
-<button id='mainsearch'>Procura</button>
-<button id='mainemail'>Email></button>
-</tr>
-</table>
+<button id='mainupdate' class="car prodtotal">
+<?php
+
+
+$sql1 = "SELECT * FROM carrinho WHERE username = '$username'";
+$stmt1 = $con->query($sql1);
+$rowcount = $stmt1->num_rows;
+if($username != null){
+if($rowcount != null){
+$stmt = $con->prepare("SELECT SUM(quantidade) as prodtotal, SUM(price_final) as pricetotal FROM carrinho WHERE username = ?");
+$stmt->bind_param('s', $username);
+$stmt->execute();
+$result = $stmt->get_result();
+while ($row = $result->fetch_assoc()){ 
+$sum = $row['prodtotal'];
+$sum1 = $row['pricetotal'];
+?>  
+<?php echo 'Items:'. $sum .'<br>'. 'Total:'.$sum1 . '€'.'<br>';} ?>
+<img src="img/cart.png" width="50px" height="50px" >
+<?php } else {
+echo '<img src="img/cart.png" width="50px" height="50px" >';
+} 
+} else {
+echo '<img src="img/cart.png" width="50px" height="50px" >';
+}
+?>
+</button>
+</li>
+</ol>
 </div>
+
+<!--ALERT MSG-->
+<div class="insertTxt">Adicionado com sucesso!</div>
+<div class="preenchatxt">Preencha os campos!</div>
+<div class="existingprod">Produto já existe na base de dados!</div>
+<div class='referror'>Por favor, apague o campo referência! Este campo será automaticamente preenchido.</div>
+<div class='loginfirst'>Entre na conta primeiro.</div>
+
 
 
 <div id="emaildiv">
@@ -481,6 +188,13 @@ return false;
 </div>
 <div id="logindiv">
 <!-- LOGIN -->
+
+<?php
+if($username == null){
+echo"
+<button id='mainregisto'>Criar conta</button>";
+}?>
+
 <?php
 if ($username == '') {
 echo "
@@ -534,14 +248,22 @@ return false;
 
 
 <div class='div_login'>
+<br>
 <h2>Login</h2>
-<h1>Utilizador:</h1><br>
+<br>
+<br>
+<h1>Utilizador:</h1>
+<br>
 <input type='text' name='username' class='textbox' id='username' placeholder='Utilizador'>
-<label for='idvazio' id='idvazio'>Preencha o campo, por favor!</label><br>
-<h1>Password:</h1><br>
+<label for='idvazio' id='idvazio'>Preencha o campo, por favor!</label>
+<br>
+<h1>Password:</h1>
+<br>
 <input type='password' name='password' class='textbox' id='password' placeholder='Password'>
 <label for='wrongcred' id='wrongcred'>Credenciais erradas!</label>
-<label for='passvazio' id='passvazio'>Preencha o campo, por favor!</label><br>
+<label for='passvazio' id='passvazio'>Preencha o campo, por favor!</label>
+<br>
+<br>
 <button type='submit'>Entrar</button>
 </div>
 </form>
@@ -559,46 +281,24 @@ $('#footer').hide();
 
 <script>
 $(document).ready(function() {
-$('#foottable').hide();
 $('#mainlogin').click(function() {
+
 $('#mainlogin').addClass('selected');
 $('#mainregisto').removeClass('selected');
 $('#maineditor').removeClass('selected');
 $('#mainsearch').removeClass('selected');
 $('#mainupdate').removeClass('selected');
 $('#mainemail').removeClass('selected');
-$('#footer').animate({height:'80%'},{duration:400,complete: function() {
-$('#footer').animate({width:'75%'},{duration:400,complete: function() {
-$('.fecharlogin').show();
+$('#footer').addClass('footeractive');
+$('#backcurtain').show();
 $('#foottable').show();
-$('#mainlogin').text('<?php echo $name; ?>');
-}
 });
-}
+$('html').click(function(){
+$('#footer').removeClass('footeractive');
 });
+$('#footer').click(function(event){
+event.stopPropagation();
 });
-return false;
-});
-</script>
-
-<script>
-$(document).ready(function() {
-$('#foottable').hide();
-$('.fecharlogin').click(function() {
-$('.fecharlogin').hide(0, function(){
-$('#footer').animate({width: '100px'},{duration:400,complete: function(){
-$('#footer').animate({height: '56px'},{duration:600, complete: function(){
-$('#foottable').hide();
-var a = 0;
-}
-
-});
-}
-});
-
-});
-});
-return false;
 });
 </script>
 
@@ -606,83 +306,49 @@ return false;
 <?php
 }
 ?>
-</div>
 
 
 </div>
 
 
-<!-- editordiv-->
-<div id="editordiv">
 
+<script>
+$(document).ready(function(){
+$('#showeditor').val(0);
+$('#showeditor').click(function(){
+if ($('#showeditor').val() == 0){
+$('#editoradmin').show();
+$('#showeditor').val(1);
+}else{
+$('#editoradmin').hide();
+$('#showeditor').val(0);
+}
+});
+});
+</script>
 
+<?php if ( $admin == 1){ ?><button id='showeditor'>Editor</button><?php } ?>
 
+<div style='display:none;' id='editoradmin'>
 <div id="fixeddiv">
-
-
-<script>
-
-$(document).ready(function() {
-$('#fixedupdate').hide();
-$('#swap').click(function(){
-$('#fixeddiv').show();
-$('#fixedupdate').hide();
-$('#swap').hide();
-$('#swap1').show();
-});
-
-});
-
-</script>
 <script>
 $(document).ready(function() {
-$('#swap1').click(function(){
-$('#fixeddiv').hide();
-$('#fixedupdate').show();
-$('#swap').show();
-$('#swap1').hide();
-
-});
-});
-</script>
-
-<?php 
-if ( $admin == 1){ ?>
-
-
-<table id="fixedinsert">
-<script>
-$(document).ready(function($) {
-$('#but-add').click(function(e) {
+$('#but-add').click(function() {
 var iprod = $('.iprod').val();
-var iquant = $('.iquant').val();
 var iprice = $('.iprice').val();
 var istock = $('.istock').val();
-if ($('#iproduto').val().length === 0 || $('#iquantidade').val().length === 0 || $('#iprice').val().length === 0) {
+if ($('#iproduto').val().length === 0 || $('#iprice').val().length === 0) {
 
 $("#preenchatxt").show();
 $('#preenchatxt').fadeOut(900);
 return false;
 
 }
-if ($('#iref').val().length !== 0) {
-
-$("#referror").show();
-$('#referror').fadeOut(900);
-}
-
-$.post('php/checkprod.php', { prod: $('#iproduto').val()}, function(response) {
-if (response != 'go') {
-$("#existingprod").show();
-$('#existingprod').fadeOut(900);
-}else{
-$("#insertTxt").fadeIn(function(){
-$('#insertTxt').fadeOut(700);
 
 $.ajax({
 type: "POST",
 url: "php/insert.php",
-data: {keyprod:iprod, keyquant:iquant, keyprice:iprice, keystock:istock}, // get all form field value in serialize form
+data: {keyprod:iprod, keyprice:iprice, keystock:istock}, // get all form field value in serialize form
 success: function(data) {
 $(".forload").load("php/show.php");
 $("html, body").animate({
@@ -691,6 +357,31 @@ scrollTop: $(document).height() - $(window).height()
 }
 });
 });
+return false;
+});
+</script>
+
+<script>
+$(document).ready(function($) {
+$('#but-up').click(function(e) {
+var iprod = $('.iprod').val();
+var iref = $('.iref').val();
+var imapa = $('.imapa').val();
+var istock = $('.istock').val();
+var iutube = $('.iutube').val();
+if ($('#iref').val().length === 0) {
+
+$("#preenchatxt").show();
+$('#preenchatxt').fadeOut(900);
+return false;
+
+}
+$.ajax({
+type: "POST",
+url: "php/update.php",
+data: {keyprod:iprod, keyprice:iprice, keystock:istock}, // get all form field value in serialize form
+success: function(data) {
+$(".forload").load("php/show.php");
 }
 });
 return false;
@@ -698,123 +389,146 @@ return false;
 });
 </script>
 
-<div id='insertform'>
-
-<label id='labelref'>Referência:</label>
-<input autocomplete="off" type="text" name="ref" id="iref" class="textinput">
-
+<ul id="fixedinsert">
+<li>
 <label id='labelproduto'>Produto:</label>
 <input autocomplete="off" type="text" name="produto" id="iproduto" class="iprod">
+</li>
 
-<label id='labelquantidade'>Quantidade:</label>
-<input autocomplete="off" type="text" name="quantidade" id="iquantidade" class="iquant" onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
-
-<label id='labelprice'>Preço:</label>
+<li>
+<label id='labelprice'>Price:</label>
 <input autocomplete="off" type="text" name="price" id="iprice" class="iprice" onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
+</li>
 
+<li>
 <button type="submit" id='but-add' value="Adicionar">Adicionar</button>
-
-
+<button type="submit" id='but-up' value="Modificar">Modificar</button>
+</li>
+<li>
 <select id='istock' class="istock" name="stock">
 <option value="1">Em stock.</option>
 <option value="2">Pouco stock.</option>
 <option value="3">Fora de stock.</option>
 </select>
-
-<?php /*DELETE BUTTON*/
-if ($admin == 1){
-echo "
+</li>
+<li>
 <form method='post' action='php/deleteall.php'>
 <button  type='submit' id='but-del' value='deleteall'>Apagar tudo</button>
-</form>";
-}
-?>
+</form>
+</li>
+<input type='text' id='byid' name='searchref' placeholder='Escreva ID procurar.'>
+</form>
 
-<div id="insertTxt">Adicionado com sucesso!</div>
-<div id="preenchatxt">Preencha os campos!</div>
-<div id="existingprod">Produto já existe na base de dados!</div>
-<div id='referror'>Por favor, apague o campo referência! Este campo será automaticamente preenchido.</div>
+</ul>
 </div>
 
-<form action="javascript:void(0)" method="POST" id="deleteref">
-<script>
-$(document).ready(function($) {
-$('#deleteref').submit(function(e) {
+</div>
+<!-- editordiv-->
+<div id="editordiv">
 
+<script>
+$(document).ready(function() {
+$('#byname').on('keyup', function(event) {
+
+var name = $('#byname').val();
 
 $.ajax({
 type: "POST",
-url: "php/deleteref.php",
-data: $("#deleteref").serialize(),
-success: function() {
-$("#insertable1").load("php/show.php");
-$("#insertTxt").show();
-$('#insertTxt').delay(700, 'linear').fadeOut(555);
-
+url: "php/search.php",
+data: {search:name}, // get all form field value in serialize form
+success: function(data) {
+$(".forload").html(data);
 }
 });
 });
-return false;
+});
+</script>
+<script>
+$(document).ready(function() {
+$('#byid').on('keyup', function(event) {
+var id = $('#byid').val();
+
+$.ajax({
+type: "POST",
+url: "php/searchref.php",
+data: {searchref:id}, // get all form field value in serialize form
+success: function(data) {
+$(".forload").html(data);
+}
+});
+});
+});
+</script>
+<br>
+
+<div class='searchbar byname'>
+<ol>
+<li>
+<button class='droplist' id='droplist'></button>
+</li>
+<li>
+<input id='byname' type="text" name="search" placeholder="Escreva o nome procurar.">
+</li>
+</ol>
+</div>
+<br>
+<br>
+<script>
+$(document).ready(function(){
+$('#droplist').click(function(){
+$('.listdropped').addClass('listdroppedactive');
+$('.backcurtain').show();
+});
+$('html').click(function(){
+$('.listdropped').removeClass('listdroppedactive');
+$('.backcurtain').hide();
+});
+
+$('#droplist , #listdropped, #mainlogin').click(function(event){
+event.stopPropagation();
+});
 });
 </script>
 
-<!--
-<tr>
-<td>
-<input id='refdel' name="id" onkeypress='return event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)'>
-</td>
-<td>
-<input class='refresher' value="Eliminar" type="submit">
-</td>
-
-<td>
-<form method="post" action="php/deletetruncate.php">
-<input class='refresher' type="submit" value="deltruncate">
-</form>
-</td>
-</td>
-</tr>
--->
-
-</form>
-</table>
-
-<?php } ?>
+<div class='lojaflex'>
+<div class='filterlist'>
+<ul>
+<li>
+<button class='filterprice' id='filterpriceasc'>Preço &uarr;</button>
+<button class='filterprice' id='filterpricedesc'>Preço &darr;</button>
+</li>
+<li>
+olá
+</li>
+<li>
+olá
+</li>
+<li>
+olá
+</li>
+<li>
+olá
+</li>
+<li>
+olá
+</li>
+<li>
+olá
+</li>
+<li>
+olá
+</li>
+<li>
+olá
+</li>
+<li>
+olá
+</li>
+</ul>
 </div>
 <div class="forload">
+<table class="insertable1">
 
-<table id="insertable1">
-
-<script>
-
-$(document).ready(function() {
-$('.addcart').click(function() {
-var addcart = $(this).data('id');
-$.post('php/CARRINHOcheckprod.php', {
-produto: addcart
-}, function(response) {
-if (response == "stop") {
-$('#produtonocarro').show();
-$('#produtonocarro').fadeOut(600);
-}else{
-
-$.ajax({
-type: "POST",
-url: "php/addtocart.php",
-data: {id:addcart}, // get all form field value in serialize form
-success: function(data) {
-$("#carrinho").load("php/CARRINHO.php");
-$(".car").load("php/prodtotal.php");
-$('#produtoaddcarro').show();
-$('#produtoaddcarro').fadeOut(600);
-}
-});
-}
-});
-});
-return false;
-});
-</script>
 
 <?php 
 
@@ -824,171 +538,79 @@ while ($row = $result->fetch_assoc()) {
 
 
 ?>
-<tr>
+<tr class='olitem' data-id='<?php echo $row["item"];?>'  id='<?php echo $row['item']; ?>'>
 
-<td>
+<td class='firstchild' data-id='<?php echo $row['img']?>'><img src='img/img<?php echo $row['img']?>'> 
+
+<?php if ($admin == 1){?><br>
+REF: <?php
+echo $row['id']; }?>
 <?php if ($row['img'] == null){ ?>
 <?php if ($admin == 1){ ?>
-<form action="php/imgUPLOAD.php" method="post" enctype="multipart/form-data">
+<form action="php/imgupload.php" method="post" enctype="multipart/form-data">
 <input type='hidden' name='id' value='<?php echo $row['id']; ?>'>
 <input class='inputfile1' id='file1' type="file" name="file">
-<label for="file1">(imagem para clique) Avatar.</label><br><br>
+<label for="file1">(imagem para clique) Avatar.</label>
 <button class='upload' type="submit" name="upload">Upload</button>
 </form>
-</td>
-<?php } }else{ ?>
+<?php } 
+
+}else{ ?>
 <?php if ($admin == 1){ ?>
-
-
-<form method='post' action='php/imgREMOVE.php'>
+<form method='post' action='php/imgremove.php'>
 <input type='hidden' name='id' value='<?php echo $row['id']; ?>' />
 <button class='removeavatar' type='submit'>Remover</button>
 </form>
 <?php }  ?>
-<div style="background-color:black;"><img style="max-width:50px;" src="img/img<?php echo $row['img']; ?>"></div>
 
 <?php }   ?>
 </td>
 
 
-<td>
-<?php
-if($username != null){?>
-<button class='addcart' data-id='<?php echo $row["id"]; ?>'> addcart </button>
-<?php
-}else{
-echo "<button class='loginshop'>login before shopping </button>";
-} ?>
-</td>
-<script>
-$(document).ready(function() {
-$('.loginshop').click(function(){
-$('#mainlogin').addClass('selected');
-$('#mainregisto').removeClass('selected');
-$('#maineditor').removeClass('selected');
-$('#mainsearch').removeClass('selected');
-$('#mainupdate').removeClass('selected');
-$('#mainemail').removeClass('selected');
-$('#swap1').hide();
-$('#swap').hide();
-$('#searchdiv').hide();
-$('#logindiv').show();
-$('#editordiv').hide();
-$('#emaildiv').hide();
-$('#fixedupdate').hide();
-$('#registodiv').hide();
-$('#carrinho').hide();
-});
-});
-</script>
+<td class='prodname' data-id='<?php echo $row["item"];?>'> 
+<?php echo $row["item"];?>
+<br>
 
-
-<td>
-<p id='prodname' data-id='<?php echo $row["produto"];?>'><?php echo $row["produto"];?></p>
-<br> REF: <?php
-    echo $row['id']; ?>
-    
-<?php if ( $admin == 1) { ?>
-<br><button class='deleteup' data-id='<?php echo $row["id"]; ?>'>APAGAR</button>
+<?php if ($admin == 1) { ?>
+<button class='deleteup' id='deleteup' data-id='<?php echo $row["id"]; ?>'>APAGAR</button>
 <?php } ?>
 </td>
 
-<td>
-<?php echo $row["price"] . " €";   ?>
-</td>
 
+<td>
+<?php echo $row["price"] . ' €';?>
+</td>
 <?php
+
 if ($row["stock"] == '1') {
 echo 
-"<td class='verde'>Em stock.</td>";
+"<td class='verde lastchild'>Em stock.!</td>";
 } elseif ($row["stock"] == '2') {
 echo 
-"<td class='amarelo'>Pouco stock.</td>";
+"<td class='amarelo lastchild'>Pouco stock.</td>";
 } else {
 echo 
-"<td class='vermelho'>Fora de stock.</td>";
+"<td class='vermelho lastchild'>Fora de stock.</td>";
 }
 ?>
+
+
 
 
 </tr>
 <?php 
 } 
 ?>
-
-
-<tr><th id='bordernone'><div id='lastdiv'></div></th></tr>
-
 </table>
+<div class='nav' id='nav'></div>
+</div>
+<!-- end forload-->
 </div>
 </div>
 
-
-<div id="searchdiv">
-
-
-<div id='searchtablediv'>
-
-<script>
-$(document).ready(function() {
-$('#search1').on('keyup', function(event) {
-
-$.ajax({
-type: "POST",
-url: "php/search.php",
-data: $("#search1").serialize(), // get all form field value in serialize form
-success: function(data) {
-$("#showsearchtable").html(data);
-}
-});
-});
-});
-</script>
-<form action="javascript:void(0)" method="POST" id="search1">
-<label>Produto:</label><br>
-<input type="text" name="search" placeholder="Escreva aqui para procurar."><br>
-</form>
-
-<script>
-$(document).ready(function() {
-$('#searchref').on('keyup', function(event) {
-
-$.ajax({
-type: "POST",
-url: "php/searchref.php",
-data: $("#searchref").serialize(), // get all form field value in serialize form
-success: function(data) {
-$("#showsearchtable").html(data);
-}
-});
-});
-});
-</script>
-<form action="javascript:void(0)" method="POST" id="searchref">
-<label>Referência:</label><br>
-<input type="text" name="searchref" placeholder="Escreva aqui para procurar.">
-</form><br>
-
-<table id='searchtableheader'>
-
-<tr>
-<th>Ref.</th>
-<th>Nome</th>
-<th>Quantidade</th>
-<th>Preço</th>
-<th>Stock</th>
-</tr>
-
-</table>
-
-<table id="showsearchtable"></table>
-
-</div>
-</div>
-
-<div id="footer">
-<div id='footerinset'>
-<table id='foottable'>
+<div class='footer' id="footer">
+<div class='footerinsert' id='footerinset'>
+<table class='foottable' id='foottable'>
 <tr>
 <th>Name</th>
 <td>
@@ -1056,15 +678,25 @@ if ($username == null) {
 <?php
 } ?>
 </td>
-<button class="fecharlogin">&darr;</button>
 </table>
 </div>
 </div>
 
-
 <div id="bottomfiller"></div>
 
 <div id='carrinho'>
+
+<?php 
+$sql1 = "SELECT * FROM carrinho WHERE username = '$username'";
+$stmt1 = $con->query($sql1);
+$rowcount = $stmt1->num_rows;
+if ($rowcount == null){
+echo "<p class='vazio'>carrinho vazio!<p>";
+}
+else {
+?>
+
+
 <table id='carrinhotable'>
 <?php 
 $sql = "SELECT * from carrinho WHERE username = ?";
@@ -1079,20 +711,17 @@ if ($username = $row['username']){
 
 
 <tr>
-  
-<td>
-<img style="max-width:50px;" src="img/img<?php echo $row['img']; ?>"><br>
-<?php echo $row["produto"]; ?><br>
-<?php echo $row["price"] . " €" ; ?>
-</td>
 
 <td>
-<input onkeypress='return (event.charCode >= 48 && event.charCode <= 57)' id="quantcar<?php echo $row["id_prod"];?>" type="text" value='<?php echo $row["quantidade"];?>'>
-<button class='quantbut' data-id='<?php echo $row["id_prod"];?>' style='width:auto;'>Confirmar quantidade</button>
+<img class='prodimg'  src="img/img<?php echo $row['img']; ?>"><br>
+<?php echo $row["item"]; ?><br>
+<?php echo $row["price"] . " € p/uni." ; ?>
+</td>
+<td>
+<input class='quantinput' data-id='<?php echo $row["id_prod"];?>' onkeypress='return (event.charCode >= 48 && event.charCode <= 57)' id="quantcar<?php echo $row["id_prod"];?>" type="text" value='<?php echo $row["quantidade"];?>'>
 </td>
 <td id='grandtotal<?php echo $row["id_prod"];?>'><?php echo $row["price_final"] . " €" ; ?></td>
-
-<td><button class='delete' data-id='<?php echo $row["carrinho_id"]; ?>'>Tirar do carrinho.</button></td>
+<td><button class='delete' data-id='<?php echo $row["id"]; ?>'>Retirar</button></td>
 
 </tr>
 
@@ -1101,13 +730,56 @@ if ($username = $row['username']){
 }
 }
 ?>
+<button id='finalencomenda'>Finalizar encomenda.</button>
+<button id='deletecarrinho'>DELETE</button>
 
 </table>
+<?php } ?>
+
 </div>
 
-<div class="car">
-<?php
 
+
+<div id='produtonocarro'>já existe no carrinho!</div>
+<div id='produtoaddcarro'>Produto adicionado <br> ao carrinho!</div>
+
+<div id='itempage'>
+
+
+</div>
+
+
+
+
+
+<div style='display:none;' id='carrinhoemail'>
+<?php 
+$sql = "SELECT * from carrinho WHERE username = ?";
+$stmt = $con->prepare($sql);
+$stmt->bind_param('s', $username);
+$stmt->execute();
+$result = $stmt->get_result();
+while ($row = $result->fetch_assoc())
+{
+if ($username = $row['username']){
+?>
+
+
+<ol>
+
+<li>
+<img style="max-width:50px;" src="img/img<?php echo $row['img']; ?>"><br>
+<?php echo $row["produto"]; ?><br>
+<?php echo $row["price"] . " € p/uni." ; ?><br>
+quantidade: <?php echo $row["quantidade"]; ?>
+</li>
+<li id='grandtotal<?php echo $row["id_prod"];?>'><?php echo $row["price_final"] . " €" ; ?></li>
+
+</ol>
+
+<?php
+}
+}
 
 $sql1 = "SELECT * FROM carrinho WHERE username = '$username'";
 $stmt1 = $con->query($sql1);
@@ -1124,26 +796,70 @@ $sum1 = $row['pricetotal'];
 ?>  
 <td class='prodtotal'>
 <?php echo '<br>'.'Items:'. $sum .'<br>'. 'Total:'.$sum1 . '€'.'<br>';} ?>
-<button id='mainupdate'><img src="img/cart.png" width="50px" height="50px" ></button>
 <?php } } ?>
+<br>
 </div>
 
+<div class='listdropped' id='listdropped'>
+    
+<ol>
+    <li><h1>LOS CALMOS</h1></li>
+    <li>
+        hello world
+    </li>
+    <li>
+        hello world
+    </li>
+    <li>
+        hello world
+    </li>
+    <li>
+        hello world
+    </li>
+    <li>
+        hello world
+    </li>
+    <li>
+        hello world
+    </li>
+</ol>
+</div>
+
+<div id='backcurtain' class='backcurtain'></div>
+<div id='infofooter' class='infofooter'>
+
+</div>
 </body>
 
 </html>
 
 
 <!-- SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT  -->
+<!-- SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT  -->
+<!-- SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT  -->
+<!-- SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT  -->
+<!-- SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT  -->
+<!-- SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT  -->
+<!-- SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT  -->
+<!-- SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT  -->
+<!-- SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT  -->
+<!-- SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT  -->
+<!-- SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT  -->
+<!-- SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT  -->
+<!-- SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT  -->
+<!-- SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT  -->
+<!-- SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT  -->
+<!-- SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT SCRIPT  -->
 
 <script>
 
 $(document).ready(function() {
-  $('.quantbut').click(function() {
-    var id = $(this).data('id');
-    var quantcar = $('#quantcar'+id).val();
+$('.quantinput').keyup(function() {
+var id = $(this).data('id');
+var quantcar = $('#quantcar'+id).val();
 $.ajax({
 type: "POST",
-url: "php/CARRINHOquant.php",
+url: "php/carrinhoquant.php",
 data: {quant:quantcar, id:id}, // get all form field value in serialize form
 success: function(data) {
 $("#grandtotal"+id).html(data);
@@ -1153,5 +869,526 @@ $('.car').load('php/prodtotal.php');
 
 });
 return false;
+});
+</script>
+
+
+<script>
+
+$(document).ready(function() {
+$('.addcart').click(function() {
+var addcart = $(this).data('id');
+
+$('#mainupdate').removeClass('blinkonce');
+
+if($('#mainlogin').text() == 'Login'){
+$('#mainlogin').addClass('blinking');
+}else{
+
+$.post('php/carrinhocheckprod.php', {
+produto: addcart
+}, function(response) {
+if (response == "stop") {
+$('#produtonocarro').show();
+$('#produtonocarro').fadeOut(600);
+}else{
+
+$.ajax({
+type: "POST",
+url: "php/addtocart.php",
+data: {id:addcart}, // get all form field value in serialize form
+success: function(data) {
+$("#carrinho").load("php/carrinho.php");
+$(".car").load("php/prodtotal.php");
+$('#produtoaddcarro').show();
+$('#produtoaddcarro').fadeOut(600);
+$('#mainupdate').addClass('blinkonce');
+}
+});
+}
+});
+}
+});
+return false;
+});
+</script>
+
+<script>
+$(document).ready(function(){
+$('#deletecarrinho').click(function(){
+
+$.ajax({
+type: "POST",
+url: "php/deletecarrinho.php",
+data: {}, // get all form field value in serialize form
+success: function(data) {
+$('#carrinhotable').closest('table').fadeOut(200,function(){
+$(this).remove();
+});
+
+$(".car").load("php/prodtotal.php");
+}
+});
+
+});
+});
+</script>
+
+<script>
+$(document).ready(function(){
+$('.detalhes,.olitem').click(function(){
+var prodname = $(this).data('id');
+var mapa = $(this).data('id2');
+
+$.ajax({
+type: "POST",
+url: "php/itempage.php",
+data: {prodname:prodname , mapa:mapa}, // get all form field value in serialize form
+success: function(data) {
+$('#itempage').animate().fadeIn(0);
+$('#backcurtain').animate().fadeIn(0);
+$('#itempage').html(data);
+}
+});
+}); 
+$('html').click(function() {
+$('#itempage').animate().fadeOut(0);
+$('#backcurtain').animate().fadeOut(0);
+$("#utube").attr("src",'https://www.youtube-nocookie.com/embed/lQoQS48GUrk');
+});
+
+$('#itempage').click(function(event){
+
+event.stopPropagation();
+});
+
+});
+</script>
+
+<script>
+
+$(document).ready(function(){
+$('#finalencomenda').click(function(){
+var name = '<?php echo $username ?>';
+var email = '<?php echo $email ?>';
+
+$.ajax({
+type: "POST",
+url: "php/encomenda.php",
+data: {}, // get all form field value in serialize form
+success: function(data) {
+alert('yes');
+$.get('php/maily.php',function(data){
+var body = data;
+
+$.ajax({
+type: "POST",
+url: "php/mail.php",
+data: {name:name, email:email, body:body}, // get all form field value in serialize form
+success: function(data) {
+$('#carrinhotable').closest('table').fadeOut(200,function(){
+$(this).remove();
+$("#carrinho").load("php/carrinho.php");
+$(".car").load("php/prodtotal.php");
+});
+}
+});
+});
+}
+});
+});
+
+});
+</script>
+
+
+<script>
+$(document).on('click','.deleteup',function (e) {
+
+// Delete 
+var el = this;
+
+// Delete id
+var deleteid = $(this).data('id');
+
+var confirmalert = confirm("Are you sure?");
+if (confirmalert == true) {
+// AJAX Request
+$.ajax({
+url: 'php/deleteup.php',
+type: 'POST',
+data: { id:deleteid },
+success: function(response){
+if(response == 1){
+// Remove row from HTML Table
+
+$(el).closest('tr').fadeOut(200,function(){
+$(this).remove();
+});
+
+}else{
+alert('Invalid ID.');
+}
+
+}
+});
+
+return true;
+}
+
+
+});
+</script>
+
+<script>
+$(document).on('click','.delete',function (e) {
+
+// Delete 
+var el = this;
+
+// Delete id
+var deleteid = $(this).data('id');
+
+var confirmalert = confirm("Are you sure?");
+if (confirmalert == true) {
+// AJAX Request
+$.ajax({
+url: 'php/carrinhoapagar.php',
+type: 'POST',
+data: { id:deleteid },
+success: function(response){
+if(response == 1){
+$('.car').load('php/prodtotal.php');
+// Remove row from HTML Table
+
+$(el).closest('tr').fadeOut(200,function(){
+$(this).remove();
+});
+
+}else{
+alert('Invalid ID.');
+}
+
+}
+});
+
+return true;
+}
+
+
+});
+</script>
+
+<script>
+
+$(document).ready(function() {
+$('#mainlogin').text("<?php if ($username != ''){echo 'Sr./Sra.'. $name;}else{echo 'Login';}?>");
+});
+</script>
+
+
+
+<script>
+$(document).ready(function() {
+
+if ($("#mainlogin").val() != 0 && $("#mainlogin").text() != 'Login' ){
+
+$('#mainlogin').val(0);
+$('#mainlogin').removeClass('selected');
+$('#mainregisto').removeClass('selected');
+$('#maineditor').addClass('selected');
+$('#mainsearch').removeClass('selected');
+$('#mainupdate').removeClass('selected');
+$('#mainemail').removeClass('selected');
+$('#editordiv').show();
+$('#searchdiv').hide();
+$('#logindiv').hide();
+$('#emaildiv').hide();
+$('#fixedupdate').hide();
+$('#registodiv').hide();
+$('#fixeddiv').show();
+$('#swap').show();
+$('#swap1').show();
+$('#carrinho').hide();
+$('#editordiv').show();
+$('#searchdiv').hide();
+$('#logindiv').hide();
+$('#emaildiv').hide();
+$('#fixedupdate').hide();
+$('#registodiv').hide();
+$('#fixeddiv').show();
+$('#swap').show();
+$('#swap1').show();
+$('#carrinho').hide();
+}
+else
+{
+$('#mainlogin').val(0);
+$('#mainlogin').removeClass('selected');
+$('#mainregisto').removeClass('selected');
+$('#maineditor').addClass('selected');
+$('#mainsearch').removeClass('selected');
+$('#mainupdate').removeClass('selected');
+$('#mainemail').removeClass('selected');
+$('#editordiv').show();
+$('#searchdiv').hide();
+$('#logindiv').hide();
+$('#emaildiv').hide();
+$('#fixedupdate').hide();
+$('#registodiv').hide();
+$('#fixeddiv').show();
+$('#swap').show();
+$('#swap1').show();
+$('#carrinho').hide(); 
+}
+});
+</script>
+
+<script>
+$(document).ready(function() {
+$('#mainlogin').click(function(){
+$('#mainlogin').val(1);
+$('#mainlogin').addClass('selected');
+$('#mainregisto').removeClass('selected');
+$('#maineditor').removeClass('selected');
+$('#mainsearch').removeClass('selected');
+$('#mainupdate').removeClass('selected');
+$('#mainemail').removeClass('selected');
+$('#infofooter').hide();
+$('#swap1').hide();
+$('#swap').hide();
+$('#searchdiv').hide();
+$('#logindiv').show();
+$('#editordiv').hide();
+$('#emaildiv').hide();
+$(".forload").hide();
+$('#fixedupdate').hide();
+$('#registodiv').hide();
+$('#carrinho').hide();
+});
+});
+</script>
+
+<script>
+$(document).ready(function() {
+$('#mainregisto').click(function(){
+$('#mainlogin').val(0);
+$('#mainlogin').removeProp('checked');
+$('#mainlogin').removeClass('selected');
+$('#mainregisto').addClass('selected');
+$('#maineditor').removeClass('selected');
+$('#mainsearch').removeClass('selected');
+$('#mainupdate').removeClass('selected');
+$('#mainemail').removeClass('selected');
+$('#footer').removeClass('footeractive');
+$('#swap1').hide();
+$('#swap').hide();
+$('#infofooter').hide();
+$('#fixeddiv').hide();
+$('#editordiv').hide();
+$('#searchdiv').hide();
+$('#logindiv').hide();
+$('#emaildiv').hide();
+$(".forload").hide();
+$('#fixedupdate').hide();
+$('#registodiv').show();
+$('#foottable').hide();
+$('#carrinho').hide();
+});
+
+});
+</script>
+
+<script>
+$(document).ready(function() {
+$('#maineditor').click(function(){
+
+if ($("#mainlogin").val() != 0 && $("#mainlogin").text() != 'Login' ){
+
+$('#mainlogin').val(0);
+$('#mainlogin').removeClass('selected');
+$('#mainregisto').removeClass('selected');
+$('#maineditor').addClass('selected');
+$('#mainsearch').removeClass('selected');
+$('#mainupdate').removeClass('selected');
+$('#mainemail').removeClass('selected');
+$('#footer').removeClass('footeractive');
+$('#editordiv').show();
+$(".forload").show();
+$('#infofooter').show();
+$('#searchdiv').hide();
+$('#logindiv').hide();
+$('#emaildiv').hide();
+$('#fixedupdate').hide();
+$('#registodiv').hide();
+$('#fixeddiv').show();
+$('#swap').show();
+$('#swap1').show();
+$('#foottable').hide();
+$('#carrinho').hide();
+$('#editordiv').show();
+$('#searchdiv').hide();
+$('#logindiv').hide();
+$('#emaildiv').hide();
+$('#fixedupdate').hide();
+$('#registodiv').hide();
+$('#fixeddiv').show();
+$('#swap').show();
+$('#swap1').show();
+$('#foottable').hide();
+$('#carrinho').hide();
+}
+else
+{
+$('#mainlogin').val(0);
+$('#mainlogin').removeClass('selected');
+$('#mainregisto').removeClass('selected');
+$('#maineditor').addClass('selected');
+$('#mainsearch').removeClass('selected');
+$('#mainupdate').removeClass('selected');
+$('#mainemail').removeClass('selected');
+$('#footer').removeClass('footeractive');
+$('#editordiv').show();
+$(".forload").hide();
+$('#searchdiv').hide();
+$('#logindiv').hide();
+$('#emaildiv').hide();
+$('#infofooter').show();
+$(".forload").show();
+$('#fixedupdate').hide();
+$('#registodiv').hide();
+$('#fixeddiv').show();
+$('#swap').show();
+$('#swap1').show();
+$('#foottable').hide();
+$('#carrinho').hide(); 
+}
+});
+});
+</script>
+
+<script>
+$(document).ready(function() {
+
+$('#mainupdate').click(function(){
+if ($("#mainlogin").val() != 0 && $("#mainlogin").text() != 'Login' ){
+
+$('#mainlogin').val(0);
+$('#mainlogin').removeClass('selected');
+$('#mainregisto').removeClass('selected');
+$('#maineditor').removeClass('selected');
+$('#mainsearch').removeClass('selected');
+$('#mainupdate').addClass('selected');
+$('#mainemail').removeClass('selected');
+$('#footer').removeClass('footeractive');
+$('#editordiv').hide();
+$('#searchdiv').hide();
+$('#logindiv').hide();
+$('#emaildiv').hide();
+$(".forload").hide();
+$('#fixedupdate').hide();
+$('#infofooter').hide();
+$('#registodiv').hide();
+$('#fixeddiv').hide();
+$('#swap').hide();
+$('#swap1').hide();
+$('#foottable').hide();
+$('#carrinho').show();
+
+}
+else
+{
+
+$('#mainlogin').val(0);
+$('#mainlogin').removeClass('selected');
+$('#mainregisto').removeClass('selected');
+$('#maineditor').removeClass('selected');
+$('#mainsearch').removeClass('selected');
+$('#mainupdate').addClass('selected');
+$('#mainemail').removeClass('selected');
+$('#footer').removeClass('footeractive');
+$('#carrinho').show();
+$('#editordiv').hide();
+$('#infofooter').hide();
+$('#searchdiv').hide();
+$('#logindiv').hide();
+$('#emaildiv').hide();
+$(".forload").hide();
+$('#fixedupdate').hide();
+$('#registodiv').hide();
+$('#fixeddiv').hide();
+$('#swap').hide();
+$('#swap1').hide();
+$('#foottable').hide();
+
+}
+
+});
+});
+</script>
+
+
+<script>
+$(document).ready(function(){
+$('#filterpriceasc').click(function(){
+var name = $('#byname').val();
+
+$.ajax({
+type: "POST",
+url: "php/showbypriceasc.php",
+data: {search:name}, // get all form field value in serialize form
+success: function(data) {
+$(".forload").html(data);
+$('#filterpriceasc').addClass('selectedfilter');
+$('#filterpricedesc').removeClass('selectedfilter');
+}
+});
+});
+});   
+</script>
+<script>
+$(document).ready(function(){
+$('#filterpricedesc').click(function(){
+var name = $('#byname').val();
+
+$.ajax({
+type: "POST",
+url: "php/showbypricedesc.php",
+data: {search:name}, // get all form field value in serialize form
+success: function(data) {
+$(".forload").html(data);
+$('#filterpriceasc').removeClass('selectedfilter');
+$('#filterpricedesc').addClass('selectedfilter');
+}
+});
+});
+});   
+</script>
+
+
+<script>
+$(document).ready(function() {
+var rowsShown = 10;
+var rowsTotal = $('.insertable1 tr').length;
+var numPages = rowsTotal / rowsShown;
+for (i = 0; i < numPages; i++) {
+var pageNum = i + 1;
+$('#nav').append('<a href="#" page="' + i + '">' + pageNum + '</a> ');
+}
+$('.insertable1 tr').hide();
+$('.insertable1 tr').slice(0, rowsShown).show();
+$('#nav a:first').addClass('active');
+
+$('#nav a').bind('click', function() {
+$('#nav a').removeClass('active');
+$(this).addClass('active');
+var currPage = $(this).attr('page');
+var startItem = currPage * rowsShown;
+var endItem = startItem + rowsShown;
+$('.insertable1 tr').hide().slice(startItem, endItem)
+.css('display', 'table-row').animate({
+opacity: 1
+}, 300);
+});
 });
 </script>

@@ -363,7 +363,6 @@ return false;
                     .css('display', 'table-row').animate({
                         opacity: 1
                     }, 300);
-
             });
         });
     </script>

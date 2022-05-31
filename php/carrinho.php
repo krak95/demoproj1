@@ -1,8 +1,10 @@
 <?php
 session_start();
 require_once "config.php";
-$username = $_SESSION['username'];
+$email = $_SESSION['email'] ?? null;
+$username = $_SESSION['username'] ?? null;
 ?>
+
 <table id='carrinhotable'>
 <?php 
 $sql = "SELECT * from carrinho WHERE username = ?";
@@ -19,18 +21,15 @@ if ($username = $row['username']){
 <tr>
   
 <td>
-<img style="max-width:50px;" src="img/img<?php echo $row['img']; ?>"><br>
-<?php echo $row["produto"]; ?><br>
-<?php echo $row["price"] . " €" ; ?>
+<img class='prodimg'  src="img/img<?php echo $row['img']; ?>"><br>
+<?php echo $row["item"]; ?><br>
+<?php echo $row["price"] . " € p/uni." ; ?>
 </td>
-
 <td>
-<input onkeypress='return (event.charCode >= 48 && event.charCode <= 57)' id="quantcar<?php echo $row["id_prod"];?>" type="text" value='<?php echo $row["quantidade"];?>'>
-<button class='quantbut' data-id='<?php echo $row["id_prod"];?>' style='width:auto;'>Confirmar quantidade</button>
+<input class='quantinput' data-id='<?php echo $row["id_prod"];?>' onkeypress='return (event.charCode >= 48 && event.charCode <= 57)' id="quantcar<?php echo $row["id_prod"];?>" type="text" value='<?php echo $row["quantidade"];?>'>
 </td>
 <td id='grandtotal<?php echo $row["id_prod"];?>'><?php echo $row["price_final"] . " €" ; ?></td>
-
-<td><button class='delete' data-id='<?php echo $row["carrinho_id"]; ?>'>Tirar do carrinho.</button></td>
+<td><button class='delete' data-id='<?php echo $row["carrinho_id"]; ?>'>Retirar</button></td>
 
 </tr>
 
@@ -39,18 +38,22 @@ if ($username = $row['username']){
 }
 }
 ?>
-
+<button id='finalencomenda'>Finalizar encomenda.</button>
+<button id='deletecarrinho'>DELETE</button>
 </table>
+
+<div id='lastdiv'></div>
+
 
 <script>
 
 $(document).ready(function() {
-  $('.quantbut').click(function() {
+  $('.quantinput').keyup(function() {
     var id = $(this).data('id');
     var quantcar = $('#quantcar'+id).val();
 $.ajax({
 type: "POST",
-url: "php/CARRINHOquant.php",
+url: "php/carrinhoquant.php",
 data: {quant:quantcar, id:id}, // get all form field value in serialize form
 success: function(data) {
 $("#grandtotal"+id).html(data);
@@ -60,5 +63,61 @@ $('.car').load('php/prodtotal.php');
 
 });
 return false;
+});
+</script>
+
+
+<script>
+  
+  $(document).ready(function(){
+    $('#finalencomenda').click(function(){
+      var name = '<?php echo $username ?>';
+      var email = '<?php echo $email ?>';
+      
+$.ajax({
+type: "POST",
+url: "php/encomenda.php",
+data: {}, // get all form field value in serialize form
+success: function(data) {
+  alert('yes');
+  $.get('php/maily.php',function(data){
+    var body = data;
+
+$("#carrinhotable").remove();
+$("#carrinho").load("php/carrinho.php");
+$(".car").load("php/prodtotal.php");
+  $.ajax({
+type: "POST",
+url: "php/mail.php",
+data: {name:name, email:email, body:body}, // get all form field value in serialize form
+success: function(data) {
+}
+});
+});
+}
+});
+});
+
+});
+</script>
+
+<script>
+$(document).ready(function(){
+$('#deletecarrinho').click(function(){
+
+$.ajax({
+type: "POST",
+url: "php/deletecarrinho.php",
+data: {}, // get all form field value in serialize form
+success: function(data) {
+$('#carrinhotable').closest('table').fadeOut(200,function(){
+$(this).remove();
+});
+
+$(".car").load("php/prodtotal.php");
+}
+});
+
+});
 });
 </script>

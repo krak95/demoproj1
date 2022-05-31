@@ -1,10 +1,10 @@
 <?php
 
-$host = "127.0.0.1";
+$host = "localhost";
 
-$db_name = "loscalmos";
+$db_name = "onlineshop";
 $db_user = "root";
-$db_pass = "server";
+$db_pass = 'server';
 
 $con = mysqli_connect($host, $db_user, $db_pass, $db_name);
 // Check connection

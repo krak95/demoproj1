@@ -1,37 +1,15 @@
-.button{
-    position: absolute;
-    margin-left:200px;
-    padding:20px;
-    background-color: crimson;
+.a{
+    background-color: black;
+    width: 100px;
+    height: 100px;
 }
-
-#demo{
+.b{
+    background-color: green;
+    width: 100px;
+    height: 100px;
+}
+#show{
     background-color: blue;
-    position: absolute;
-}
-
-#alert{
-    background-color: aqua;
-    padding:50px;
-    position: absolute;
-    margin-top:20px;
-}
-
-#bigduk{
-    padding:10px;
-    background-color:black;
-    position: absolute;
-    margin-top:200px;
-}
-
-.load{
-    background-color: cornflowerblue;
-    position: absolute;
-    margin-top:100px;
-    padding:100px 100px;
-}
-.box{
-    position: absolute;
-    background-color: blanchedalmond;
-    padding:50px 50px;
+    width: 100px;
+    height: 100px;
 }

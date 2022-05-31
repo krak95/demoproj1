@@ -1,7 +1,7 @@
 <?php
 session_start();
 require_once "config.php";
-$username = $_SESSION['username'];
+$username = $_SESSION['username'] ?? null;
 ?>
 <div class="car">
 <?php
@@ -20,8 +20,13 @@ while ($row = $result->fetch_assoc()){
 $sum = $row['prodtotal'];
 $sum1 = $row['pricetotal'];
 ?>  
-<td class='prodtotal'>
-<?php echo '<br>'.'Items:'. $sum .'<br>'. 'Total:'.$sum1 . '€'.'<br>';} ?>
-<button id='mainupdate'><img src="img/cart.png" width="50px" height="50px" ></button>
-<?php } } ?>
+<?php echo 'Items:'. $sum .'<br>'. 'Total:'.$sum1 . '€'.'<br>';} ?>
+<img src="img/cart.png" width="50px" height="50px" >
+<?php } else {
+echo '<img src="img/cart.png" width="50px" height="50px" >';
+} 
+} else {
+echo '<img src="img/cart.png" width="50px" height="50px" >';
+}
+?>
 </div>
